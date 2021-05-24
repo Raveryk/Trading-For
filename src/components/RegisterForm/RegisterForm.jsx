@@ -11,18 +11,18 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   form: {
     padding: '2%',
-    alignContent: 'center',
-    justifyContent: 'center',
-  },
-  btn: {
-    alignContent: 'center',
-    justifyContent: 'center',
-
   },
   formCard: {
     justifyContent: 'center',
     padding: '2%',
-
+    textAlign: 'center'
+  },
+  formGrid: {
+    marginRight: '20px',
+    marginLeft: '20px',
+  },
+  btn: {
+    margin: '5px'
   }
 })
 
@@ -30,7 +30,7 @@ function RegisterForm() {
 
   
 
-  
+  // Registration input values 
   const [username, setUsername] = useState('');
   // console.log('username:', username)
   const [password, setPassword] = useState('');
@@ -61,10 +61,10 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    <Grid item xs={12}>
+    <Grid className={classes.formGrid} item xs={12}>
     <Card elevation={4}>
     <form className={classes.formCard} onSubmit={registerUser}>
-      <h2 >Register User</h2>
+      <h2 >Join The Band</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
@@ -115,7 +115,7 @@ function RegisterForm() {
           />
       </div>
       <div className={classes.btn}>
-        <Button  type="submit" name="submit">Register</Button>
+        <Button variant="outlined" type="submit" name="submit">Join</Button>
       </div>
     </form>
   </Card>
