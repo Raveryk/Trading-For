@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     padding: '2%',
   },
   formCard: {
-    justifyContent: 'center',
+    // justifyContent: 'center',
     padding: '2%',
     textAlign: 'center',
     backgroundColor: '#c8e6c9'
