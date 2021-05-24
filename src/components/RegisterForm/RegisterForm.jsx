@@ -15,7 +15,8 @@ const useStyles = makeStyles({
   formCard: {
     justifyContent: 'center',
     padding: '2%',
-    textAlign: 'center'
+    textAlign: 'center',
+    backgroundColor: '#c8e6c9'
   },
   formGrid: {
     marginRight: '20px',

@@ -16,11 +16,15 @@ const useStyles = makeStyles({
   formCard: {
     justifyContent: 'center',
     padding: '2%',
-    textAlign: 'center'
+    textAlign: 'center',
+    backgroundColor: '#c8e6c9'
+
   },
   formGrid: {
     marginRight: '20px',
     marginLeft: '20px',
+    direction: 'column',
+    marginBottom: '10px',
   },
   btn: {
     margin: '5px'
@@ -52,10 +56,11 @@ function LoginForm() {
   }; // end login
 
   return (
-    <Grid className={classes.formGrid} item xs={12}>
-    <Card elevation={6}>
+    <Grid container >
+    <Grid className={classes.formGrid} item xs={12} >
+    <Card elevation={6} >
     <form className={classes.formCard} onSubmit={login}>
-      <h2>Login</h2>
+      <h2>Backstage Pass</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
@@ -84,10 +89,11 @@ function LoginForm() {
           />
       </div>
       <div>
-        <Button className={classes.btn} type="submit" name="submit" value="Log In">Log In</Button>
+        <Button variant="outlined" className={classes.btn} type="submit" name="submit" value="Log In">Sign In</Button>
       </div>
     </form>
     </Card>
+    </Grid>
     </Grid>
   );
 }
