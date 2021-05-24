@@ -62,7 +62,7 @@ function RegisterForm() {
 
   return (
     <Grid className={classes.formGrid} item xs={12}>
-    <Card elevation={4}>
+    <Card elevation={6}>
     <form className={classes.formCard} onSubmit={registerUser}>
       <h2 >Join The Band</h2>
       {errors.registrationMessage && (
