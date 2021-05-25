@@ -5,21 +5,24 @@ import './Nav.css';
 import {useSelector} from 'react-redux';
 import Looks4Icon from '@material-ui/icons/Looks4';
 
-import {AppBar, Toolbar, IconButton, Typography, Hidden, Drawer, Divider, Button} from '@material-ui/core';
+import {AppBar, Toolbar, IconButton, Typography, Hidden, Drawer, Divider, Button, List, ListItem} from '@material-ui/core';
+import { SettingsInputAntennaTwoTone } from '@material-ui/icons';
+
+import DrawerList from '../Drawer/DrawerList'
 
 
 function Nav() {
-  const user = useSelector((store) => store.user);
+  // const user = useSelector((store) => store.user);
 
-  let loginLinkData = {
-    path: '/login',
-    text: 'Login / Register',
-  };
+  // let loginLinkData = {
+  //   path: '/login',
+  //   text: 'Login / Register',
+  // };
 
-  if (user.id != null) {
-    loginLinkData.path = '/user';
-    loginLinkData.text = 'Home';
-  }
+  // if (user.id != null) {
+  //   loginLinkData.path = '/user';
+  //   loginLinkData.text = 'Home';
+  // }
 
   // export default function TemporaryDrawer() {
   //   const [state, setState] = React.useState({
@@ -40,6 +43,7 @@ function Nav() {
     setDrawer(!drawer);
   };
 
+  
 
 
   return (
@@ -47,29 +51,15 @@ function Nav() {
     <div className="nav">
     <Looks4Icon 
     onClick={toggleDrawer}/>
-      <Link to="/home">
-        <h2 className="nav-title">Trading For</h2>
-      </Link>
-      <div>
-        <Link className="navLink" to={loginLinkData.path}>
-          {loginLinkData.text}
-        </Link>
-
-        {user.id && (
-          <>
-            <Link className="navLink" to="/info">
-              Info Page
-            </Link>
-            <LogOutButton className="navLink" />
-          </>
-        )}
-
-        <Link className="navLink" to="/about">
-          About
-        </Link>
       </div>
+    <Drawer 
+    variant="temporary"
+    open={drawer}
+    onClose={toggleDrawer}
+    >
+      <DrawerList />
+    </Drawer>
     </div>
-  </div>
   );
 }
 
