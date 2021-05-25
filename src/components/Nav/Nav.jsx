@@ -4,6 +4,8 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import {useSelector} from 'react-redux';
 
+import {AppBar, Toolbar, IconButton, Typography, Hidden, Drawer, Divider, Button} from '@material-ui/core';
+
 function Nav() {
   const user = useSelector((store) => store.user);
 
@@ -17,7 +19,27 @@ function Nav() {
     loginLinkData.text = 'Home';
   }
 
+  // export default function TemporaryDrawer() {
+  //   const [state, setState] = React.useState({
+  //     top: false,
+  //     left: false,
+  //     bottom: false,
+  //     right: false,
+  //   });
+  
+
+  // const toggleDrawer = (anchor, open) => (event) => {
+  //   if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+  //     return;
+  //   }
+
+  //   setState({ ...state, [anchor]: open });
+  // };
+
+
+
   return (
+    <div>
     <div className="nav">
       <Link to="/home">
         <h2 className="nav-title">Trading For</h2>
@@ -41,6 +63,7 @@ function Nav() {
         </Link>
       </div>
     </div>
+  </div>
   );
 }
 

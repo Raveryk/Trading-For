@@ -7,6 +7,16 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   // GET route code here
+  const query = `SELECT * FROM posts WHERE traded=false;`
+  pool.query(query)
+    .then(result => {
+      console.log(result.rows);
+      res.send(result.rows)
+    })
+    .catch( error => {
+      console.log('Something went wrong GETting posts:', error)
+      res.sendStatus(500);
+    })
 });
 
 /**
