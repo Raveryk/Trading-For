@@ -15,13 +15,14 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import { createMuiTheme } from '@material-ui/core/styles'
 
-import AboutPage from '../AboutPage/AboutPage';
+import Post from '../Post/Post';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
+import Account from '../Account/Account';
 // import LandingPage from '../LandingPage/LandingPage';
 import Home from '../Home/Home';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Browse from '../Browse/Browse';
 
 // import './App.css';
 
@@ -46,19 +47,28 @@ function App() {
   return (
     <Router>
       <div>
+    </div>
+      <div>
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/login" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
-          <Route
+          <ProtectedRoute
             // shows AboutPage at all times (logged in or not)
             exact
-            path="/about"
+            path="/browse"
           >
-            <AboutPage />
-          </Route>
+            <Browse />
+          </ProtectedRoute>
+          <ProtectedRoute
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/post"
+          >
+            <Post />
+          </ProtectedRoute>
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -75,9 +85,9 @@ function App() {
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
-            path="/info"
+            path="/account"
           >
-            <InfoPage />
+            <Account />
           </ProtectedRoute>
 
           {/* When a value is supplied for the authRedirect prop the user will
