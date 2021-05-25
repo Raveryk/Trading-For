@@ -13,6 +13,8 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
+import { createMuiTheme } from '@material-ui/core/styles'
+
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -22,6 +24,17 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 // import './App.css';
+
+// const theme = createMuiTheme({
+//     palette: {
+//       primary: {
+//         main: '#a5d6a7',
+//       },
+//       secondary: {
+//         main: '#e65100',
+//       },
+//     },
+// })
 
 function App() {
   const dispatch = useDispatch();
