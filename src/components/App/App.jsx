@@ -22,7 +22,6 @@ import Account from '../Account/Account';
 import Home from '../Home/Home';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import Header from '../Header/Header';
 import Browse from '../Browse/Browse';
 
 // import './App.css';
@@ -48,7 +47,6 @@ function App() {
   return (
     <Router>
       <div>
-    <Header />
     </div>
       <div>
         <Nav />

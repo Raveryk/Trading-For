@@ -1,12 +1,14 @@
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
+.nav{
   margin: 0 0 30px;
   background-color: #81ac8d
   ;
   overflow: hidden;
+}
+
+.nav-icon{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .nav a {
@@ -14,12 +16,12 @@
 }
 
 .nav-title {
+  display: flex;
   font-size: 24px;
   font-weight: 700;
-  color: #81ac8d;
-  padding-left: 10px;
   margin: 0;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .navLink {
