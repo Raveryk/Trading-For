@@ -22,12 +22,14 @@ router.get('/', (req, res) => {
 // POST request to send posts to DB //
 router.post('/', (req, res) => {
     userId = req.user.id;
-    title = req.body.id;
-    info = req.body.description;
+    title = req.body.title;
+    info = req.body.info;
     condition = req.body.condition;
-    pic = req.body.image_url;
+    pic = req.body.url;
     wants = req.body.wants;
     type = req.body.category_id
+
+    console.log('User Id:', req.user, 'Post:', req.body)
 
     const query = `INSERT INTO posts ("users_id", "title", "description", "condition", "image_url", "wants", "category_id")
                   VALUES($1, $2, $3, $4, $5, $6, $7);`;
