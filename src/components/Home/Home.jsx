@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import List from '@material-ui/core/List';
+import {List, ListItem} from '@material-ui/core';
 
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
+
+import '../Home/Home.css'
 
 // CUSTOM COMPONENTS
 
@@ -23,13 +25,14 @@ function Home() {
 
   return (
     <div className="container">
-      <h2>{heading}</h2>
 
       <div className="grid">
         <div className="grid-col grid-col_8">
-          <p>
-            Home Page Component
-          </p>
+          <List>
+            {posts.map((post, i) => {
+              return <ListItem key={i}><img className="browserImage" src={post.image_url}/>{post.title}: {post.description}</ListItem>
+            })}
+          </List>
 
         </div>
         
