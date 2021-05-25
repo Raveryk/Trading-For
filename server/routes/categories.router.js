@@ -2,13 +2,13 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-
+// GET route to grab categories from DB
 router.get('/', (req, res) => {
   // GET route code here
   const query = `SELECT * FROM category;`
   pool.query(query)
     .then(result => {
-      console.log(result.rows);
+    //   console.log(result.rows);
       res.send(result.rows)
     })
     .catch( error => {

@@ -7,4 +7,6 @@ const categories = ( state=[], action ) => {
     }
 }
 
+console.log(categories)
+
 export default categories

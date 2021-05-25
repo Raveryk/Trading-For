@@ -1,18 +1,23 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 
-import { FormControl, TextField, Button, Card } from '@material-ui/core';
+import { FormControl, TextField, Button, Card, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Post() {
 
+  useEffect( () => {
+    dispatch({ type: 'FETCH_CATEGORIES' })
+  }, []);
+
   const dispatch = useDispatch();
   const types = useSelector( store => store.categories )
+  console.log('categories from DB:', types);
 
   const [newPost, setNewPost] = useState({
     title: '',
     info: '',
-    type: 0,
+    type: '',
     condition: '',
     url: '',
     wants: ''
@@ -35,7 +40,7 @@ function Post() {
         <FormControl >
           <TextField id="title" placeholder="item" variant="outlined" value={newPost.title} onChange={handleChange}/>
           <TextField id="info" multiline rows={4} placeholder="description" variant="outlined" value={newPost.info} onChange={handleChange}/>
-          <InputLabel>category</InputLabel>
+          {/* <InputLabel>category</InputLabel> */}
               <Select
                 id="type"
                 label="category"
