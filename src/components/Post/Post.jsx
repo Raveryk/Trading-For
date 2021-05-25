@@ -2,16 +2,17 @@ import React, {useState} from 'react';
 
 
 import { FormControl, TextField, Button, Card } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Post() {
 
   const dispatch = useDispatch();
+  const types = useSelector( store => store.categories )
 
   const [newPost, setNewPost] = useState({
     title: '',
     info: '',
-    type: '',
+    type: 0,
     condition: '',
     url: '',
     wants: ''
@@ -33,11 +34,23 @@ function Post() {
       <Card elevation={4}>
         <FormControl >
           <TextField id="title" placeholder="item" variant="outlined" value={newPost.title} onChange={handleChange}/>
-          <TextField id="info" multiline rows={4} placeholder="description" variant="outlined" onChange={handleChange}/>
-          <TextField id="type" placeholder="category" variant="outlined" onChange={handleChange}/>
-          <TextField id="condition" placeholder="condition" variant="outlined" onChange={handleChange}/>
-          <TextField id="url" placeholder="image url" variant="outlined" onChange={handleChange}/>
-          <TextField id="wants" placeholder="trade for..." variant="outlined" onChange={handleChange}/>
+          <TextField id="info" multiline rows={4} placeholder="description" variant="outlined" value={newPost.info} onChange={handleChange}/>
+          <InputLabel>category</InputLabel>
+              <Select
+                id="type"
+                label="category"
+                value={newPost.type}
+                onChange={handleChange}
+              >
+                {types.map((type) => (
+                  <MenuItem key={type.id} value={type.id}>
+                    {type.type}
+                  </MenuItem>
+                ))}
+              </Select>
+          <TextField id="condition" placeholder="condition" variant="outlined" value={newPost.condition}onChange={handleChange}/>
+          <TextField id="url" placeholder="image url" variant="outlined" value={newPost.url}onChange={handleChange}/>
+          <TextField id="wants" placeholder="trade for..." variant="outlined" value={newPost.wants}onChange={handleChange}/>
           <Button variant="outlined" onClick={() => submitPost()}>Submit</Button>
         </FormControl>
       </Card>
