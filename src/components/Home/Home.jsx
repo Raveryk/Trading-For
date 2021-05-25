@@ -12,9 +12,9 @@ function Home() {
   const dispatch = useDispatch();
   const [heading, setHeading] = useState('Welcome');
 
-  useEffect(() => (
+  useEffect(() => {
     dispatch({ type:'FETCH_POSTS'})
-  ), [])
+}, [])
 
   const posts = useSelector( (store) => store.posts )
   console.log(posts)

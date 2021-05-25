@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
   const query = `SELECT * FROM posts WHERE traded=false;`
   pool.query(query)
     .then(result => {
+      console.log(result.rows);
       res.send(result.rows)
     })
     .catch( error => {
