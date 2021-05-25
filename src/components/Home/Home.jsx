@@ -30,7 +30,7 @@ function Home() {
         <div className="grid-col grid-col_8">
           <List>
             {posts.map((post, i) => {
-              return <ListItem key={i}><img className="browserImage" src={post.image_url}/>{post.title}: {post.description}</ListItem>
+              return <ListItem key={i}><img className="browserImage" src={post.image_url}/>{post.username} traded a {post.title}</ListItem>
             })}
           </List>
 
