@@ -25,7 +25,7 @@ function Home() {
 
   return (
     <div className="container">
-
+      <h2>Market Place Feed</h2>
       <div className="grid">
         <div className="grid-col grid-col_8">
           <List>

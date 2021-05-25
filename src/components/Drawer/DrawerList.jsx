@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import "../Nav/Nav.css";
 
 import { List, ListItem, Typography} from "@material-ui/core";
+import Looks4Icon from '@material-ui/icons/Looks4';
+
 
 function DrawerList() {
   const user = useSelector((store) => store.user);
@@ -25,11 +27,7 @@ function DrawerList() {
     <div>
       
       <List>
-        <ListItem>
-          <Link to="/home">
-            <h2 className="nav-title">Trading For</h2>
-          </Link>
-        </ListItem>
+        <Looks4Icon />
         <Typography>
         Welcome back, {user.username}!
       </Typography>
@@ -42,20 +40,27 @@ function DrawerList() {
         </div>
         <div>
           <ListItem>
-            {user.id && (
-              <>
-                <Link className="navLink" to="/info">
-                  Info Page
-                </Link>
-              </>
-            )}
+            <Link className="navLink" to="/browse">
+              Browse
+            </Link>
           </ListItem>
         </div>
         <div>
           <ListItem>
-            <Link className="navLink" to="/about">
-              About
+            <Link className="navLink" to="/post">
+              Post
             </Link>
+          </ListItem>
+        </div>
+        <div>
+          <ListItem>
+            {user.id && (
+              <>
+                <Link className="navLink" to="/account">
+                  Account
+                </Link>
+              </>
+            )}
           </ListItem>
         </div>
         <div>
