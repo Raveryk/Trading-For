@@ -19,11 +19,26 @@ router.get('/', (req, res) => {
     })
 });
 
-/**
- * POST route template
- */
+// POST request to send posts to DB //
 router.post('/', (req, res) => {
-  // POST route code here
+    userId = req.user.id;
+    title = req.body.id;
+    info = req.body.description;
+    condition = req.body.condition;
+    pic = req.body.image_url;
+    wants = req.body.wants;
+    type = req.body.category_id
+
+    const query = `INSERT INTO posts ("users_id", "title", "description", "condition", "image_url", "wants", "category_id")
+                  VALUES($1, $2, $3, $4, $5, $6, $7);`;
+    pool.query(query, [userId, title, info, condition, pic, wants, type]) 
+      .then(result => {
+        res.sendStatus(201)
+      })
+      .catch(error => {
+        console.log('Error adding post to DB:', error);
+        res.sendStatus(500)
+      })
 });
 
 module.exports = router;
