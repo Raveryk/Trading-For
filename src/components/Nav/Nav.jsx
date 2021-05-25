@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import {useSelector} from 'react-redux';
+import Looks4Icon from '@material-ui/icons/Looks4';
 
 import {AppBar, Toolbar, IconButton, Typography, Hidden, Drawer, Divider, Button} from '@material-ui/core';
+
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -26,21 +28,25 @@ function Nav() {
   //     bottom: false,
   //     right: false,
   //   });
+
+  const [drawer, setDrawer] = useState(false);
   
-
-  // const toggleDrawer = (anchor, open) => (event) => {
-  //   if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-  //     return;
-  //   }
-
-  //   setState({ ...state, [anchor]: open });
-  // };
+  // function to toggle drawer being open or closed
+  const toggleDrawer = (event) => {
+    console.log('You clicked me!', drawer)
+    if (event.type === 'keydown') {
+      return;
+    }
+    setDrawer(!drawer);
+  };
 
 
 
   return (
     <div>
     <div className="nav">
+    <Looks4Icon 
+    onClick={toggleDrawer}/>
       <Link to="/home">
         <h2 className="nav-title">Trading For</h2>
       </Link>
