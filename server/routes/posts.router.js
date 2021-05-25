@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
     condition = req.body.condition;
     pic = req.body.url;
     wants = req.body.wants;
-    type = req.body.category_id
+    type = req.body.type
 
     console.log('User Id:', req.user, 'Post:', req.body)
 

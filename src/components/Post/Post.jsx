@@ -6,14 +6,18 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function Post() {
 
+  // On page load, fetch categories from DB to populate reducer
   useEffect( () => {
     dispatch({ type: 'FETCH_CATEGORIES' })
   }, []);
 
   const dispatch = useDispatch();
   const types = useSelector( store => store.categories )
-  console.log('categories from DB:', types);
+  // console.log('categories from DB:', types);
 
+  const condition = ['Brand New', 'Mint', 'Excellent', 'Very Good', 'Good', 'Fair', 'Poor', 'Broken']
+
+  //
   const [newPost, setNewPost] = useState({
     title: '',
     info: '',
@@ -25,27 +29,38 @@ function Post() {
 
 
   const handleChange = (e) => {
+    e.preventDefault();
     setNewPost({...newPost,
         [e.target.id]: e.target.value
     })
 }
+  const handleCategory = (e) => {
+    e.preventDefault();
+    setNewPost({...newPost, type: e.target.value })
+  }
+
+  const handleCondition = (e) => {
+    e.preventDefault();
+    setNewPost({...newPost, condition: e.target.value })
+  }
 
   const submitPost = () => {
+    console.log(newPost);
     dispatch({ type: 'ADD_POST', payload: newPost })
   }
 
   return (
     <div className="container">
       <Card elevation={4}>
-        <FormControl >
-          <TextField id="title" placeholder="item" variant="outlined" value={newPost.title} onChange={handleChange}/>
-          <TextField id="info" multiline rows={4} placeholder="description" variant="outlined" value={newPost.info} onChange={handleChange}/>
-          {/* <InputLabel>category</InputLabel> */}
+        <FormControl>
+          <TextField id="title" label="title" variant="outlined" value={newPost.title} onChange={handleChange}/>
+          <TextField id="info" multiline rows={4} label="description" variant="outlined" value={newPost.info} onChange={handleChange}/>
+          <FormControl>
+          <InputLabel>category</InputLabel>
               <Select
                 id="type"
-                label="category"
                 value={newPost.type}
-                onChange={handleChange}
+                onChange={handleCategory}
               >
                 {types.map((type) => (
                   <MenuItem key={type.id} value={type.id}>
@@ -53,9 +68,23 @@ function Post() {
                   </MenuItem>
                 ))}
               </Select>
-          <TextField id="condition" placeholder="condition" variant="outlined" value={newPost.condition}onChange={handleChange}/>
-          <TextField id="url" placeholder="image url" variant="outlined" value={newPost.url}onChange={handleChange}/>
-          <TextField id="wants" placeholder="trade for..." variant="outlined" value={newPost.wants}onChange={handleChange}/>
+            </FormControl>
+            <FormControl>
+          <InputLabel>condition</InputLabel>
+              <Select
+                id="condition"
+                value={newPost.condition}
+                onChange={handleCondition}
+              >
+                {condition.map((type, i) => (
+                  <MenuItem key={i} value={type}>
+                    {type}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          <TextField id="url" label="image url" variant="outlined" value={newPost.url}onChange={handleChange}/>
+          <TextField id="wants" label="trade for..." variant="outlined" value={newPost.wants}onChange={handleChange}/>
           <Button variant="outlined" onClick={() => submitPost()}>Submit</Button>
         </FormControl>
       </Card>
