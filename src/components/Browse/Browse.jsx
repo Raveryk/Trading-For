@@ -11,6 +11,9 @@ import {
   Button,
   Slide,
   Paper,
+  Divider,
+  ListItemAvatar,
+  Avatar,
 } from "@material-ui/core";
 
 import { useHistory } from "react-router-dom";
@@ -35,7 +38,7 @@ function getModalStyle() {
   };
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
     width: 225,
@@ -47,6 +50,15 @@ const useStyles = makeStyles(() => ({
   image: {
     maxWidth: '75px',
     maxHeight: '75px',    
+  },
+  list: {
+    width: '100%',
+    maxWidth: 360,
+  },
+  avatars: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    marginRight: theme.spacing(1)
   }
 }));
 
@@ -120,17 +132,21 @@ function Browse() {
       <h2>Browse Trades</h2>
       <div className="grid">
         <div className="grid-col grid-col_8">
-          <List>
+          <List className={classes.list}>
             {browser.map((post, i) => {
               return (
+                  <>
                 <ListItem key={i} onClick={() => toDetail(post)}>
-
-                  <img className={classes.image} src={post.image_url} />
+                    <ListItemAvatar>
+                        <Avatar variant="square" className={classes.avatars} src={post.image_url} />
+                    </ListItemAvatar>
                   <ListItemText
                     primary={post.title}
                     secondary={post.condition}
                   />
                 </ListItem>
+                <Divider />
+                </>
               );
             })}
           </List>
