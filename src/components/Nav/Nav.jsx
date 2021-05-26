@@ -4,6 +4,8 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
 import { useSelector } from "react-redux";
 import Looks4Icon from "@material-ui/icons/Looks4";
+import Logo from "../Nav/TF_Logo_4.png"
+
 
 import {
   AppBar,
@@ -17,12 +19,12 @@ import {
   List,
   ListItem,
 } from "@material-ui/core";
-import { SettingsInputAntennaTwoTone } from "@material-ui/icons";
 
 import DrawerList from "../Drawer/DrawerList";
+import userReducer from "../../redux/reducers/user.reducer";
 
 function Nav() {
-  // const user = useSelector((store) => store.user);
+  const user = useSelector((store) => store.user);
 
   // let loginLinkData = {
   //   path: '/login',
@@ -56,12 +58,16 @@ function Nav() {
   return (
     <div>
       <div className="nav">
-          <Looks4Icon className="nav-icon"onClick={toggleDrawer} />
           <h2 className="nav-title">Trading For</h2>
-      </div>
+        </div>
+      {user.id && (
+        <>
+          <img src={Logo} className="nav-icon"onClick={toggleDrawer} />
       <Drawer variant="temporary" open={drawer} onClose={toggleDrawer}>
         <DrawerList />
       </Drawer>
+      </>
+      )}
     </div>
   );
 }

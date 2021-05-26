@@ -15,8 +15,18 @@ function* getPosts() {
     }
 }
 
+function* addPost(action) {
+    try {
+        console.log('New post:', action.payload)
+        yield axios.post('/api/posts', action.payload);
+    } catch (error) {
+        console.log('Error sending newPost from client:', error)
+    }
+}
+
 function* postsSaga() {
     yield takeLatest('FETCH_POSTS', getPosts)
+    yield takeLatest('ADD_POST', addPost)
 }
 
 export default postsSaga;
