@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   List,
   ListItem,
+  ListItemText,
   Modal,
   Card,
   makeStyles,
@@ -123,10 +124,12 @@ function Browse() {
             {browser.map((post, i) => {
               return (
                 <ListItem key={i} onClick={() => toDetail(post)}>
-                  {post.username}
+
                   <img className={classes.image} src={post.image_url} />
-                  {post.title}
-                  <p>{post.condition}</p>
+                  <ListItemText
+                    primary={post.title}
+                    secondary={post.condition}
+                  />
                 </ListItem>
               );
             })}
