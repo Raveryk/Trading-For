@@ -15,8 +15,19 @@ function* getBrowser() {
     }
 }
 
+function* getDetails(action) {
+    try{
+        const response = yield axios.get(`/api/browser/details/${action.payload}`);
+        console.log('Get all details:', response.data);
+        yield put({ type: 'SET_DETAILS', payload: response.data })
+    } catch (error) {
+        console.log('GET details request failed in saga:', error)
+    }
+}
+
 function* browserSaga() {
-    yield takeLatest('FETCH_BROWSER', getBrowser)
+    yield takeLatest('FETCH_BROWSER', getBrowser);
+    yield takeLatest('FETCH_DETAILS', getDetails);
 }
 
 export default browserSaga;

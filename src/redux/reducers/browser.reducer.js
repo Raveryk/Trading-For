@@ -1,3 +1,6 @@
+import { combineReducers } from 'redux';
+
+
 const browser = ( state=[], action ) => {
     switch (action.type) {
         case 'SET_BROWSER':
@@ -7,4 +10,16 @@ const browser = ( state=[], action ) => {
     }
 }
 
-export default browser
+const detail = ( state=[], action ) => {
+    switch (action.type) {
+        case 'SET_DETAIL':
+            return action.payload
+        default:
+            return state;
+    }
+}
+
+export default combineReducers({
+    browser,
+    detail,
+})
