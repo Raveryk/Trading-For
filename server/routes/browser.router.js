@@ -4,7 +4,9 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     // GET route code here
-    const query = `SELECT * FROM posts WHERE traded='false';`;
+    const query = `SELECT * FROM posts 
+    JOIN "user" ON "user".id=posts.users_id
+    WHERE traded=false;`;
     pool.query(query)
       .then(result => {
         console.log(result.rows);
