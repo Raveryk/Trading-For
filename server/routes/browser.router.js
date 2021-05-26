@@ -23,9 +23,9 @@ router.get('/', (req, res) => {
       console.log(req.params.id);
       postId = req.params.id
     // GET route code here
-    const query = `SELECT * FROM posts 
-    JOIN "user" ON "user".id=posts.users_id
-    WHERE user_id=$1;`;
+    const query = `SELECT title, description, condition, image_url, wants, "user".username, "user".email, "user".phone_num FROM posts 
+                    JOIN "user" ON "user".id=posts.users_id
+                    WHERE posts.id=$1;`;
 
     pool.query(query, [postId])
       .then(result => {
