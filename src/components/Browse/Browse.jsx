@@ -95,6 +95,7 @@ function Browse() {
             <p>{item.description}</p>
             <h4>Trade For:</h4>
             <p>{item.wants}</p>
+            <Button variant="outlined" onClick={() => modalToggle()}>Back</Button>
             <Button variant="outlined" onClick={() => slideToggle()}>Interested?</Button>
             <Slide direction="up" in={slide} onChange={slideToggle}>
               <Paper>
