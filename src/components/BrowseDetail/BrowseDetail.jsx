@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {List, ListItem} from '@material-ui/core';
+import {Card} from '@material-ui/core';
 
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch} from 'react-redux';
@@ -11,29 +11,19 @@ function BrowseDetail() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type:'FETCH_BROWSER'})
+    dispatch({ type:'FETCH_DETAILS'})
 }, [])
 
-  const browser = useSelector( (store) => store.browser )
-  console.log(browser)
+  const detail = useSelector( (store) => store.browser.detail )
+  console.log(detail)
 
   
 
   return (
     <div className="container">
-      <h2>Browse Trades</h2>
-      <div className="grid">
-        <div className="grid-col grid-col_8">
-          <List>
-            {browser.map((post, i) => {
-                return <ListItem key={i}>{post.username}
-               <img className="browserImage" src={post.image_url}/>{post.title}<p>{post.condition}</p></ListItem>
-            })}
-          </List>
-
-        </div>
-        
-      </div>
+        <Card>
+            <p>Detail Here</p>
+        </Card>
     </div>
   );
 }
