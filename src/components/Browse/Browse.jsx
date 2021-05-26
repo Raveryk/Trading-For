@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {List, ListItem, Modal, Card, makeStyles, Fade} from '@material-ui/core';
+import {List, ListItem, Modal, Card, makeStyles, Fade, Backdrop} from '@material-ui/core';
 
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch} from 'react-redux';
@@ -26,10 +26,11 @@ function getModalStyle() {
   const useStyles = makeStyles(() => ({
     paper: {
       position: 'absolute',
-      width: 400,
+      width: 225,
+      height: 500,
       backgroundColor: 'white',
       border: '2px solid #000',
-      padding: '25%',
+      padding: '5%',
     },
   }));
 
@@ -74,8 +75,10 @@ function Browse() {
             <p></p>
             <h3>{item.title}</h3>
             <img src={item.image_url}/>
-            <p>{item.condition}</p>
+            <p>Condition: <i>{item.condition}</i></p>
+            <h4>Info:</h4>
             <p>{item.description}</p>
+            <h4>Trade For:</h4>
             <p>{item.wants}</p>      
     </Card> )
     })} 
@@ -102,6 +105,10 @@ function Browse() {
             open={open}
             onClose={modalToggle}
             closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+            timeout: 500,
+        }}
             > 
             <Fade in={open}>
             {body}
