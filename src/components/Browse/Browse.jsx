@@ -43,6 +43,10 @@ const useStyles = makeStyles(() => ({
     border: "2px solid #000",
     padding: "5%",
   },
+  image: {
+    maxWidth: '75px',
+    maxHeight: '75px',    
+  }
 }));
 
 function Browse() {
@@ -73,6 +77,7 @@ function Browse() {
   // function to toggle modal
   const modalToggle = () => {
     setOpen(!open);
+    dispatch({ type: 'SET_DETAILS', payload: [] })
   };
 
   const slideToggle = () => {
@@ -83,11 +88,11 @@ function Browse() {
     <div style={modalStyle} className={classes.paper}>
       {detail.map((item, i) => {
         return (
-          <Card>
+          <>
             <h3>{item.username}</h3>
             <p></p>
             <h3>{item.title}</h3>
-            <img src={item.image_url} />
+            <img className={classes.image} src={item.image_url} />
             <p>
               Condition: <i>{item.condition}</i>
             </p>
@@ -103,7 +108,7 @@ function Browse() {
                 <p>Phone#: {item.phone_num}</p>
               </Paper>
             </Slide>
-          </Card>
+          </>
         );
       })}
     </div>
@@ -119,7 +124,7 @@ function Browse() {
               return (
                 <ListItem key={i} onClick={() => toDetail(post)}>
                   {post.username}
-                  <img className="browserImage" src={post.image_url} />
+                  <img className={classes.image} src={post.image_url} />
                   {post.title}
                   <p>{post.condition}</p>
                 </ListItem>

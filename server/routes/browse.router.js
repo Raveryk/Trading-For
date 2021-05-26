@@ -4,7 +4,7 @@ const router = express.Router();
 
 // GET request to grab all posts that haven't been traded
 router.get('/', (req, res) => {
-    const query = `SELECT * FROM posts 
+    const query = `SELECT posts.id, title, condition, image_url, "user".username FROM posts 
     JOIN "user" ON "user".id=posts.users_id
     WHERE traded=false;`;
     pool.query(query)
