@@ -64,6 +64,12 @@ function Post() {
   const submitPost = () => {
     console.log(newPost);
     dispatch({ type: "ADD_POST", payload: newPost });
+    setNewPost({title: "",
+    info: "",
+    type: "",
+    condition: "",
+    url: "",
+    wants: "",})
   };
 
   return (
