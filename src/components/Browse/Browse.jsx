@@ -1,27 +1,61 @@
 import React, { useState } from 'react';
-import {List, ListItem, Modal} from '@material-ui/core';
+import {List, ListItem, Modal, Card, makeStyles, Fade} from '@material-ui/core';
 
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 
 import BrowseDetail from '../BrowseDetail/BrowseDetail'
-import '../Home/Home.css'
+// import '../Home/Home.css'
 
-// CUSTOM COMPONENTS
+function rand() {
+    return Math.round(Math.random() * 20) - 10;
+  }
+
+function getModalStyle() {
+    const top = 50 + rand();
+    const left = 50 + rand();
+  
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    };
+  }
+  
+  const useStyles = makeStyles(() => ({
+    paper: {
+      position: 'absolute',
+      width: 400,
+      backgroundColor: 'white',
+      border: '2px solid #000',
+      padding: '25%',
+    },
+  }));
 
 function Browse() {
 
   const dispatch = useDispatch();
+  const history = useHistory();
+
+
+  const classes = useStyles();
+  const [modalStyle] = React.useState(getModalStyle);
 
   const [open, setOpen] = useState(false)
 
-  const handleOpen = () => {
-      setOpen(true);
+  const detail = useSelector( (store) => store.browser.detail )
+  console.log('Detail item:', detail)
+
+  const toDetail = (post) => {
+      console.log(post.id)
+      dispatch({ type: 'FETCH_DETAILS', payload: post.id })
+      modalToggle();
+    // history.push(`/browse/detail/${post.id}`)
   }
 
-  const handleClose = () => {
-    setOpen(false);
+  const modalToggle = () => {
+    setOpen(!open);
 }
 
   useEffect(() => {
@@ -30,6 +64,24 @@ function Browse() {
 
   const browser = useSelector( (store) => store.browser.browser )
   console.log(browser)
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+    {detail.map((item, i) => {
+        return (
+    <Card > 
+            <h3>{item.username}</h3>
+            <p></p>
+            <h3>{item.title}</h3>
+            <img src={item.image_url}/>
+            <p>{item.condition}</p>
+            <p>{item.description}</p>
+            <p>{item.wants}</p>      
+    </Card> )
+    })} 
+</div>
+  )
+
 
   
 
@@ -40,23 +92,27 @@ function Browse() {
         <div className="grid-col grid-col_8">
           <List>
             {browser.map((post, i) => {
-                return <ListItem key={i} onClick={handleOpen}>{post.username}
+                return <ListItem key={i} onClick={() => toDetail(post)}>{post.username}
                <img className="browserImage" src={post.image_url}/>{post.title}<p>{post.condition}</p></ListItem>
             })}
           </List>
         </div>
         <div>
-            <Modal 
+            <Modal
             open={open}
-            onClose={handleClose}
-            >
-                <BrowseDetail />
+            onClose={modalToggle}
+            closeAfterTransition
+            > 
+            <Fade in={open}>
+            {body}
+            </Fade>        
             </Modal>
         </div>
-        
       </div>
     </div>
   );
 }
 
 export default Browse;
+
+

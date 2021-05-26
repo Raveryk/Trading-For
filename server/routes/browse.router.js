@@ -19,8 +19,8 @@ router.get('/', (req, res) => {
   });
 
   // GET request for specific post id
-  router.get(`/details/:id`, (req, res) => {
-      console.log(req.params.id);
+  router.get(`/detail/:id`, (req, res) => {
+      console.log('req.params.id:', req.params.id);
       postId = req.params.id
     // GET route code here
     const query = `SELECT title, description, condition, image_url, wants, "user".username, "user".email, "user".phone_num FROM posts 

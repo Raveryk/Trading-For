@@ -7,7 +7,7 @@ import { takeLatest } from 'redux-saga/effects';
 
 function* getBrowser() {
     try {
-        const response = yield axios.get('/api/browser');
+        const response = yield axios.get('/api/browse');
         console.log('Got from server for browser:', response.data)
         yield put({ type: 'SET_BROWSER', payload: response.data })
     } catch (error) {
@@ -17,7 +17,7 @@ function* getBrowser() {
 
 function* getDetails(action) {
     try{
-        const response = yield axios.get(`/api/browser/details/${action.payload}`);
+        const response = yield axios.get(`/api/browse/detail/${action.payload}`);
         console.log('Get all details:', response.data);
         yield put({ type: 'SET_DETAILS', payload: response.data })
     } catch (error) {

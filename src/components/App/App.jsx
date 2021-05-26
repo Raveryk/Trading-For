@@ -23,6 +23,7 @@ import Home from '../Home/Home';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Browse from '../Browse/Browse';
+import BrowseDetail from '../BrowseDetail/BrowseDetail'
 
 // import './App.css';
 
@@ -61,6 +62,12 @@ function App() {
             path="/browse"
           >
             <Browse />
+          </ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path="/browse/detail/:id"
+          >
+            <BrowseDetail />
           </ProtectedRoute>
           <ProtectedRoute
             // shows AboutPage at all times (logged in or not)

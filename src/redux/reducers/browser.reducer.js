@@ -12,7 +12,7 @@ const browser = ( state=[], action ) => {
 
 const detail = ( state=[], action ) => {
     switch (action.type) {
-        case 'SET_DETAIL':
+        case 'SET_DETAILS':
             return action.payload
         default:
             return state;
