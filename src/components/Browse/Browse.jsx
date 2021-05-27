@@ -14,7 +14,10 @@ import {
   Divider,
   ListItemAvatar,
   Avatar,
+  IconButton,
 } from "@material-ui/core";
+
+import CloseIcon from '@material-ui/icons/Close';
 
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -71,6 +74,17 @@ const useStyles = makeStyles((theme) => ({
   divider: {
     marginBottom: '5px'
   },
+  contact: {
+    backgroundColor: "whitesmoke",
+  },
+  modal: {
+    margin: '0 auto', 
+    display: "flex"
+  },
+  button: {
+    margin: '0 auto', 
+    display: "flex"
+  }
 }));
 
 function Browse() {
@@ -110,6 +124,9 @@ function Browse() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
+    <IconButton onClick={() => modalToggle()}>
+        <CloseIcon className={classes.close} variant="outlined" />
+    </IconButton>
       {detail.map((item, i) => {
         return (
           <>
@@ -128,10 +145,9 @@ function Browse() {
             <h4>Trade For:</h4>
             <p>{item.wants}</p>
             <Divider className={classes.divider}/>
-            <Button variant="outlined" onClick={() => modalToggle()}>Back</Button>
-            <Button variant="outlined" onClick={() => slideToggle()}>Interested?</Button>
+            <Button className={classes.button} variant="outlined" onClick={() => slideToggle()}>Interested?</Button>
             <Slide direction="up" in={slide} onChange={slideToggle}>
-              <Paper>
+              <Paper className={classes.contact}>
                 <p>Email: {item.email}</p>
                 <p>Phone#: {item.phone_num}</p>
               </Paper>
@@ -144,7 +160,8 @@ function Browse() {
 
   return (
     <div className="container">
-      <h2>Browse Trades</h2>
+      <h2 className={classes.title}>Browse Trades</h2>
+      <Divider />
       <div className="grid">
         <div className="grid-col grid-col_8">
           <List className={classes.list}>
