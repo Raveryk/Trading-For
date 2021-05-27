@@ -41,15 +41,20 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
+    overflow: 'auto',
     width: 225,
-    height: 500,
-    backgroundColor: "white",
+    height: '75%',
+    backgroundColor: "#81ac8d",
     border: "2px solid #000",
     padding: "5%",
   },
   image: {
+    display: 'block',
     maxWidth: '75px',
-    maxHeight: '75px',    
+    maxHeight: '75px', 
+    marginLeft: 'auto',
+    marginRight: 'auto',
+       
   },
   list: {
     width: '100%',
@@ -59,7 +64,13 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(7),
     height: theme.spacing(7),
     marginRight: theme.spacing(1)
-  }
+  },
+  title: {
+    textAlign: 'center'
+  },
+  divider: {
+    marginBottom: '5px'
+  },
 }));
 
 function Browse() {
@@ -102,17 +113,21 @@ function Browse() {
       {detail.map((item, i) => {
         return (
           <>
-            <h3>{item.username}</h3>
+            <h3 className={classes.title}>{item.username}</h3>
             <p></p>
-            <h3>{item.title}</h3>
+            <h3 className={classes.title}>{item.title}</h3>
             <img className={classes.image} src={item.image_url} />
+            <Divider />
             <p>
               Condition: <i>{item.condition}</i>
             </p>
+            <Divider />
             <h4>Info:</h4>
             <p>{item.description}</p>
+            <Divider />
             <h4>Trade For:</h4>
             <p>{item.wants}</p>
+            <Divider className={classes.divider}/>
             <Button variant="outlined" onClick={() => modalToggle()}>Back</Button>
             <Button variant="outlined" onClick={() => slideToggle()}>Interested?</Button>
             <Slide direction="up" in={slide} onChange={slideToggle}>
