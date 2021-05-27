@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import postsSaga from './posts.saga';
 import categoriesSaga from './categories.saga';
 import browserSaga from './browser.saga';  
+import accountSaga from './account.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     postsSaga(),
     categoriesSaga(),
     browserSaga(),
+    accountSaga(),
   ]);
 }

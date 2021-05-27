@@ -14,7 +14,11 @@ import {
   ListItemAvatar,
   Avatar,
   IconButton,
+  Checkbox,
+  FormControlLabel,
 } from "@material-ui/core";
+
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import CloseIcon from '@material-ui/icons/Close';
 
@@ -101,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
 function EditPosts() {
 
   useEffect(() => {
-    dispatch({ type: "FETCH_BROWSER" });
+    dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
   }, []);
 
   const dispatch = useDispatch();
@@ -112,9 +116,11 @@ function EditPosts() {
   const [open, setOpen] = useState(false);
   const [slide, setSlide] = useState(false);
   //grabs detailed info from reducer
-  const detail = useSelector((store) => store.browser.detail);
+  // const detail = useSelector((store) => store.account.accountDetail);
   // grabs all posts for browser
-  const browser = useSelector((store) => store.browser.browser);
+  const browser = useSelector((store) => store.account.accountBrowser);
+  const user = useSelector((store) => store.userReducer);
+  console.log('User data:', user)
 
   // targets specific post and toggles the modal comp to open
   const toDetail = (post) => {
@@ -134,51 +140,51 @@ function EditPosts() {
     setSlide(!slide);
   };
 
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-    <IconButton onClick={() => modalToggle()}>
-        <CloseIcon className={classes.close} variant="outlined" />
-    </IconButton>
-      {detail.map((item, i) => {
-        return (
-          <>
-            <h3 className={classes.title}>{item.username}</h3>
-            <p></p>
-            <h3 className={classes.title}>{item.title}</h3>
-            <div className={classes.modalPic} >
-            <img className={classes.image} src={item.image_url} />
-            </div>
-            <Divider />
-            <p>
-              Condition: <i>{item.condition}</i>
-            </p>
-            <Divider />
-            <div className={classes.info} >
-            <h4>Info:</h4>
-            <p>{item.description}</p>
-            </div>
-            <Divider />
-            <div className={classes.info} >
-            <h4>Trade For:</h4>
-            <p>{item.wants}</p>
-            </div>
-            <Divider className={classes.divider}/>
-            <Button className={classes.button} variant="outlined" onClick={() => slideToggle()}>Interested?</Button>
-            <Slide direction="up" in={slide} onChange={slideToggle}>
-              <Paper className={classes.contact}>
-                <p>Email: {item.email}</p>
-                <p>Phone#: {item.phone_num}</p>
-              </Paper>
-            </Slide>
-          </>
-        );
-      })}
-    </div>
-  );
+  // const body = (
+  //   <div style={modalStyle} className={classes.paper}>
+  //   <IconButton onClick={() => modalToggle()}>
+  //       <CloseIcon className={classes.close} variant="outlined" />
+  //   </IconButton>
+  //     {detail.map((item, i) => {
+  //       return (
+  //         <>
+  //           <h3 className={classes.title}>{item.username}</h3>
+  //           <p></p>
+  //           <h3 className={classes.title}>{item.title}</h3>
+  //           <div className={classes.modalPic} >
+  //           <img className={classes.image} src={item.image_url} />
+  //           </div>
+  //           <Divider />
+  //           <p>
+  //             Condition: <i>{item.condition}</i>
+  //           </p>
+  //           <Divider />
+  //           <div className={classes.info} >
+  //           <h4>Info:</h4>
+  //           <p>{item.description}</p>
+  //           </div>
+  //           <Divider />
+  //           <div className={classes.info} >
+  //           <h4>Trade For:</h4>
+  //           <p>{item.wants}</p>
+  //           </div>
+  //           <Divider className={classes.divider}/>
+  //           <Button className={classes.button} variant="outlined" onClick={() => slideToggle()}>Interested?</Button>
+  //           <Slide direction="up" in={slide} onChange={slideToggle}>
+  //             <Paper className={classes.contact}>
+  //               <p>Email: {item.email}</p>
+  //               <p>Phone#: {item.phone_num}</p>
+  //             </Paper>
+  //           </Slide>
+  //         </>
+  //       );
+  //     })}
+  //   </div>
+  // );
 
   return (
     <div className={classes.browse}>
-      <h2 className={classes.title}>Browse Trades</h2>
+      <h2 className={classes.title}>User Trades</h2>
       <Divider />
       <div className="grid">
         <div className="grid-col grid-col_8">
@@ -194,6 +200,11 @@ function EditPosts() {
                     primary={post.title}
                     secondary={post.condition}
                   />
+                  <FormControlLabel control={
+                  <Checkbox />}
+                  label="Traded"
+                  labelPlacement="top"
+                  />
                 </ListItem>
                 <Divider />
                 </>
@@ -202,7 +213,7 @@ function EditPosts() {
           </List>
         </div>
         <div>
-          <Modal
+          {/* <Modal
             open={open}
             onClose={modalToggle}
             closeAfterTransition
@@ -212,7 +223,7 @@ function EditPosts() {
             }}
           >
             <Fade in={open}>{body}</Fade>
-          </Modal>
+          </Modal> */}
         </div>
       </div>
     </div>
