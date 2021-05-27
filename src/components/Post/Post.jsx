@@ -5,11 +5,47 @@ import {
   TextField,
   Button,
   Card,
+  Grid,
   InputLabel,
   Select,
   MenuItem,
+  makeStyles,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
+
+const useStyles = makeStyles((theme) => ({
+  grid: {
+    direction: 'column',
+    justify: 'center',
+    alignItems: 'center',
+  },
+  card: {
+    width: '75%',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginTop: '20%',
+  },
+  form: {
+    display: 'flex',
+    margin: '10px',
+    flexDirection: 'column',
+    
+  },
+  inputs: {
+    marginTop: '5px',
+    marginBottom: '5px',
+  },
+  btn: {
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginTop: '5px',
+    marginBottom: '5px',
+    width: '50%'
+  },
+  title: {
+    textAlign: 'center'
+  }
+}))
 
 function Post() {
   // On page load, fetch categories from DB to populate reducer
@@ -17,6 +53,7 @@ function Post() {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
 
+  const classes = useStyles()
   const dispatch = useDispatch();
   const types = useSelector((store) => store.categories);
 
@@ -73,10 +110,13 @@ function Post() {
   };
 
   return (
-    <div className="container">
-      <Card elevation={4}>
-        <FormControl>
+    <div>
+      <Grid container className={classes.grid}>
+      <Card elevation={4} className={classes.card} >
+        <h2 className={classes.title}>Post A Trade</h2>
+        <form className={classes.form}>
           <TextField
+            className={classes.inputs}
             id="title"
             label="title"
             variant="outlined"
@@ -84,6 +124,7 @@ function Post() {
             onChange={handleChange}
           />
           <TextField
+            className={classes.inputs}
             id="info"
             multiline
             rows={4}
@@ -92,7 +133,7 @@ function Post() {
             value={newPost.info}
             onChange={handleChange}
           />
-          <FormControl>
+          <FormControl className={classes.inputs}>
             <InputLabel>category</InputLabel>
             <Select id="type" value={newPost.type} onChange={handleCategory}>
               {types.map((type) => (
@@ -102,7 +143,7 @@ function Post() {
               ))}
             </Select>
           </FormControl>
-          <FormControl>
+          <FormControl className={classes.inputs}>
             <InputLabel>condition</InputLabel>
             <Select
               id="condition"
@@ -117,6 +158,7 @@ function Post() {
             </Select>
           </FormControl>
           <TextField
+            className={classes.inputs}
             id="url"
             label="image url"
             variant="outlined"
@@ -124,17 +166,19 @@ function Post() {
             onChange={handleChange}
           />
           <TextField
+            className={classes.inputs}
             id="wants"
             label="trade for..."
             variant="outlined"
             value={newPost.wants}
             onChange={handleChange}
           />
-          <Button variant="outlined" onClick={() => submitPost()}>
+          <Button className={classes.btn} variant="outlined" onClick={() => submitPost()}>
             Submit
           </Button>
-        </FormControl>
+        </form>
       </Card>
+      </Grid>
     </div>
   );
 }
