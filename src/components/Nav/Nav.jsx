@@ -4,9 +4,8 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
 import { useSelector } from "react-redux";
 import Looks4Icon from "@material-ui/icons/Looks4";
-import Logo from "../Nav/TF_Logo_4.png"
-import { useTheme } from '@material-ui/core/styles'
-
+import Logo from "../Nav/TF_Logo_4.png";
+import { useTheme } from "@material-ui/core/styles";
 
 import {
   AppBar,
@@ -19,24 +18,30 @@ import {
   Button,
   List,
   ListItem,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 
 import DrawerList from "../Drawer/DrawerList";
 import userReducer from "../../redux/reducers/user.reducer";
 
 const useStyles = makeStyles((theme) => ({
-    toolbar: {
-      marginBottom: 20,
-    },
-    title: {
-      marginRight: 'auto',
-      marginLeft: 'auto',
-    }
-}))
+  toolbar: {
+    marginBottom: 20,
+  },
+  title: {
+    marginRight: "auto",
+    marginLeft: "auto",
+  },
+  icon: {
+    maxWidth: "30px",
+    maxHeight: "30px",
+    borderRadius: "50%",
+  },
+  
+}));
 
 function Nav() {
-  const theme = useTheme()
+  const theme = useTheme();
   const classes = useStyles();
   const user = useSelector((store) => store.user);
 
@@ -71,19 +76,21 @@ function Nav() {
 
   return (
     <div className={classes.toolbar}>
-      <AppBar >
-        <Toolbar >
+      <AppBar>
+        <Toolbar>
+          {user.id && (
+            <>
+            <IconButton>
+              <img src={Logo} className={classes.icon} onClick={toggleDrawer} />
+            </IconButton>
+              <Drawer className={classes.navBar} variant="temporary" open={drawer} onClose={toggleDrawer}>
+                <DrawerList />
+              </Drawer>
+            </>
+          )}
           <div className={classes.title}>
             <h2 className={classes.title}>Trading For</h2>
           </div>
-      {user.id && (
-        <>
-          <img src={Logo} className="nav-icon"onClick={toggleDrawer} />
-      <Drawer variant="temporary" open={drawer} onClose={toggleDrawer}>
-        <DrawerList />
-      </Drawer>
-      </>
-      )}
         </Toolbar>
       </AppBar>
     </div>

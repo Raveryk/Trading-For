@@ -5,11 +5,24 @@ import { useSelector } from "react-redux";
 
 import "../Nav/Nav.css";
 
-import { List, ListItem, Typography} from "@material-ui/core";
-import Looks4Icon from '@material-ui/icons/Looks4';
+import { List, ListItem, Typography, Divider, makeStyles } from "@material-ui/core";
+import Logo from "../Nav/TF_Logo_4.png";
+
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    maxWidth: "30px",
+    maxHeight: "30px",
+    borderRadius: "50%",
+  },
+  list: {
+      width: 200,
+  }
+  
+}));
 
 
 function DrawerList() {
+  const classes = useStyles();
   const user = useSelector((store) => store.user);
   console.log(user);
 
@@ -24,13 +37,16 @@ function DrawerList() {
   }
 
   return (
-    <div>
-      
-      <List>
-        <Looks4Icon />
+    <div className={classes.list}>
+      <div >
+        <img src={Logo} className={classes.icon}/>
         <Typography>
-        Welcome back, {user.username}!
+        Welcome back, 
+        <br/>{user.username}!
       </Typography>
+      </div>
+      <Divider />
+      <List>
         <div>
           <ListItem>
             <Link className="navLink" to={loginLinkData.path}>
