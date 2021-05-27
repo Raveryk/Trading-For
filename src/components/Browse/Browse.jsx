@@ -99,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Browse() {
+
   useEffect(() => {
     dispatch({ type: "FETCH_BROWSER" });
   }, []);
@@ -109,7 +110,7 @@ function Browse() {
   const [modalStyle] = React.useState(getModalStyle);
   //state for modal open attribute
   const [open, setOpen] = useState(false);
-  const [slide, setSlide] = useState(false)
+  const [slide, setSlide] = useState(false);
   //grabs detailed info from reducer
   const detail = useSelector((store) => store.browser.detail);
   // grabs all posts for browser

@@ -21,10 +21,12 @@ const useStyles = makeStyles({
 
   },
   formGrid: {
-    marginRight: '20px',
-    marginLeft: '20px',
+    marginRight: '10%',
+    marginLeft: '10%',
     direction: 'column',
     marginBottom: '10px',
+    marginTop: '50%',
+
   },
   btn: {
     margin: '5px'
