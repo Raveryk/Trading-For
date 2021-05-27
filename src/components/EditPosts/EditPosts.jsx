@@ -122,6 +122,12 @@ function EditPosts() {
   const user = useSelector((store) => store.userReducer);
   console.log('User data:', user)
 
+
+  const updateTrade = (post) => {
+    console.log('You checked the box!')
+    dispatch({ type: 'UPDATE_TRADE', payload: post.id})
+  }
+
   // targets specific post and toggles the modal comp to open
   const toDetail = (post) => {
     // console.log(post.id);
@@ -204,6 +210,7 @@ function EditPosts() {
                   <Checkbox />}
                   label="Traded"
                   labelPlacement="top"
+                  onChange={() => updateTrade(post)}
                   />
                 </ListItem>
                 <Divider />

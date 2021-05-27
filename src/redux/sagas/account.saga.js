@@ -25,9 +25,18 @@ function* getAccountDetails(action) {
     }
 }
 
+function* updateTrade(action) {
+    try{
+        yield axios.put(`/api/account/${action.payload}`)
+    } catch (error) {
+        console.log('Error updating post to traded:', error)
+    }
+}
+
 function* accountSaga() {
     yield takeLatest('FETCH_ACCOUNT_BROWSER', getAccountBrowser);
     yield takeLatest('FETCH_ACCOUNT_DETAILS', getAccountDetails);
+    yield takeLatest('UPDATE_TRADE', updateTrade)
 }
 
 export default accountSaga;
