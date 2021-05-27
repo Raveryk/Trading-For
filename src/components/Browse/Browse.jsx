@@ -23,8 +23,6 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
-import BrowseDetail from "../BrowseDetail/BrowseDetail";
-// import '../Home/Home.css'
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -95,6 +93,9 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto', 
     minHeight: 75,
     height: 75,
+  },
+  browse: {
+    marginTop: 150,
   }
 }));
 
@@ -177,7 +178,7 @@ function Browse() {
   );
 
   return (
-    <div className="container">
+    <div className={classes.browse}>
       <h2 className={classes.title}>Browse Trades</h2>
       <Divider />
       <div className="grid">
