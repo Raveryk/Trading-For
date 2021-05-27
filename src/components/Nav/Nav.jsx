@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "auto",
   },
   icon: {
-    maxWidth: "30px",
-    maxHeight: "30px",
+    maxWidth: "60px",
+    maxHeight: "60px",
     borderRadius: "50%",
   },
   
@@ -67,7 +67,6 @@ function Nav() {
 
   // function to toggle drawer being open or closed
   const toggleDrawer = (event) => {
-    console.log("You clicked me!", drawer);
     if (event.type === "keydown") {
       return;
     }
@@ -84,7 +83,7 @@ function Nav() {
               <img src={Logo} className={classes.icon} onClick={toggleDrawer} />
             </IconButton>
               <Drawer className={classes.navBar} variant="temporary" open={drawer} onClose={toggleDrawer}>
-                <DrawerList />
+                <DrawerList toggleDrawer={toggleDrawer}/>
               </Drawer>
             </>
           )}
