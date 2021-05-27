@@ -1,14 +1,46 @@
 import React from 'react';
+import {makeStyles, Button, Card} from '@material-ui/core';
+import {useHistory} from 'react-router-dom';
 
-// This is one of our simplest components
-// It doesn't have local state
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is
+const useStyles = makeStyles((theme) => ({
+  body: {
+    marginTop: 100,
+  },
+  card: {
+    height: '80%',
+    width: '50%',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginTop: '75%',
+    padding: 50,
+  },
+  btns: {
+    textAlign: 'center',
+    margin: 10
+  },
+  btn: {
+    margin: 10,
+  }
+
+}))
 
 function Account() {
+const classes = useStyles();
+
+const history = useHistory()
+
+const editPosts = () => {
+  history.push('/edit/posts')
+}
+
   return (
-    <div className="container">
-      <p>This will be my Account Component</p>
+    <div className={classes.body}>
+      <Card elevation={8} className={classes.card}>
+        <div className={classes.btns}>
+          <Button className={classes.btn} variant="outlined" onClick={editPosts}>Edit Posts</Button>
+          <Button className={classes.btn} variant="outlined">Edit Account</Button>
+        </div>
+      </Card>
     </div>
   );
 }

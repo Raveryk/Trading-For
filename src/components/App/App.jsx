@@ -24,6 +24,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Browse from '../Browse/Browse';
 import BrowseDetail from '../BrowseDetail/BrowseDetail'
+import EditPosts from '../EditPosts/EditPosts';
 
 // import './App.css';
 
@@ -97,6 +98,13 @@ function App() {
             path="/account"
           >
             <Account />
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/edit/posts"
+          >
+            <EditPosts />
           </ProtectedRoute>
 
           {/* When a value is supplied for the authRedirect prop the user will
