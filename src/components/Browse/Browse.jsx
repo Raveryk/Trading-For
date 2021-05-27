@@ -11,7 +11,13 @@ import {
   Button,
   Slide,
   Paper,
+  Divider,
+  ListItemAvatar,
+  Avatar,
+  IconButton,
 } from "@material-ui/core";
+
+import CloseIcon from '@material-ui/icons/Close';
 
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -35,18 +41,49 @@ function getModalStyle() {
   };
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
+    overflow: 'auto',
     width: 225,
-    height: 500,
-    backgroundColor: "white",
+    height: '75%',
+    backgroundColor: "#81ac8d",
     border: "2px solid #000",
     padding: "5%",
   },
   image: {
+    display: 'block',
     maxWidth: '75px',
-    maxHeight: '75px',    
+    maxHeight: '75px', 
+    marginLeft: 'auto',
+    marginRight: 'auto',
+       
+  },
+  list: {
+    width: '100%',
+    maxWidth: 360,
+  },
+  avatars: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    marginRight: theme.spacing(1)
+  },
+  title: {
+    textAlign: 'center'
+  },
+  divider: {
+    marginBottom: '5px'
+  },
+  contact: {
+    backgroundColor: "whitesmoke",
+  },
+  modal: {
+    margin: '0 auto', 
+    display: "flex"
+  },
+  button: {
+    margin: '0 auto', 
+    display: "flex"
   }
 }));
 
@@ -87,24 +124,30 @@ function Browse() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
+    <IconButton onClick={() => modalToggle()}>
+        <CloseIcon className={classes.close} variant="outlined" />
+    </IconButton>
       {detail.map((item, i) => {
         return (
           <>
-            <h3>{item.username}</h3>
+            <h3 className={classes.title}>{item.username}</h3>
             <p></p>
-            <h3>{item.title}</h3>
+            <h3 className={classes.title}>{item.title}</h3>
             <img className={classes.image} src={item.image_url} />
+            <Divider />
             <p>
               Condition: <i>{item.condition}</i>
             </p>
+            <Divider />
             <h4>Info:</h4>
             <p>{item.description}</p>
+            <Divider />
             <h4>Trade For:</h4>
             <p>{item.wants}</p>
-            <Button variant="outlined" onClick={() => modalToggle()}>Back</Button>
-            <Button variant="outlined" onClick={() => slideToggle()}>Interested?</Button>
+            <Divider className={classes.divider}/>
+            <Button className={classes.button} variant="outlined" onClick={() => slideToggle()}>Interested?</Button>
             <Slide direction="up" in={slide} onChange={slideToggle}>
-              <Paper>
+              <Paper className={classes.contact}>
                 <p>Email: {item.email}</p>
                 <p>Phone#: {item.phone_num}</p>
               </Paper>
@@ -117,20 +160,25 @@ function Browse() {
 
   return (
     <div className="container">
-      <h2>Browse Trades</h2>
+      <h2 className={classes.title}>Browse Trades</h2>
+      <Divider />
       <div className="grid">
         <div className="grid-col grid-col_8">
-          <List>
+          <List className={classes.list}>
             {browser.map((post, i) => {
               return (
+                  <>
                 <ListItem key={i} onClick={() => toDetail(post)}>
-
-                  <img className={classes.image} src={post.image_url} />
+                    <ListItemAvatar>
+                        <Avatar variant="square" className={classes.avatars} src={post.image_url} />
+                    </ListItemAvatar>
                   <ListItemText
                     primary={post.title}
                     secondary={post.condition}
                   />
                 </ListItem>
+                <Divider />
+                </>
               );
             })}
           </List>
