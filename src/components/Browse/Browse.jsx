@@ -44,12 +44,13 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    overflow: 'auto',
+    // overflow: 'auto',
     width: 225,
     height: '75%',
     backgroundColor: "#81ac8d",
     border: "2px solid #000",
     padding: "5%",
+    borderRadius: 16,
   },
   image: {
     display: 'block',
@@ -84,6 +85,16 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: '0 auto', 
     display: "flex"
+  },
+  info: {
+    overflow: 'auto', 
+    maxHeight: 100,
+    height: 100,
+  },
+  modalPic: {
+    overflow: 'auto', 
+    minHeight: 75,
+    height: 75,
   }
 }));
 
@@ -133,17 +144,23 @@ function Browse() {
             <h3 className={classes.title}>{item.username}</h3>
             <p></p>
             <h3 className={classes.title}>{item.title}</h3>
+            <div className={classes.modalPic} >
             <img className={classes.image} src={item.image_url} />
+            </div>
             <Divider />
             <p>
               Condition: <i>{item.condition}</i>
             </p>
             <Divider />
+            <div className={classes.info} >
             <h4>Info:</h4>
             <p>{item.description}</p>
+            </div>
             <Divider />
+            <div className={classes.info} >
             <h4>Trade For:</h4>
             <p>{item.wants}</p>
+            </div>
             <Divider className={classes.divider}/>
             <Button className={classes.button} variant="outlined" onClick={() => slideToggle()}>Interested?</Button>
             <Slide direction="up" in={slide} onChange={slideToggle}>
