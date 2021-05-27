@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 'auto',
     marginLeft: 'auto',
     marginTop: '20%',
+    borderRadius: 16,
   },
   form: {
     display: 'flex',
