@@ -5,6 +5,7 @@ import "./Nav.css";
 import { useSelector } from "react-redux";
 import Looks4Icon from "@material-ui/icons/Looks4";
 import Logo from "../Nav/TF_Logo_4.png"
+import { useTheme } from '@material-ui/core/styles'
 
 
 import {
@@ -18,12 +19,25 @@ import {
   Button,
   List,
   ListItem,
+  makeStyles
 } from "@material-ui/core";
 
 import DrawerList from "../Drawer/DrawerList";
 import userReducer from "../../redux/reducers/user.reducer";
 
+const useStyles = makeStyles((theme) => ({
+    toolbar: {
+      marginBottom: 20,
+    },
+    title: {
+      marginRight: 'auto',
+      marginLeft: 'auto',
+    }
+}))
+
 function Nav() {
+  const theme = useTheme()
+  const classes = useStyles();
   const user = useSelector((store) => store.user);
 
   // let loginLinkData = {
@@ -56,10 +70,12 @@ function Nav() {
   };
 
   return (
-    <div>
-      <div className="nav">
-          <h2 className="nav-title">Trading For</h2>
-        </div>
+    <div className={classes.toolbar}>
+      <AppBar >
+        <Toolbar >
+          <div className={classes.title}>
+            <h2 className={classes.title}>Trading For</h2>
+          </div>
       {user.id && (
         <>
           <img src={Logo} className="nav-icon"onClick={toggleDrawer} />
@@ -68,6 +84,8 @@ function Nav() {
       </Drawer>
       </>
       )}
+        </Toolbar>
+      </AppBar>
     </div>
   );
 }

@@ -13,7 +13,7 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 import Post from '../Post/Post';
 import UserPage from '../UserPage/UserPage';
@@ -27,16 +27,16 @@ import BrowseDetail from '../BrowseDetail/BrowseDetail'
 
 // import './App.css';
 
-// const theme = createMuiTheme({
-//     palette: {
-//       primary: {
-//         main: '#a5d6a7',
-//       },
-//       secondary: {
-//         main: '#e65100',
-//       },
-//     },
-// })
+const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#a5d6a7',
+      },
+      secondary: {
+        main: '#e65100',
+      },
+    },
+})
 
 function App() {
   const dispatch = useDispatch();
@@ -46,7 +46,9 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Router>
+   
+    <Router> 
+      <ThemeProvider theme={theme}>
       <div>
     </div>
       <div>
@@ -140,6 +142,7 @@ function App() {
         </Switch>
         <Footer />
       </div>
+      </ThemeProvider>
     </Router>
   );
 }
