@@ -4,6 +4,7 @@ import user from './user.reducer';
 import posts from './posts.reducer';
 import categories from './categories.reducer';
 import browser from './browser.reducer';
+import account from './account.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   posts,
   categories,
   browser,
+  account,
 });
 // this.props.store.errors.loginMessage
 

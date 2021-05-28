@@ -4,24 +4,33 @@ import {
   ListItem,
   ListItemText,
   Modal,
-  Card,
   makeStyles,
   Fade,
   Backdrop,
   Button,
-  Slide,
-  Paper,
   Divider,
   ListItemAvatar,
   Avatar,
   IconButton,
+  Checkbox,
+  FormControlLabel,
+  Box,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@material-ui/core";
 
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CloseIcon from '@material-ui/icons/Close';
 
-import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+
+// import EditDetail from '../EditDetail/EditDetail'
+
+import Swal from 'sweetalert2';
 
 
 function rand() {
@@ -42,13 +51,14 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    // overflow: 'auto',
+    overflow: 'auto',
     width: 225,
     height: '75%',
     backgroundColor: "#81ac8d",
     border: "2px solid #000",
     padding: "5%",
     borderRadius: 16,
+    outline: 0,
   },
   image: {
     display: 'block',
@@ -56,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '75px', 
     marginLeft: 'auto',
     marginRight: 'auto',
+    border: '2px solid #000'
        
   },
   list: {
@@ -82,7 +93,9 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: '0 auto', 
-    display: "flex"
+    display: "flex",
+    flexWrap: 'wrap',
+    textAlign: 'center',
   },
   info: {
     overflow: 'auto', 
@@ -90,37 +103,66 @@ const useStyles = makeStyles((theme) => ({
     height: 100,
   },
   modalPic: {
-    overflow: 'auto', 
+    overflow: 'visible', 
     minHeight: 75,
     height: 75,
+    
   },
   browse: {
     marginTop: 150,
+  },
+  edit: {
+    display: 'flex',
+    flexWrap: 'wrap',
   }
 }));
 
-function Browse() {
+function EditPosts() {
+
+  const condition = [
+    "Brand New",
+    "Mint",
+    "Excellent",
+    "Very Good",
+    "Good",
+    "Fair",
+    "Poor",
+    "Broken",
+  ];
 
   useEffect(() => {
-    dispatch({ type: "FETCH_BROWSER" });
+    dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
   }, []);
 
   const dispatch = useDispatch();
 
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
+
   //state for modal open attribute
   const [open, setOpen] = useState(false);
-  const [slide, setSlide] = useState(false);
+  const [edit, setEdit] = useState(false);
+
+  // ----REDUCERS----- //
+
   //grabs detailed info from reducer
-  const detail = useSelector((store) => store.browser.detail);
+  const detail = useSelector((store) => store.account.accountDetail);
   // grabs all posts for browser
-  const browser = useSelector((store) => store.browser.browser);
+  const browser = useSelector((store) => store.account.accountBrowser);
+  const user = useSelector((store) => store.user);
+  console.log('User data:', user)
+
+
+  const updateTrade = (post) => {
+    console.log('You checked the box!')
+    dispatch({ type: 'UPDATE_TRADE', payload: post.id})
+    dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
+  }
 
   // targets specific post and toggles the modal comp to open
   const toDetail = (post) => {
-    // console.log(post.id);
-    dispatch({ type: "FETCH_DETAILS", payload: post.id });
+    
+    dispatch({ type: "FETCH_ACCOUNT_DETAILS", payload: post.id });
     modalToggle();
   };
 
@@ -131,9 +173,23 @@ function Browse() {
     dispatch({ type: 'SET_DETAILS', payload: [] })
   };
 
-  const slideToggle = () => {
-    setSlide(!slide);
+  // function to delete post 
+  const deletePost = (item) => {
+    //Want to figure out confirmation stuff....
+    dispatch({ type: 'DELETE_POST', payload: item.id })
+    // refresh users posts list
+    dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
+    // close out of modal view
+    modalToggle();
+    
   };
+
+  const editItem = (item) => {
+    console.log('Edit button clicked!', edit);
+    setEdit(!edit);
+  }
+
+  
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -145,32 +201,55 @@ function Browse() {
           <>
             <h3 className={classes.title}>{item.username}</h3>
             <p></p>
+            {!edit ?
             <h3 className={classes.title}>{item.title}</h3>
+            :
+            <TextField placeholder={item.title}/>
+            }
+            {!edit ?
             <div className={classes.modalPic} >
             <img className={classes.image} src={item.image_url} />
             </div>
+            :
+            <TextField placeholder={item.image_url}/>
+            }
             <Divider />
             <p>
-              Condition: <i>{item.condition}</i>
+              Condition: {!edit ? <i>{item.condition}</i>
+            :
+            <FormControl className={classes.inputs}>
+            <InputLabel>condition</InputLabel>
+            <Select
+              id="condition"
+              value={item.condition}
+            >
+              {condition.map((type, i) => (
+                <MenuItem key={i} value={type}>
+                  {type}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>}
             </p>
             <Divider />
             <div className={classes.info} >
             <h4>Info:</h4>
+            {!edit ? 
             <p>{item.description}</p>
+            : <TextField placeholder={item.description}/> }
             </div>
             <Divider />
             <div className={classes.info} >
             <h4>Trade For:</h4>
+            {!edit ? 
             <p>{item.wants}</p>
+            : <TextField placeholder={item.wants}/> }
             </div>
             <Divider className={classes.divider}/>
-            <Button className={classes.button} variant="outlined" onClick={() => slideToggle()}>Interested?</Button>
-            <Slide direction="up" in={slide} onChange={slideToggle}>
-              <Paper className={classes.contact}>
-                <p>Email: {item.email}</p>
-                <p>Phone#: {item.phone_num}</p>
-              </Paper>
-            </Slide>
+            <Box display="flex" justifyContent="center">
+            <Button variant="outlined" onClick={() => deletePost(item)}>Delete</Button>
+            <Button variant="outlined" onClick={() => editItem(item)}>Edit</Button>
+            </Box>
           </>
         );
       })}
@@ -179,7 +258,7 @@ function Browse() {
 
   return (
     <div className={classes.browse}>
-      <h2 className={classes.title}>Browse Trades</h2>
+      <h2 className={classes.title}>{user.username}'s Posts</h2>
       <Divider />
       <div className="grid">
         <div className="grid-col grid-col_8">
@@ -195,14 +274,23 @@ function Browse() {
                     primary={post.title}
                     secondary={post.condition}
                   />
+                  {!post.traded ?
+                  <FormControlLabel control={
+                  <Checkbox />}
+                  label="Traded"
+                  labelPlacement="top"
+                  onChange={() => updateTrade(post)}
+                  /> :
+                  <CheckBoxIcon />}
                 </ListItem>
                 <Divider />
                 </>
               );
             })}
           </List>
-        </div>
+        </div> 
         <div>
+          
           <Modal
             open={open}
             onClose={modalToggle}
@@ -214,10 +302,11 @@ function Browse() {
           >
             <Fade in={open}>{body}</Fade>
           </Modal>
+          
         </div>
       </div>
     </div>
   );
 }
 
-export default Browse;
+export default EditPosts;

@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     direction: 'column',
     justify: 'center',
     alignItems: 'center',
+    marginTop: 75
   },
   card: {
     width: '75%',

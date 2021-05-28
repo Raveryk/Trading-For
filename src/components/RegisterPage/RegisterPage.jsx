@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useHistory } from 'react-router-dom';
 import RegisterForm from '../RegisterForm/RegisterForm';
+import Header from '../Header/Header';
 import Button from '@material-ui/core/Button';
 
 function RegisterPage() {
@@ -9,6 +10,7 @@ function RegisterPage() {
 
   return (
     <div>
+      <Header />
       <RegisterForm />
 
       <center>

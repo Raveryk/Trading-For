@@ -13,7 +13,7 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 import Post from '../Post/Post';
 import UserPage from '../UserPage/UserPage';
@@ -24,19 +24,20 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Browse from '../Browse/Browse';
 import BrowseDetail from '../BrowseDetail/BrowseDetail'
+import EditPosts from '../EditPosts/EditPosts';
 
 // import './App.css';
 
-// const theme = createMuiTheme({
-//     palette: {
-//       primary: {
-//         main: '#a5d6a7',
-//       },
-//       secondary: {
-//         main: '#e65100',
-//       },
-//     },
-// })
+const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#a5d6a7',
+      },
+      secondary: {
+        main: '#e65100',
+      },
+    },
+})
 
 function App() {
   const dispatch = useDispatch();
@@ -46,7 +47,9 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Router>
+   
+    <Router> 
+      <ThemeProvider theme={theme}>
       <div>
     </div>
       <div>
@@ -96,6 +99,13 @@ function App() {
           >
             <Account />
           </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/edit/posts"
+          >
+            <EditPosts />
+          </ProtectedRoute>
 
           {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
@@ -140,6 +150,7 @@ function App() {
         </Switch>
         <Footer />
       </div>
+      </ThemeProvider>
     </Router>
   );
 }
