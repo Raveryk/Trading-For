@@ -5,20 +5,21 @@ import {useHistory} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   body: {
+    height: 350
     
   },
   card: {
-    height: '80%',
+    height: '100%',
     width: '75%',
     marginRight: 'auto',
     marginLeft: 'auto',
-    marginTop: '75%',
+    marginTop: '50%',
     borderRadius: 16,
 
   },
   btns: {
     textAlign: 'center',
-    margin: 10
+    marginTop: '20%'
   },
   btn: {
     margin: 10,
@@ -29,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
   stats: {
     textAlign: 'center',
     margin: '4px',
+  },
+  contents: {
+
   }
 
 }))
@@ -66,11 +70,13 @@ const editPosts = () => {
   return (
     <div className={classes.body}>
       <Card elevation={8} className={classes.card}>
+        <div className={classes.contents}>
         <h2 className={classes.title}>{user.username}'s Account</h2>
         <h4 className={classes.stats}><em>Posts</em>:{browser.length}    <em>Trades</em>:{tradeNums()}</h4>
         <div className={classes.btns}>
           <Button className={classes.btn} variant="outlined" onClick={editPosts}>Edit Posts</Button>
           <Button className={classes.btn} variant="outlined">Edit Account</Button>
+        </div>
         </div>
       </Card>
     </div>
