@@ -16,6 +16,7 @@ import {
   IconButton,
   Checkbox,
   FormControlLabel,
+  Box,
 } from "@material-ui/core";
 
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
@@ -47,13 +48,14 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    // overflow: 'auto',
+    overflow: 'auto',
     width: 225,
     height: '75%',
     backgroundColor: "#81ac8d",
     border: "2px solid #000",
     padding: "5%",
     borderRadius: 16,
+    outline: 0,
   },
   image: {
     display: 'block',
@@ -61,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '75px', 
     marginLeft: 'auto',
     marginRight: 'auto',
+    border: '2px solid #000'
        
   },
   list: {
@@ -87,7 +90,9 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: '0 auto', 
-    display: "flex"
+    display: "flex",
+    flexWrap: 'wrap',
+    textAlign: 'center',
   },
   info: {
     overflow: 'auto', 
@@ -95,9 +100,10 @@ const useStyles = makeStyles((theme) => ({
     height: 100,
   },
   modalPic: {
-    overflow: 'auto', 
+    overflow: 'visible', 
     minHeight: 75,
     height: 75,
+    
   },
   browse: {
     marginTop: 150,
@@ -118,8 +124,13 @@ function EditPosts() {
 
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
+
   //state for modal open attribute
   const [open, setOpen] = useState(false);
+  const [edit, setEdit] = useState(false);
+
+  // ----REDUCERS----- //
+
   //grabs detailed info from reducer
   const detail = useSelector((store) => store.account.accountDetail);
   // grabs all posts for browser
@@ -159,6 +170,16 @@ function EditPosts() {
     
   };
 
+  const editItem = (item) => {
+    console.log('Edit button clicked!', edit);
+    setEdit(!edit);
+  }
+
+  const editPost = (
+    <>
+    </>
+  )
+
   const body = (
     <div style={modalStyle} className={classes.paper}>
     <IconButton onClick={() => modalToggle()}>
@@ -169,26 +190,29 @@ function EditPosts() {
           <>
             <h3 className={classes.title}>{item.username}</h3>
             <p></p>
-            <h3 className={classes.title}>{item.title}<EditIcon className={classes.edit}/></h3>
+            <h3 className={classes.title}>{item.title}</h3>
             <div className={classes.modalPic} >
-            <img className={classes.image} src={item.image_url} /><EditIcon className={classes.edit}/>
+            <img className={classes.image} src={item.image_url} />
             </div>
-            <Divider /><EditIcon className={classes.edit}/>
+            <Divider />
             <p>
               Condition: <i>{item.condition}</i>
             </p>
-            <Divider /><EditIcon className={classes.edit}/>
+            <Divider />
             <div className={classes.info} >
             <h4>Info:</h4>
             <p>{item.description}</p>
             </div>
-            <Divider /><EditIcon className={classes.edit}/>
+            <Divider />
             <div className={classes.info} >
             <h4>Trade For:</h4>
             <p>{item.wants}</p>
             </div>
             <Divider className={classes.divider}/>
-            <Button className={classes.button} variant="outlined" onClick={() => deletePost(item)}>Delete</Button>
+            <Box display="flex" justifyContent="center">
+            <Button variant="outlined" onClick={() => deletePost(item)}>Delete</Button>
+            <Button variant="outlined" onClick={() => editItem(item)}>Edit</Button>
+            </Box>
           </>
         );
       })}
@@ -197,7 +221,7 @@ function EditPosts() {
 
   return (
     <div className={classes.browse}>
-      <h2 className={classes.title}>User Posts</h2>
+      <h2 className={classes.title}>{browser[0].username}'s Posts</h2>
       <Divider />
       <div className="grid">
         <div className="grid-col grid-col_8">

@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
 import { useSelector } from "react-redux";
-import Looks4Icon from "@material-ui/icons/Looks4";
 import Logo from "../Nav/TF_Logo_4.png";
 import { useTheme } from "@material-ui/core/styles";
 
@@ -11,18 +8,11 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Typography,
-  Hidden,
   Drawer,
-  Divider,
-  Button,
-  List,
-  ListItem,
   makeStyles,
 } from "@material-ui/core";
 
 import DrawerList from "../Drawer/DrawerList";
-import userReducer from "../../redux/reducers/user.reducer";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -33,15 +23,15 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
   },
   icon: {
-    maxWidth: "60px",
-    maxHeight: "60px",
+    maxWidth: "40px",
+    maxHeight: "40px",
     borderRadius: "50%",
   },
   
 }));
 
 function Nav() {
-  const theme = useTheme();
+  // const theme = useTheme();
   const classes = useStyles();
   const user = useSelector((store) => store.user);
 
@@ -54,14 +44,6 @@ function Nav() {
   //   loginLinkData.path = '/user';
   //   loginLinkData.text = 'Home';
   // }
-
-  // export default function TemporaryDrawer() {
-  //   const [state, setState] = React.useState({
-  //     top: false,
-  //     left: false,
-  //     bottom: false,
-  //     right: false,
-  //   });
 
   const [drawer, setDrawer] = useState(false);
 

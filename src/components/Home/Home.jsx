@@ -61,21 +61,18 @@ const useStyles = makeStyles((theme) => ({
     height: 75,
   },
   browse: {
-    marginTop: 150,
+    marginTop: 200,
   },
   title: {
     textAlign: 'center'
   }
 }));
 
-// CUSTOM COMPONENTS
-
 function Home() {
 
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const [heading, setHeading] = useState('Welcome');
 
   useEffect(() => {
     dispatch({ type:'FETCH_POSTS'})
@@ -97,7 +94,7 @@ function Home() {
   
 
   return (
-    <div className="container">
+    <div className={classes.browse}>
       <h2 className={classes.title}>Market Place Feed</h2>
       <div className="grid">
         <div className="grid-col grid-col_8">
