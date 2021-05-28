@@ -98,6 +98,7 @@ function Home() {
       <h2 className={classes.title}>Market Place Feed</h2>
       <div className="grid">
         <div className="grid-col grid-col_8">
+          <Divider />
         <List className={classes.list}>
             {posts.map((post, i) => {
               return (

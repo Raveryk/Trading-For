@@ -25,7 +25,6 @@ const useStyles = makeStyles({
     marginLeft: '10%',
     direction: 'column',
     marginBottom: '10px',
-    marginTop: '50%',
 
   },
   btn: {
