@@ -135,7 +135,7 @@ function EditPosts() {
   const detail = useSelector((store) => store.account.accountDetail);
   // grabs all posts for browser
   const browser = useSelector((store) => store.account.accountBrowser);
-  const user = useSelector((store) => store.userReducer);
+  const user = useSelector((store) => store.user);
   console.log('User data:', user)
 
 
@@ -221,7 +221,7 @@ function EditPosts() {
 
   return (
     <div className={classes.browse}>
-      <h2 className={classes.title}>{browser[0].username}'s Posts</h2>
+      <h2 className={classes.title}>{user.username}'s Posts</h2>
       <Divider />
       <div className="grid">
         <div className="grid-col grid-col_8">
