@@ -18,13 +18,15 @@ import {
   FormControlLabel,
 } from "@material-ui/core";
 
-import DeleteIcon from '@material-ui/icons/Delete';
-
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CloseIcon from '@material-ui/icons/Close';
+import EditIcon from '@material-ui/icons/Edit';
 
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+
+import Swal from 'sweetalert2';
 
 
 function rand() {
@@ -99,6 +101,10 @@ const useStyles = makeStyles((theme) => ({
   },
   browse: {
     marginTop: 150,
+  },
+  edit: {
+    display: 'flex',
+    flexWrap: 'wrap',
   }
 }));
 
@@ -114,9 +120,8 @@ function EditPosts() {
   const [modalStyle] = React.useState(getModalStyle);
   //state for modal open attribute
   const [open, setOpen] = useState(false);
-  const [slide, setSlide] = useState(false);
   //grabs detailed info from reducer
-  // const detail = useSelector((store) => store.account.accountDetail);
+  const detail = useSelector((store) => store.account.accountDetail);
   // grabs all posts for browser
   const browser = useSelector((store) => store.account.accountBrowser);
   const user = useSelector((store) => store.userReducer);
@@ -126,12 +131,13 @@ function EditPosts() {
   const updateTrade = (post) => {
     console.log('You checked the box!')
     dispatch({ type: 'UPDATE_TRADE', payload: post.id})
+    dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
   }
 
   // targets specific post and toggles the modal comp to open
   const toDetail = (post) => {
-    // console.log(post.id);
-    dispatch({ type: "FETCH_DETAILS", payload: post.id });
+    
+    dispatch({ type: "FETCH_ACCOUNT_DETAILS", payload: post.id });
     modalToggle();
   };
 
@@ -142,55 +148,56 @@ function EditPosts() {
     dispatch({ type: 'SET_DETAILS', payload: [] })
   };
 
-  const slideToggle = () => {
-    setSlide(!slide);
+  // function to delete post 
+  const deletePost = (item) => {
+    //Want to figure out confirmation stuff....
+    dispatch({ type: 'DELETE_POST', payload: item.id })
+    // refresh users posts list
+    dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
+    // close out of modal view
+    modalToggle();
+    
   };
 
-  // const body = (
-  //   <div style={modalStyle} className={classes.paper}>
-  //   <IconButton onClick={() => modalToggle()}>
-  //       <CloseIcon className={classes.close} variant="outlined" />
-  //   </IconButton>
-  //     {detail.map((item, i) => {
-  //       return (
-  //         <>
-  //           <h3 className={classes.title}>{item.username}</h3>
-  //           <p></p>
-  //           <h3 className={classes.title}>{item.title}</h3>
-  //           <div className={classes.modalPic} >
-  //           <img className={classes.image} src={item.image_url} />
-  //           </div>
-  //           <Divider />
-  //           <p>
-  //             Condition: <i>{item.condition}</i>
-  //           </p>
-  //           <Divider />
-  //           <div className={classes.info} >
-  //           <h4>Info:</h4>
-  //           <p>{item.description}</p>
-  //           </div>
-  //           <Divider />
-  //           <div className={classes.info} >
-  //           <h4>Trade For:</h4>
-  //           <p>{item.wants}</p>
-  //           </div>
-  //           <Divider className={classes.divider}/>
-  //           <Button className={classes.button} variant="outlined" onClick={() => slideToggle()}>Interested?</Button>
-  //           <Slide direction="up" in={slide} onChange={slideToggle}>
-  //             <Paper className={classes.contact}>
-  //               <p>Email: {item.email}</p>
-  //               <p>Phone#: {item.phone_num}</p>
-  //             </Paper>
-  //           </Slide>
-  //         </>
-  //       );
-  //     })}
-  //   </div>
-  // );
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+    <IconButton onClick={() => modalToggle()}>
+        <CloseIcon className={classes.close} variant="outlined" />
+    </IconButton>
+      {detail.map((item, i) => {
+        return (
+          <>
+            <h3 className={classes.title}>{item.username}</h3>
+            <p></p>
+            <h3 className={classes.title}>{item.title}<EditIcon className={classes.edit}/></h3>
+            <div className={classes.modalPic} >
+            <img className={classes.image} src={item.image_url} /><EditIcon className={classes.edit}/>
+            </div>
+            <Divider /><EditIcon className={classes.edit}/>
+            <p>
+              Condition: <i>{item.condition}</i>
+            </p>
+            <Divider /><EditIcon className={classes.edit}/>
+            <div className={classes.info} >
+            <h4>Info:</h4>
+            <p>{item.description}</p>
+            </div>
+            <Divider /><EditIcon className={classes.edit}/>
+            <div className={classes.info} >
+            <h4>Trade For:</h4>
+            <p>{item.wants}</p>
+            </div>
+            <Divider className={classes.divider}/>
+            <Button className={classes.button} variant="outlined" onClick={() => deletePost(item)}>Delete</Button>
+          </>
+        );
+      })}
+    </div>
+  );
 
   return (
     <div className={classes.browse}>
-      <h2 className={classes.title}>User Trades</h2>
+      <h2 className={classes.title}>User Posts</h2>
       <Divider />
       <div className="grid">
         <div className="grid-col grid-col_8">
@@ -206,12 +213,14 @@ function EditPosts() {
                     primary={post.title}
                     secondary={post.condition}
                   />
+                  {!post.traded ?
                   <FormControlLabel control={
                   <Checkbox />}
                   label="Traded"
                   labelPlacement="top"
                   onChange={() => updateTrade(post)}
-                  />
+                  /> :
+                  <CheckBoxIcon />}
                 </ListItem>
                 <Divider />
                 </>
@@ -220,7 +229,7 @@ function EditPosts() {
           </List>
         </div>
         <div>
-          {/* <Modal
+          <Modal
             open={open}
             onClose={modalToggle}
             closeAfterTransition
@@ -230,7 +239,7 @@ function EditPosts() {
             }}
           >
             <Fade in={open}>{body}</Fade>
-          </Modal> */}
+          </Modal>
         </div>
       </div>
     </div>

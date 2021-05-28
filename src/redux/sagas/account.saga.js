@@ -33,10 +33,19 @@ function* updateTrade(action) {
     }
 }
 
+function* deletePost(action) {
+    try{
+        yield axios.delete(`/api/account/${action.payload}`)
+    } catch (error) {
+        console.log('Error deleting post: ', error)
+    }
+}
+
 function* accountSaga() {
     yield takeLatest('FETCH_ACCOUNT_BROWSER', getAccountBrowser);
     yield takeLatest('FETCH_ACCOUNT_DETAILS', getAccountDetails);
-    yield takeLatest('UPDATE_TRADE', updateTrade)
+    yield takeLatest('UPDATE_TRADE', updateTrade);
+    yield takeLatest('DELETE_POST', deletePost)
 }
 
 export default accountSaga;

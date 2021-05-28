@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginRight: "auto",
-    marginLeft: "auto",
+    marginLeft: 'auto',
   },
   icon: {
     maxWidth: "60px",

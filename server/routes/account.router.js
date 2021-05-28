@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     console.log('userId:', req.user.id)
-    const query = `SELECT posts.id, title, condition, image_url, "user".username FROM posts 
+    const query = `SELECT posts.id, title, condition, image_url, traded, "user".username FROM posts 
     JOIN "user" ON "user".id=posts.users_id
     WHERE "user".id = $1;`;
     pool.query(query, [req.user.id])
@@ -18,6 +18,25 @@ router.get('/', (req, res) => {
         res.sendStatus(500);
       })
   });
+
+  router.get(`/detail/:id`, (req, res) => {
+    console.log('req.params.id:', req.params.id);
+    postId = req.params.id
+  // GET route code here
+  const query = `SELECT title, description, condition, image_url, wants, posts.id, "user".username, "user".email, "user".phone_num FROM posts 
+                  JOIN "user" ON "user".id=posts.users_id
+                  WHERE posts.id=$1;`;
+
+  pool.query(query, [postId])
+    .then(result => {
+      console.log(result.rows);
+      res.send(result.rows)
+    })
+    .catch( error => {
+      console.log('Something went wrong GETting details:', error)
+      res.sendStatus(500);
+    })
+});
 
   router.put('/:id', (req, res) => {
       console.log('post id:', req.params.id)
@@ -32,5 +51,19 @@ router.get('/', (req, res) => {
           res.sendStatus(500)
       })
   })
+
+  router.delete('/:id', (req, res) => {
+    console.log('post id:', req.params.id)
+    const query = `DELETE FROM posts WHERE id = $1;`;
+    pool.query(query, [req.params.id])
+    .then(response => {
+        res.sendStatus(200);
+        console.log('Successfully deleted post!')
+    })
+    .catch(error => {
+        console.log('Error deleing post in server:', error)
+        res.sendStatus(500)
+    })
+})
 
   module.exports = router;
