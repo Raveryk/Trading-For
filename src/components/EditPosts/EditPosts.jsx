@@ -8,8 +8,6 @@ import {
   Fade,
   Backdrop,
   Button,
-  Slide,
-  Paper,
   Divider,
   ListItemAvatar,
   Avatar,
@@ -17,15 +15,20 @@ import {
   Checkbox,
   FormControlLabel,
   Box,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@material-ui/core";
 
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CloseIcon from '@material-ui/icons/Close';
-import EditIcon from '@material-ui/icons/Edit';
 
-import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+
+// import EditDetail from '../EditDetail/EditDetail'
 
 import Swal from 'sweetalert2';
 
@@ -116,6 +119,17 @@ const useStyles = makeStyles((theme) => ({
 
 function EditPosts() {
 
+  const condition = [
+    "Brand New",
+    "Mint",
+    "Excellent",
+    "Very Good",
+    "Good",
+    "Fair",
+    "Poor",
+    "Broken",
+  ];
+
   useEffect(() => {
     dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
   }, []);
@@ -175,10 +189,7 @@ function EditPosts() {
     setEdit(!edit);
   }
 
-  const editPost = (
-    <>
-    </>
-  )
+  
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -190,23 +201,49 @@ function EditPosts() {
           <>
             <h3 className={classes.title}>{item.username}</h3>
             <p></p>
+            {!edit ?
             <h3 className={classes.title}>{item.title}</h3>
+            :
+            <TextField placeholder={item.title}/>
+            }
+            {!edit ?
             <div className={classes.modalPic} >
             <img className={classes.image} src={item.image_url} />
             </div>
+            :
+            <TextField placeholder={item.image_url}/>
+            }
             <Divider />
             <p>
-              Condition: <i>{item.condition}</i>
+              Condition: {!edit ? <i>{item.condition}</i>
+            :
+            <FormControl className={classes.inputs}>
+            <InputLabel>condition</InputLabel>
+            <Select
+              id="condition"
+              value={item.condition}
+            >
+              {condition.map((type, i) => (
+                <MenuItem key={i} value={type}>
+                  {type}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>}
             </p>
             <Divider />
             <div className={classes.info} >
             <h4>Info:</h4>
+            {!edit ? 
             <p>{item.description}</p>
+            : <TextField placeholder={item.description}/> }
             </div>
             <Divider />
             <div className={classes.info} >
             <h4>Trade For:</h4>
+            {!edit ? 
             <p>{item.wants}</p>
+            : <TextField placeholder={item.wants}/> }
             </div>
             <Divider className={classes.divider}/>
             <Box display="flex" justifyContent="center">
@@ -251,8 +288,9 @@ function EditPosts() {
               );
             })}
           </List>
-        </div>
+        </div> 
         <div>
+          
           <Modal
             open={open}
             onClose={modalToggle}
@@ -264,6 +302,7 @@ function EditPosts() {
           >
             <Fade in={open}>{body}</Fade>
           </Modal>
+          
         </div>
       </div>
     </div>
