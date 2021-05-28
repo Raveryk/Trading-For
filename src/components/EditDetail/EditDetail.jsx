@@ -17,6 +17,8 @@ import {
   Checkbox,
   FormControlLabel,
   Box,
+  ThemeProvider,
+  Typography,
 } from "@material-ui/core";
 
 import CheckBoxIcon from '@material-ui/icons/CheckBox';

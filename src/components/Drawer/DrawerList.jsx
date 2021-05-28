@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import "../Nav/Nav.css";
 
@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 function DrawerList({toggleDrawer}) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   console.log(user);
 
@@ -116,9 +117,9 @@ function DrawerList({toggleDrawer}) {
               </Avatar>
             </ListItemAvatar>
             {user.id && (
-              <>
-                <LogOutButton className="navLink" onClick={toggleDrawer}/>
-              </>
+              <Link className="navLink" to="/login" onClick={() => dispatch({ type: 'LOGOUT' })}>
+                Log Out
+              </Link>
             )}
           </ListItem>
         </div>

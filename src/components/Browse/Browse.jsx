@@ -15,6 +15,7 @@ import {
   ListItemAvatar,
   Avatar,
   IconButton,
+  Typography
 } from "@material-ui/core";
 
 import CloseIcon from '@material-ui/icons/Close';
@@ -179,7 +180,7 @@ function Browse() {
 
   return (
     <div className={classes.browse}>
-      <h2 className={classes.title}>Browse Trades</h2>
+      <Typography><h2 className={classes.title}>Browse Trade List</h2></Typography>
       <Divider />
       <div className="grid">
         <div className="grid-col grid-col_8">

@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
   form: {
@@ -67,7 +67,7 @@ function RegisterForm() {
     <Grid className={classes.formGrid} item xs={12}>
     <Card elevation={6}>
     <form className={classes.formCard} onSubmit={registerUser}>
-      <h2 >Join The Band</h2>
+      <Typography><h2>Register</h2></Typography>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}

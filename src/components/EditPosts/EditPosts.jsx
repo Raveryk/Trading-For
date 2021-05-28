@@ -20,6 +20,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Typography,
 } from "@material-ui/core";
 
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
@@ -258,7 +259,7 @@ function EditPosts() {
 
   return (
     <div className={classes.browse}>
-      <h2 className={classes.title}>{user.username}'s Posts</h2>
+      <Typography><h2 className={classes.title}>{user.username}'s Posts</h2></Typography>
       <Divider />
       <div className="grid">
         <div className="grid-col grid-col_8">

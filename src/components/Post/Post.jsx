@@ -10,8 +10,11 @@ import {
   Select,
   MenuItem,
   makeStyles,
+  Typography,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
+
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -57,6 +60,7 @@ function Post() {
 
   const classes = useStyles()
   const dispatch = useDispatch();
+  const history = useHistory();
   const types = useSelector((store) => store.categories);
 
   // array of condition types
@@ -109,13 +113,16 @@ function Post() {
     condition: "",
     url: "",
     wants: "",})
+
+    history.push('/browse');
+    dispatch({ type: "FETCH_BROWSER" });
   };
 
   return (
     <div>
       <Grid container className={classes.grid}>
       <Card elevation={4} className={classes.card} >
-        <h2 className={classes.title}>Post A Trade</h2>
+        <Typography><h2 className={classes.title}>Post A Trade</h2></Typography>
         <form className={classes.form}>
           <TextField
             className={classes.inputs}

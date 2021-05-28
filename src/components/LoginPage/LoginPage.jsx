@@ -3,6 +3,8 @@ import LoginForm from '../LoginForm/LoginForm';
 import Header from '../Header/Header'
 import { useHistory } from 'react-router-dom';
 
+import {Typography} from '@material-ui/core'
+
 import Button from '@material-ui/core/Button'
 
 function LoginPage() {
@@ -14,7 +16,7 @@ function LoginPage() {
       <LoginForm />
 
       <center>
-      <p>Want to join?</p>
+      <Typography><p>Want to join?</p></Typography>
         <Button
           variant="outlined"
           type="button"
@@ -23,7 +25,7 @@ function LoginPage() {
             history.push('/registration');
           }}
         >
-          Join the Band
+          Register
         </Button>
       </center>
     </div>

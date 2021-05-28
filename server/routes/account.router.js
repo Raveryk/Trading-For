@@ -7,7 +7,8 @@ router.get('/', (req, res) => {
     console.log('userId:', req.user.id)
     const query = `SELECT posts.id, title, condition, image_url, traded, "user".username FROM posts 
     JOIN "user" ON "user".id=posts.users_id
-    WHERE "user".id = $1;`;
+    WHERE "user".id = $1
+    ORDER BY traded;`;
     pool.query(query, [req.user.id])
       .then(result => {
         console.log(result.rows);

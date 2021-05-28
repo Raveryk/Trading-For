@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { makeStyles, Button, Card } from "@material-ui/core";
+import { makeStyles, Button, Card, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +64,7 @@ function Account() {
   return (
     <div className={classes.body}>
       <Card elevation={8} className={classes.card}>
-          <h2 className={classes.title}>{user.username}'s Account</h2>
+          <Typography><h2 className={classes.title}>{user.username}'s Account</h2></Typography>
           <h4 className={classes.stats}>
             <em>Posts</em>:{browser.length} <em>Trades</em>:{tradeNums()}
           </h4>

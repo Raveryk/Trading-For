@@ -3,9 +3,13 @@ import Logo from "../Header/TF_Logo_Curve.png";
 import {makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
-    logo: {
+    logoContainer: {
         textAlign: 'center',
-        marginTop: '20%',
+        marginTop: '25%',
+    },
+    logo: {
+        width: '30%',
+        height: '30%',
     }
 }))
 
@@ -14,8 +18,8 @@ function Header() {
     const classes=useStyles();
 
     return(
-        <div className={classes.logo}>
-        <img src={Logo} />
+        <div className={classes.logoContainer}>
+        <img className={classes.logo} src={Logo} />
         </div>
     )
 }

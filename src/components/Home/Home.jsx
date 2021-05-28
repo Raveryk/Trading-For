@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import {List, ListItem, ListItemAvatar, Avatar, ListItemText, Divider, makeStyles} from '@material-ui/core';
+import {List, ListItem, ListItemAvatar, Avatar, ListItemText, Divider, makeStyles, Typography} from '@material-ui/core';
+import Header from '../Header/Header';
 
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch} from 'react-redux';
@@ -34,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1)
   },
   title: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'sans-serif',
   },
   divider: {
     marginBottom: '5px'
@@ -60,11 +62,15 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 75,
     height: 75,
   },
-  browse: {
-    marginTop: 200,
+  
+  feedText: {
+    fontSize: '12px'
   },
-  title: {
-    textAlign: 'center'
+  nameText: {
+    fontSize: '15px'
+  },
+  titleText: {
+    textTransform: 'uppercase',
   }
 }));
 
@@ -85,7 +91,7 @@ function Home() {
     return (
       <>
       
-        {post.username} traded a {post.title}.
+        <b className={classes.nameText}>{post.username}</b><a className={classes.feedText}> traded a </a><div className={classes.titleText}>{post.title}</div>
      
       </>
     )
@@ -94,8 +100,9 @@ function Home() {
   
 
   return (
-    <div className={classes.browse}>
-      <h2 className={classes.title}>Market Place Feed</h2>
+    <div>
+      <Header />
+      <Typography><h2 className={classes.title}>Marketplace Feed</h2></Typography>
       <div className="grid">
         <div className="grid-col grid-col_8">
           <Divider />

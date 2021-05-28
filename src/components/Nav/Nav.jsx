@@ -3,6 +3,7 @@ import "./Nav.css";
 import { useSelector } from "react-redux";
 import Logo from "../Nav/TF_Logo_4.png";
 import { useTheme } from "@material-ui/core/styles";
+import MenuIcon from '@material-ui/icons/Menu';
 
 import {
   AppBar,
@@ -10,6 +11,7 @@ import {
   IconButton,
   Drawer,
   makeStyles,
+  Typography,
 } from "@material-ui/core";
 
 import DrawerList from "../Drawer/DrawerList";
@@ -21,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginRight: "auto",
     marginLeft: 'auto',
+    fontFamily: 'sans-serif',
+    letterSpacing: '10px',
+    fontSize: ''
   },
   icon: {
     maxWidth: "40px",
@@ -62,7 +67,7 @@ function Nav() {
           {user.id && (
             <>
             <IconButton>
-              <img src={Logo} className={classes.icon} onClick={toggleDrawer} />
+              <MenuIcon className={classes.icon} onClick={toggleDrawer} />
             </IconButton>
               <Drawer className={classes.navBar} variant="temporary" open={drawer} onClose={toggleDrawer}>
                 <DrawerList toggleDrawer={toggleDrawer}/>
@@ -70,7 +75,7 @@ function Nav() {
             </>
           )}
           <div className={classes.title}>
-            <h2 className={classes.title}>Trading For</h2>
+            <Typography><h2 className={classes.title}>TRADINGFOR</h2></Typography>
           </div>
         </Toolbar>
       </AppBar>
