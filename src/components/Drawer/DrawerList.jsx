@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 function DrawerList({toggleDrawer}) {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const user = useSelector((store) => store.user);
   console.log(user);
 

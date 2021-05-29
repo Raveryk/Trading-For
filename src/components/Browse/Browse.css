@@ -2,3 +2,7 @@
     max-width:75px;
     max-height:75px;
 }
+.auto-flex {
+    margin: 0 auto;
+    display: flex;
+}

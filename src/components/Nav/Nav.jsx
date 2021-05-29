@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Nav.css";
 import { useSelector } from "react-redux";
 import Logo from "../Nav/TF_Logo_4.png";
@@ -36,9 +36,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Nav() {
+
+  
+
+  // useEffect(() => {
+  //   setDrawer(false)
+  // }, [])
+
+  
   // const theme = useTheme();
   const classes = useStyles();
+
   const user = useSelector((store) => store.user);
+
+  const [drawer, setDrawer] = useState(false);
+  
 
   // let loginLinkData = {
   //   path: '/login',
@@ -50,14 +62,12 @@ function Nav() {
   //   loginLinkData.text = 'Home';
   // }
 
-  const [drawer, setDrawer] = useState(false);
 
   // function to toggle drawer being open or closed
-  const toggleDrawer = (event) => {
-    if (event.type === "keydown") {
-      return;
-    }
-    setDrawer(!drawer);
+  const toggleDrawer = () => {
+    
+   setDrawer(!drawer);
+    console.log('in toggle drawer', drawer);
   };
 
   return (
@@ -66,11 +76,11 @@ function Nav() {
         <Toolbar>
           {user.id && (
             <>
-            <IconButton>
-              <MenuIcon className={classes.icon} onClick={toggleDrawer} />
+            <IconButton onClick={toggleDrawer}>
+              <MenuIcon className={classes.icon} />
             </IconButton>
-              <Drawer className={classes.navBar} variant="temporary" open={drawer} onClose={toggleDrawer}>
-                <DrawerList toggleDrawer={toggleDrawer}/>
+              <Drawer className={classes.navBar} open={drawer} onClose={toggleDrawer}>
+                <DrawerList toggleDrawer={toggleDrawer}/> 
               </Drawer>
             </>
           )}

@@ -49,7 +49,7 @@ const theme = createMuiTheme({
           '"Segoe UI Emoji"',
           '"Segoe UI Symbol"',
         ].join(',')
-      }
+      },
     },
 })
 
@@ -60,6 +60,10 @@ function App() {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
 
+
+
+
+
   return (
    
     <Router> 
@@ -67,7 +71,7 @@ function App() {
       <div>
     </div>
       <div>
-        <Nav />
+        <Nav/>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/login" />
