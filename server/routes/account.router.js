@@ -39,6 +39,7 @@ router.get('/', (req, res) => {
     })
 });
 
+    // PUT route to update traded boolean
   router.put('/:id', (req, res) => {
       console.log('post id:', req.params.id)
       const query = `UPDATE posts SET traded='true' WHERE id=$1;`;
@@ -52,6 +53,8 @@ router.get('/', (req, res) => {
           res.sendStatus(500)
       })
   })
+
+  
 
   router.delete('/:id', (req, res) => {
     console.log('post id:', req.params.id)

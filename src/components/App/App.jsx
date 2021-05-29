@@ -120,7 +120,7 @@ function App() {
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
-            path="/edit/posts"
+            path="/edit/posts/:id"
           >
             <EditPosts />
           </ProtectedRoute>
