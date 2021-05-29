@@ -33,6 +33,14 @@ function* updateTrade(action) {
     }
 }
 
+function* updatePost(action) {
+    try{
+        yield axios.put(`/api/edit/posts/${action.payload.id}`, action.payload)
+    } catch(error) {
+        console.log('Error updating post: ', error)
+    }
+}
+
 function* deletePost(action) {
     try{
         yield axios.delete(`/api/account/${action.payload}`)
@@ -45,7 +53,8 @@ function* accountSaga() {
     yield takeLatest('FETCH_ACCOUNT_BROWSER', getAccountBrowser);
     yield takeLatest('FETCH_ACCOUNT_DETAILS', getAccountDetails);
     yield takeLatest('UPDATE_TRADE', updateTrade);
-    yield takeLatest('DELETE_POST', deletePost)
+    yield takeLatest('UPDATE_POST', updatePost);
+    yield takeLatest('DELETE_POST', deletePost);
 }
 
 export default accountSaga;

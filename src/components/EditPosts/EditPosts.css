@@ -1,0 +1,19 @@
+.inputs {
+    width: '75%';
+    margin-right: 'auto';
+    margin-left: 'auto';
+    margin-top: '20%';
+    border-radius: 16;
+  }
+
+/* .form {
+display: 'flex';
+margin: '10px';
+flex-direction: 'column';
+
+}
+
+.inputs {
+margin-top: '5px';
+margin-bottom: '5px';
+} */

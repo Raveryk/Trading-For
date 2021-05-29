@@ -12,7 +12,8 @@ const userRouter = require('./routes/user.router');
 const postsRouter = require('./routes/posts.router');
 const categoriesRouter = require('./routes/categories.router');
 const browseRouter = require('./routes/browse.router');
-const accountRouter = require('./routes/account.router')
+const accountRouter = require('./routes/account.router');
+const editRouter = require('./routes/edit.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,7 +31,8 @@ app.use('/api/user', userRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/browse', browseRouter);
-app.use('/api/account', accountRouter)
+app.use('/api/account', accountRouter);
+app.use('/api/edit', editRouter);
 
 
 // Serve static files

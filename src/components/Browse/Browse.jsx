@@ -77,6 +77,14 @@ const useStyles = makeStyles((theme) => ({
   contact: {
     backgroundColor: "whitesmoke",
   },
+  modal: {
+    margin: '0 auto', 
+    display: "flex"
+  },
+  button: {
+    margin: '0 auto', 
+    display: "flex"
+  },
   info: {
     overflow: 'auto', 
     maxHeight: 100,
@@ -157,7 +165,7 @@ function Browse() {
             <p>{item.wants}</p>
             </div>
             <Divider className={classes.divider}/>
-            <Button className='auto-flex' variant="outlined" onClick={() => slideToggle()}>Interested?</Button>
+            <Button className={classes.button} variant="outlined" onClick={() => slideToggle()}>Interested?</Button>
             <Slide direction="up" in={slide} onChange={slideToggle}>
               <Paper className={classes.contact}>
                 <p>Email: {item.email}</p>
