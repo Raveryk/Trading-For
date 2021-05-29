@@ -158,22 +158,22 @@ function EditPosts() {
   // ---- EDIT --- //
 
   // creating temporary holder for old values and new values.
-  // const [update, setUpdate] = useState({
-  //   title: '',
-  //   info: '',
-  //   condition: '',
-  //   url: '',
-  //   wants: '',
-  // });
-
   const [update, setUpdate] = useState({
-    id: detail[0].id,
-    title: detail[0].title,
-    info: detail[0].description,
-    condition: detail[0].condition,
-    url: detail[0].image_url,
-    wants: detail[0].wants,
+    title: '',
+    info: '',
+    condition: '',
+    url: '',
+    wants: '',
   });
+
+  // const [update, setUpdate] = useState({
+  //   id: detail[0].id,
+  //   title: detail[0].title,
+  //   info: detail[0].description,
+  //   condition: detail[0].condition,
+  //   url: detail[0].image_url,
+  //   wants: detail[0].wants,
+  // });
 
   // updates trade from false to true.
   const updateTrade = (post) => {
