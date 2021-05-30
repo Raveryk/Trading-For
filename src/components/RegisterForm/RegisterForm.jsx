@@ -67,7 +67,7 @@ function RegisterForm() {
     <Grid className={classes.formGrid} item xs={12}>
     <Card elevation={6}>
     <form className={classes.formCard} onSubmit={registerUser}>
-      <Typography><h2>Register</h2></Typography>
+      <Typography variant="h5">Register</Typography>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}

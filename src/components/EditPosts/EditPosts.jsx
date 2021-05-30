@@ -12,7 +12,6 @@ import {
   ListItemAvatar,
   Avatar,
   IconButton,
-  Checkbox,
   FormControlLabel,
   Box,
   TextField,
@@ -21,10 +20,14 @@ import {
   Select,
   MenuItem,
   Typography,
+  Tooltip
 } from "@material-ui/core";
 
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CloseIcon from "@material-ui/icons/Close";
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete'
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -178,9 +181,22 @@ function EditPosts() {
 
   // updates trade from false to true.
   const updateTrade = (post) => {
-    console.log("You checked the box!");
+    Swal.fire({
+      title: 'Mark item as traded?',
+      icon: 'warning',
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if(result.isConfirmed) {
+        Swal.fire(
+          'Success trading item!'
+        )
     dispatch({ type: "UPDATE_TRADE", payload: post.id });
     dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
+        }
+  })
   };
 
   // targets specific post and toggles the modal comp to open
@@ -196,13 +212,26 @@ function EditPosts() {
   };
 
   // function to delete post
-  const deletePost = (item) => {
+  const deletePost = (post) => {
+    Swal.fire({
+      title: 'Delete Item',
+      text: 'Are you sure?',
+      icon: 'warning',
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if(result.isConfirmed) {
+        Swal.fire(
+          'Success deleting item!'
+        )
     //Want to figure out confirmation stuff....
-    dispatch({ type: "DELETE_POST", payload: item.id });
+    dispatch({ type: "DELETE_POST", payload: post.id });
     // refresh users posts list
     dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
-    // close out of modal view
-    modalToggle();
+        }
+      })
   };
 
   // edit inputs conditionally render
@@ -244,7 +273,7 @@ function EditPosts() {
       {detail.map((item, i) => {
         return (
           <>
-            <h3 className={classes.title}>{item.username}</h3>
+            <h3 className={classes.title} key={i}>{item.username}</h3>
             <p></p>
             {!edit ? (
               <h3 className={classes.title}>{item.title}</h3>
@@ -326,9 +355,6 @@ function EditPosts() {
             <Box display="flex" justifyContent="center">
               {!edit ? (
                 <div>
-                  <Button variant="outlined" onClick={() => deletePost(item)}>
-                    Delete
-                  </Button>
                   <Button variant="outlined" onClick={() => editItem(item)}>
                     Edit
                   </Button>
@@ -352,8 +378,8 @@ function EditPosts() {
 
   return (
     <div className={classes.browse}>
-      <Typography>
-        <h2 className={classes.title}>{user.username}'s Posts</h2>
+      <Typography className={classes.title} variant="h5">
+        {user.username}'s Posts
       </Typography>
       <Divider />
       <div className="grid">
@@ -362,7 +388,7 @@ function EditPosts() {
             {browser.map((post, i) => {
               return (
                 <>
-                  <ListItem key={i} onClick={() => toDetail(post)}>
+                  <ListItem key={i} >
                     <ListItemAvatar>
                       <Avatar
                         variant="square"
@@ -372,18 +398,20 @@ function EditPosts() {
                     </ListItemAvatar>
                     <ListItemText
                       primary={post.title}
-                      secondary={post.condition}
                     />
                     {!post.traded ? (
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Traded"
-                        labelPlacement="top"
-                        onChange={() => updateTrade(post)}
-                      />
+                        <IconButton edge="end" onClick={() => updateTrade(post)}>
+                          <CheckBoxOutlineBlankIcon />
+                        </IconButton>
                     ) : (
-                      <CheckBoxIcon />
+                        <CheckBoxIcon />
                     )}
+                    <IconButton edge="end" onClick={() => toDetail(post)}>
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton edge="end" onClick={() => deletePost(post)}>
+                      <DeleteIcon />
+                    </IconButton>
                   </ListItem>
                   <Divider />
                 </>

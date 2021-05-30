@@ -122,7 +122,7 @@ function Post() {
     <div>
       <Grid container className={classes.grid}>
       <Card elevation={4} className={classes.card} >
-        <Typography><h2 className={classes.title}>Post A Trade</h2></Typography>
+        <Typography variant="h5" className={classes.title}>Post A Trade</Typography>
         <form className={classes.form}>
           <TextField
             className={classes.inputs}

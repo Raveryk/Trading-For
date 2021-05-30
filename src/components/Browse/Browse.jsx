@@ -180,7 +180,7 @@ function Browse() {
 
   return (
     <div className={classes.browse}>
-      <Typography><h2 className={classes.title}>Browse Trade List</h2></Typography>
+      <Typography className={classes.title} variant="h5">Browse Trade List</Typography>
       <Divider />
       <div className="grid">
         <div className="grid-col grid-col_8">

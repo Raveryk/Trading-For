@@ -102,7 +102,7 @@ function Home() {
   return (
     <div>
       <Header />
-      <Typography><h2 className={classes.title}>Marketplace Feed</h2></Typography>
+      <Typography className={classes.title} variant="h5">Marketplace Feed</Typography>
       <div className="grid">
         <div className="grid-col grid-col_8">
           <Divider />
