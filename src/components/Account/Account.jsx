@@ -64,7 +64,7 @@ function Account() {
   return (
     <div className={classes.body}>
       <Card elevation={8} className={classes.card}>
-          <Typography><h2 className={classes.title}>{user.username}'s Account</h2></Typography>
+          <Typography className={classes.title} variant="h5">{user.username}'s Account</Typography>
           <h4 className={classes.stats}>
             <em>Posts</em>:{browser.length} <em>Trades</em>:{tradeNums()}
           </h4>

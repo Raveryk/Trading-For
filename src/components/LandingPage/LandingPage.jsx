@@ -22,7 +22,7 @@ function LandingPage() {
           <p>
             Landing Page Component
           </p>
-
+            
           <p>
             
           </p>

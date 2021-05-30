@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
     console.log('req.params.id:', req.params.id);
     postId = req.params.id
   // GET route code here
-  const query = `SELECT title, description, condition, image_url, wants, posts.id, "user".username, "user".email, "user".phone_num FROM posts 
+  const query = `SELECT title, description, condition, image_url, wants, traded, posts.id, "user".username, "user".email, "user".phone_num FROM posts 
                   JOIN "user" ON "user".id=posts.users_id
                   WHERE posts.id=$1;`;
 

@@ -16,7 +16,7 @@ function LoginPage() {
       <LoginForm />
 
       <center>
-      <Typography><p>Want to join?</p></Typography>
+      <Typography>Want to join?</Typography>
         <Button
           variant="outlined"
           type="button"

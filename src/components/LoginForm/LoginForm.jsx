@@ -57,7 +57,7 @@ function LoginForm() {
     <Grid className={classes.formGrid} item xs={12} >
     <Card elevation={6} >
     <form className={classes.formCard} onSubmit={login}>
-      <Typography><h2>Log In</h2></Typography>
+      <Typography variant="h5">Log In</Typography>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
