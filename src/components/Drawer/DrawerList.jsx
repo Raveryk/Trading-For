@@ -31,10 +31,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 function DrawerList({toggleDrawer}) {
+
   const classes = useStyles();
   const dispatch = useDispatch()
+
+  // User reducer to grab user info
   const user = useSelector((store) => store.user);
-  console.log(user);
+  // console.log(user);
 
   let loginLinkData = {
     path: "/login",
@@ -45,7 +48,7 @@ function DrawerList({toggleDrawer}) {
     loginLinkData.path = "/user";
     loginLinkData.text = "Home";
   }
-
+  // List of items in drawer with avatars and links.
   return (
     <div className={classes.list}>
       <div >

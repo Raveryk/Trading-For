@@ -1,8 +1,11 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
-// GET route for Market Place feed 
+// GET route for Marketplace feed 
 router.get('/', (req, res) => {
   // GET route code here
   const query = `SELECT posts.title, posts.image_url, "user".username FROM posts 
@@ -20,7 +23,7 @@ router.get('/', (req, res) => {
 });
 
 // POST request to send posts to DB //
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     userId = req.user.id;
     title = req.body.title;
     info = req.body.info;

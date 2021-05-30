@@ -1,9 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 
 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('userId:', req.user.id)
     const query = `SELECT posts.id, title, condition, image_url, traded, "user".username FROM posts 
     JOIN "user" ON "user".id=posts.users_id
@@ -20,7 +23,7 @@ router.get('/', (req, res) => {
       })
   });
 
-  router.get(`/detail/:id`, (req, res) => {
+  router.get(`/detail/:id`, rejectUnauthenticated, (req, res) => {
     console.log('req.params.id:', req.params.id);
     postId = req.params.id
   // GET route code here
@@ -40,7 +43,7 @@ router.get('/', (req, res) => {
 });
 
     // PUT route to update traded boolean
-  router.put('/:id', (req, res) => {
+  router.put('/:id', rejectUnauthenticated, (req, res) => {
       console.log('post id:', req.params.id)
       const query = `UPDATE posts SET traded='true' WHERE id=$1;`;
       pool.query(query, [req.params.id])
@@ -56,7 +59,7 @@ router.get('/', (req, res) => {
 
   
 
-  router.delete('/:id', (req, res) => {
+  router.delete('/:id', rejectUnauthenticated, (req, res) => {
     console.log('post id:', req.params.id)
     const query = `DELETE FROM posts WHERE id = $1;`;
     pool.query(query, [req.params.id])

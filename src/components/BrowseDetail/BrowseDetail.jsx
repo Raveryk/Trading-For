@@ -21,7 +21,7 @@ function BrowseDetail() {
 
   // grabbing details from reducer
   const detail = useSelector( (store) => store.browser.detail )
-  console.log(detail)
+//   console.log(detail)
 
   
 

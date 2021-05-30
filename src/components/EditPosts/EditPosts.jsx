@@ -12,7 +12,6 @@ import {
   ListItemAvatar,
   Avatar,
   IconButton,
-  FormControlLabel,
   Box,
   TextField,
   FormControl,
@@ -20,7 +19,6 @@ import {
   Select,
   MenuItem,
   Typography,
-  Tooltip
 } from "@material-ui/core";
 
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
@@ -31,11 +29,8 @@ import DeleteIcon from '@material-ui/icons/Delete'
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useHistory } from 'react-router-dom'
 
 import "./EditPosts.css";
-
-// import EditDetail from '../EditDetail/EditDetail'
 
 import Swal from "sweetalert2";
 
@@ -122,6 +117,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function EditPosts() {
+
   const condition = [
     "Brand New",
     "Mint",
@@ -158,7 +154,7 @@ function EditPosts() {
   const user = useSelector((store) => store.user);
   // console.log("User data:", user);
 
-  // ---- EDIT --- //
+  // ----UPDATE STATES--- //
 
   // creating temporary holder for old values and new values.
   const [update, setUpdate] = useState({
@@ -179,25 +175,13 @@ function EditPosts() {
   //   wants: detail[0].wants,
   // });
 
-  // updates trade from false to true.
-  const updateTrade = (post) => {
-    Swal.fire({
-      title: 'Mark item as traded?',
-      icon: 'warning',
-      showConfirmButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'Yes',
-      cancelButtonText: 'No',
-    }).then((result) => {
-      if(result.isConfirmed) {
-        Swal.fire(
-          'Success trading item!'
-        )
-    dispatch({ type: "UPDATE_TRADE", payload: post.id });
-    dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
-        }
-  })
-  };
+  // ----MODAL HANDLERS----- //
+
+    // function to toggle modal
+    const modalToggle = () => {
+      setOpen(!open);
+      dispatch({ type: "SET_DETAILS", payload: [] });
+    };
 
   // targets specific post and toggles the modal comp to open
   const toDetail = (post) => {
@@ -205,11 +189,8 @@ function EditPosts() {
     modalToggle();
   };
 
-  // function to toggle modal
-  const modalToggle = () => {
-    setOpen(!open);
-    dispatch({ type: "SET_DETAILS", payload: [] });
-  };
+  
+  // -----DELETE------ //
 
   // function to delete post
   const deletePost = (post) => {
@@ -234,7 +215,29 @@ function EditPosts() {
       })
   };
 
-  // edit inputs conditionally render
+  // ----- EDITS/UPDATES ----- //
+
+  // updates trade from false to true.
+  const updateTrade = (post) => {
+    Swal.fire({
+      title: 'Mark item as traded?',
+      icon: 'warning',
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if(result.isConfirmed) {
+        Swal.fire(
+          'Success trading item!'
+        )
+    dispatch({ type: "UPDATE_TRADE", payload: post.id });
+    dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
+        }
+  })
+  };
+
+  // edit inputs conditionally rendered
   const editItem = (item) => {
     console.log("Edit button clicked!", edit);
     setEdit(!edit);
@@ -248,22 +251,28 @@ function EditPosts() {
     })
   };
 
+  // handles all text inputs in edit mode
   const handleEdits = (e) => {
     e.preventDefault();
     setUpdate({ ...update, [e.target.id]: e.target.value });
   };
 
+  // handles select input in edit mode
   const conditionEdit = (e) => {
     e.preventDefault();
     setUpdate({...update, condition: e.target.value})
   }
 
+  // handles submit of edited info
   const updateItem = () => {
     console.log('Update sent to saga: ', update)
     dispatch({type: 'UPDATE_POST', payload: update});
     dispatch({ type: "FETCH_ACCOUNT_BROWSER" })
-    setEdit(!edit);
+    modalToggle();
   }
+
+      // ----MODAL----- //
+      // Contains conditional rendering for edit mode.
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -376,6 +385,8 @@ function EditPosts() {
     </div>
   );
 
+
+  // ----- RENDERED LIST OF USER'S POSTS ----- //
   return (
     <div className={classes.browse}>
       <Typography className={classes.title} variant="h5">

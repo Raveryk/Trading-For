@@ -1,9 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
   
   // PUT route to update post
-  router.put('/posts/:id', (req, res) => {
+  router.put('/posts/:id', rejectUnauthenticated, (req, res) => {
     console.log('post id:', req.params.id)
     console.log('Post update:', req.body)
     const query = `UPDATE posts SET title=$2, description=$3, condition=$4, image_url=$5, wants=$6 WHERE id=$1;`;

@@ -110,9 +110,13 @@ function Browse() {
 
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
+
   //state for modal open attribute
   const [open, setOpen] = useState(false);
   const [slide, setSlide] = useState(false);
+
+  // ---REDUCERS--- //
+
   //grabs detailed info from reducer
   const detail = useSelector((store) => store.browser.detail);
   // grabs all posts for browser
@@ -129,9 +133,11 @@ function Browse() {
   // function to toggle modal
   const modalToggle = () => {
     setOpen(!open);
+    // reset reducer to be empty
     dispatch({ type: 'SET_DETAILS', payload: [] })
   };
 
+  // handles contact info action
   const slideToggle = () => {
     setSlide(!slide);
   };
