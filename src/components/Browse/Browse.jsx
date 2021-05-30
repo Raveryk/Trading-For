@@ -24,6 +24,8 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
+import Header from '../Header/Header';
+
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -95,9 +97,6 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 75,
     height: 75,
   },
-  browse: {
-    marginTop: 150,
-  }
 }));
 
 function Browse() {
@@ -186,6 +185,7 @@ function Browse() {
 
   return (
     <div className={classes.browse}>
+        <Header />
       <Typography className={classes.title} variant="h5">Browse Trade List</Typography>
       <Divider />
       <div className="grid">

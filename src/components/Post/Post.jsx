@@ -16,18 +16,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useHistory } from 'react-router-dom';
 
+import Header from '../Header/Header';
+
 const useStyles = makeStyles((theme) => ({
   grid: {
     direction: 'column',
-    justify: 'center',
     alignItems: 'center',
-    marginTop: 75
   },
   card: {
     width: '75%',
     marginRight: 'auto',
     marginLeft: 'auto',
-    marginTop: '20%',
     borderRadius: 16,
   },
   form: {
@@ -120,6 +119,7 @@ function Post() {
 
   return (
     <div>
+      <Header />
       <Grid container className={classes.grid}>
       <Card elevation={4} className={classes.card} >
         <Typography variant="h5" className={classes.title}>Post A Trade</Typography>
