@@ -18,7 +18,6 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import Post from '../Post/Post';
 import UserPage from '../UserPage/UserPage';
 import Account from '../Account/Account';
-// import LandingPage from '../LandingPage/LandingPage';
 import Home from '../Home/Home';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -120,7 +119,7 @@ function App() {
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
-            path="/edit/posts/:id"
+            path="/edit/posts"
           >
             <EditPosts />
           </ProtectedRoute>
