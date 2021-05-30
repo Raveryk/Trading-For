@@ -233,7 +233,7 @@ function EditPosts() {
     console.log('Update sent to saga: ', update)
     dispatch({type: 'UPDATE_POST', payload: update});
     dispatch({ type: "FETCH_ACCOUNT_BROWSER" })
-
+    setEdit(!edit);
   }
 
   const body = (
