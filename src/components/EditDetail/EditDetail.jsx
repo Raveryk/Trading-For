@@ -167,12 +167,12 @@ function EditDetail() {
   // });
 
   const [update, setUpdate] = useState({
-    id: detail[0].id,
-    title: detail[0].title,
-    info: detail[0].description,
-    condition: detail[0].condition,
-    url: detail[0].image_url,
-    wants: detail[0].wants,
+    id: '',
+    title: '',
+    info: '',
+    condition: '',
+    url: '',
+    wants: '',
   });
 
   // updates trade from false to true.
@@ -206,8 +206,16 @@ function EditDetail() {
 
   // edit inputs conditionally render
   const editItem = (item) => {
+    setEdit(true);
+    setUpdate({
+    id: detail[0].id,
+    title: detail[0].title,
+    info: detail[0].description,
+    condition: detail[0].condition,
+    url: detail[0].image_url,
+    wants: detail[0].wants, 
+    })
     console.log("Edit button clicked!", edit);
-    setEdit(!edit);
   };
 
   const handleEdits = (e) => {
@@ -222,8 +230,8 @@ function EditDetail() {
 
   const updateItem = () => {
     console.log('Update sent to saga: ', update)
-    dispatch({type: 'UPDATE_POST', payload: update});
-    dispatch({ type: "FETCH_ACCOUNT_BROWSER" })
+    // dispatch({type: 'UPDATE_POST', payload: update});
+    // dispatch({ type: "FETCH_ACCOUNT_BROWSER" })
 
   }
 
@@ -243,7 +251,6 @@ function EditDetail() {
               <TextField
                 id="title"
                 className="inputs"
-                placeholder={item.title}
                 value={update.title}
                 onChange={handleEdits}
               />
@@ -326,7 +333,7 @@ function EditDetail() {
                 </div>
               ) : (
                 <div>
-                  <Button variant="outlined" onClick={() => editItem()}>
+                  <Button variant="outlined" onClick={() => setEdit(!edit)}>
                     Cancel
                   </Button>
                   <Button variant="outlined" onClick={() => updateItem()}>

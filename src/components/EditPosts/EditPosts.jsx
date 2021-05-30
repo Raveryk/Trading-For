@@ -159,6 +159,7 @@ function EditPosts() {
 
   // creating temporary holder for old values and new values.
   const [update, setUpdate] = useState({
+    id: '',
     title: '',
     info: '',
     condition: '',
@@ -208,6 +209,14 @@ function EditPosts() {
   const editItem = (item) => {
     console.log("Edit button clicked!", edit);
     setEdit(!edit);
+    setUpdate({
+      id: detail[0].id,
+      title: detail[0].title,
+      info: detail[0].description,
+      condition: detail[0].condition,
+      url: detail[0].image_url,
+      wants: detail[0].wants,
+    })
   };
 
   const handleEdits = (e) => {

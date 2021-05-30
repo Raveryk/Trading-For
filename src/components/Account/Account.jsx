@@ -58,7 +58,7 @@ function Account() {
 
   // 
   const editPosts = () => {
-    history.push("/edit/posts/:id");
+    history.push("/edit/posts");
   };
 
   return (
