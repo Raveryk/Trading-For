@@ -28,7 +28,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     // GET route code here
     const query = `SELECT posts.id as posts_id, title, description, condition, image_url, wants, "user".username, "user".email, "user".phone_num FROM posts 
                     JOIN "user" ON "user".id=posts.users_id
-                    WHERE posts.id=$1;`;
+                    WHERE posts.id=$1; `;
 
     pool.query(query, [postId])
       .then(result => {
@@ -58,6 +58,22 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         console.log('Error adding favorite: ', error)
       })
 
+  })
+
+  router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    console.log('req.params: ', req.params.id)
+    console.log(`req.user: `, req.user)
+
+    const query =  `DELETE FROM favorites WHERE users_id = $1 AND posts_id = $2;`;
+
+    pool.query(query, [req.user.id, req.params.id])
+      .then(result => {
+        console.log('Success deleting favorite')
+        res.sendStatus(201)
+      })
+      .catch( error => {
+        console.log('Error deleting fav: ', error)
+      })
   })
 
   module.exports = router;

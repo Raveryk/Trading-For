@@ -34,10 +34,20 @@ function* addFavorite(action) {
     }
 }
 
+function* deleteFav(action) {
+    try{
+        console.log('Fav item deleted: ', action.payload)
+        yield axios.delete(`/api/browse/${action.payload}`)
+    } catch (error) {
+        console.log('Error deleting favorite: ', error)
+    }
+}
+
 function* browserSaga() {
     yield takeLatest('FETCH_BROWSER', getBrowser);
     yield takeLatest('FETCH_DETAILS', getDetails);
-    yield takeLatest('ADD_FAVORITE', addFavorite)
+    yield takeLatest('ADD_FAVORITE', addFavorite);
+    yield takeLatest('DELETE_FAV', deleteFav)
 }
 
 export default browserSaga;

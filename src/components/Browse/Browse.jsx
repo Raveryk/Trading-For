@@ -21,6 +21,7 @@ import {
 
 import CloseIcon from "@material-ui/icons/Close";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -118,6 +119,7 @@ function Browse() {
   //state for modal open attribute
   const [open, setOpen] = useState(false);
   const [slide, setSlide] = useState(false);
+  const [favorite, setFavorite] = useState(false);
 
   // ---REDUCERS--- //
 
@@ -149,6 +151,13 @@ function Browse() {
   const favoritePost = (item) => {
       console.log('in favoritePost: ', item);
       dispatch({ type: 'ADD_FAVORITE', payload: item })
+      setFavorite(!favorite)
+  }
+
+  const deleteFav = (item) => {
+      console.log('in deleteFav: ', item.posts_id);
+      dispatch({ type: 'DELETE_FAV', payload: item.posts_id})
+      setFavorite(!favorite)
   }
 
   const body = (
@@ -160,9 +169,14 @@ function Browse() {
             <IconButton onClick={() => modalToggle()}>
               <CloseIcon variant="outlined" />
             </IconButton>
+            {!favorite ?
                 <IconButton onClick={() => favoritePost(item)} edge="end">
                     <BookmarkBorderIcon />
                 </IconButton>
+                :
+                <IconButton onClick={() => deleteFav(item)} edge="end">
+                    <BookmarkIcon />
+                </IconButton>}
             </Box>
             <h3 className={classes.title}>{item.username}</h3>
             <p></p>
