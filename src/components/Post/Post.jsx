@@ -47,7 +47,8 @@ const useStyles = makeStyles((theme) => ({
     width: '50%'
   },
   title: {
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: '4%',
   }
 }))
 
