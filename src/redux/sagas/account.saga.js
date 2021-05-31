@@ -25,6 +25,16 @@ function* getAccountDetails(action) {
     }
 }
 
+function* getFavorites() {
+    try{
+        const response = yield axios.get(`/api/account/favorites`);
+        console.log('Got favorites from DB: ', response.data)
+        yield put({ type: 'SET_FAVORITES', payload: response.data})
+    } catch(error) {
+        console.log('GET favorites failed: ', error)
+    }
+}
+
 function* updateTrade(action) {
     try{
         yield axios.put(`/api/account/${action.payload}`)
@@ -52,6 +62,7 @@ function* deletePost(action) {
 function* accountSaga() {
     yield takeLatest('FETCH_ACCOUNT_BROWSER', getAccountBrowser);
     yield takeLatest('FETCH_ACCOUNT_DETAILS', getAccountDetails);
+    yield takeLatest('FETCH_FAVORITES', getFavorites)
     yield takeLatest('UPDATE_TRADE', updateTrade);
     yield takeLatest('UPDATE_POST', updatePost);
     yield takeLatest('DELETE_POST', deletePost);
