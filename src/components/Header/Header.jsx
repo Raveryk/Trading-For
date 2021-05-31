@@ -5,7 +5,7 @@ import {makeStyles} from '@material-ui/core';
 const useStyles = makeStyles(() => ({
     logoContainer: {
         textAlign: 'center',
-        marginTop: '25%',
+        marginTop: '20%',
     },
     logo: {
         width: '30%',

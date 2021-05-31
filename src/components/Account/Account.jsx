@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     width: "75%",
     marginRight: "auto",
     marginLeft: "auto",
-    marginTop: "50%",
     borderRadius: 16,
   },
   btns: {
@@ -24,12 +23,15 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     textAlign: "center",
+    marginTop: '4%',
   },
   stats: {
     textAlign: "center",
     margin: "4px",
   },
 }));
+
+import Header from '../Header/Header';
 
 function Account() {
   // fetching posts by specific user to calculate stats
@@ -63,10 +65,11 @@ function Account() {
 
   return (
     <div className={classes.body}>
+      <Header />
       <Card elevation={8} className={classes.card}>
           <Typography className={classes.title} variant="h5">{user.username}'s Account</Typography>
           <h4 className={classes.stats}>
-            <em>Posts</em>:{browser.length} <em>Trades</em>:{tradeNums()}
+            <em>Posts</em>: {browser.length} <em>Trades</em>: {tradeNums()}
           </h4>
           <div className={classes.btns}>
             <Button

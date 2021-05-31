@@ -84,9 +84,9 @@ function Nav() {
               </Drawer>
             </>
           )}
-          <div className={classes.title}>
+          {/* <div className={classes.title}>
             <Typography className={classes.title} variant="h5">TRADINGFOR</Typography>
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
     </div>

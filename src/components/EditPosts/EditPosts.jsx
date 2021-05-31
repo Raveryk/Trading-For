@@ -30,6 +30,8 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
+import Header from '../Header/Header';
+
 import "./EditPosts.css";
 
 import Swal from "sweetalert2";
@@ -106,9 +108,6 @@ const useStyles = makeStyles((theme) => ({
     overflow: "visible",
     minHeight: 75,
     height: 75,
-  },
-  browse: {
-    marginTop: 150,
   },
   edit: {
     display: "flex",
@@ -388,7 +387,8 @@ function EditPosts() {
 
   // ----- RENDERED LIST OF USER'S POSTS ----- //
   return (
-    <div className={classes.browse}>
+    <div>
+      <Header />
       <Typography className={classes.title} variant="h5">
         {user.username}'s Posts
       </Typography>
