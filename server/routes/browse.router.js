@@ -26,7 +26,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       console.log('req.params.id:', req.params.id);
       postId = req.params.id
     // GET route code here
-    const query = `SELECT title, description, condition, image_url, wants, "user".username, "user".email, "user".phone_num FROM posts 
+    const query = `SELECT posts.id as posts_id, title, description, condition, image_url, wants, "user".username, "user".email, "user".phone_num FROM posts 
                     JOIN "user" ON "user".id=posts.users_id
                     WHERE posts.id=$1;`;
 
@@ -40,5 +40,24 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
       })
   });
+
+  router.post(`/`, rejectUnauthenticated, (req, res) => {
+    console.log(`req.body: `, req.body)
+    console.log(`req.user: `, req.user)
+    // console.log(`req.params: `, req.params)
+
+    const query = `INSERT INTO favorites ("users_id", "posts_id")
+                    VALUES($1, $2);`;
+    
+    pool.query(query, [req.user.id, req.body.posts_id])
+      .then(result => {
+        console.log('Success favoriting post')
+        res.sendStatus(201)
+      })
+      .catch( error => {
+        console.log('Error adding favorite: ', error)
+      })
+
+  })
 
   module.exports = router;

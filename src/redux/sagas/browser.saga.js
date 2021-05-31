@@ -25,9 +25,19 @@ function* getDetails(action) {
     }
 }
 
+function* addFavorite(action) {
+    try{
+        console.log('Favorite item: ', action.payload)
+        yield axios.post('/api/browse', action.payload)
+    } catch (error) {
+        console.log('Error adding favorite: ', error)
+    }
+}
+
 function* browserSaga() {
     yield takeLatest('FETCH_BROWSER', getBrowser);
     yield takeLatest('FETCH_DETAILS', getDetails);
+    yield takeLatest('ADD_FAVORITE', addFavorite)
 }
 
 export default browserSaga;

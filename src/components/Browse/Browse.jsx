@@ -123,6 +123,7 @@ function Browse() {
 
   //grabs detailed info from reducer
   const detail = useSelector((store) => store.browser.detail);
+  console.log('Detail item: ', detail)
   // grabs all posts for browser
   const browser = useSelector((store) => store.browser.browser);
 
@@ -145,6 +146,11 @@ function Browse() {
     setSlide(!slide);
   };
 
+  const favoritePost = (item) => {
+      console.log('in favoritePost: ', item);
+      dispatch({ type: 'ADD_FAVORITE', payload: item })
+  }
+
   const body = (
     <div style={modalStyle} className={classes.paper}>
       {detail.map((item, i) => {
@@ -154,7 +160,7 @@ function Browse() {
             <IconButton onClick={() => modalToggle()}>
               <CloseIcon variant="outlined" />
             </IconButton>
-                <IconButton  edge="end">
+                <IconButton onClick={() => favoritePost(item)} edge="end">
                     <BookmarkBorderIcon />
                 </IconButton>
             </Box>
