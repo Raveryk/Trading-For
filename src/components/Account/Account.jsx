@@ -64,7 +64,7 @@ function Account() {
   };
 
   const toFavorites = () => {
-    history.push("/favorites");
+    history.push(`/favorites/${user.id}`);
   };
 
   return (

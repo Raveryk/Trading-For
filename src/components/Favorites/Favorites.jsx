@@ -25,7 +25,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
@@ -42,9 +42,12 @@ const useStyles = makeStyles((theme) => ({
 
 function Favorites() {
 
+    let { id } = useParams();
+    console.log(id);
+
     useEffect(() => {
-        dispatch({ type: 'FETCH_FAVORITES' })
-    })
+        dispatch({ type: 'FETCH_FAVORITES', payload: id})
+    }, [])
 
     const classes = useStyles();
     const dispatch = useDispatch();

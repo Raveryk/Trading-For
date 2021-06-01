@@ -127,7 +127,7 @@ function App() {
 
           <ProtectedRoute
             exact
-            path="/favorites"
+            path="/favorites/:id"
           >
             <Favorites />
           </ProtectedRoute>

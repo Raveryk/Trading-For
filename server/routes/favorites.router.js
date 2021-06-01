@@ -5,17 +5,20 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-router.get('/', rejectUnauthenticated, (req, res) => {
-    const query = `SELECT posts.id, title, condition, image_url, "user".username FROM posts 
-    JOIN "user" ON "user".id=posts.users_id
-    WHERE traded=false;`;
-    pool.query(query)
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+    console.log('for favs: ', req.params.id)
+    let userId = req.params.id;
+
+    const query = `SELECT * FROM favorites
+                    JOIN posts ON posts.id=favorites.posts_id
+                    WHERE favorites.users_id=$1;`;
+    pool.query(query, [userId])
       .then(result => {
         console.log(result.rows);
         res.send(result.rows)
       })
       .catch( error => {
-        console.log('Something went wrong GETting posts for browser:', error)
+        console.log('Something went wrong GETting favorites:', error)
         res.sendStatus(500);
       })
   });
