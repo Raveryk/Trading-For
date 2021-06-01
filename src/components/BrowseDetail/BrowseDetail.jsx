@@ -26,6 +26,8 @@ import BookmarkIcon from "@material-ui/icons/Bookmark";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { CheckOutlined } from "@material-ui/icons";
+import userReducer from "../../redux/reducers/user.reducer";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -106,10 +108,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function BrowseDetail({ modalToggle, favorites, user }) {
-    // useEffect(() => {
-    //     dispatch({type: 'FETCH_FAVORITES', payload: })
-    // }, [])
+function BrowseDetail({ modalToggle }) {
+    useEffect(() => {
+        dispatch({type: 'FETCH_FAVORITES', payload: user.id})
+    }, [])
   
   const dispatch = useDispatch();
 
@@ -119,15 +121,17 @@ function BrowseDetail({ modalToggle, favorites, user }) {
 // grabbing details from reducer
   const detail = useSelector((store) => store.browser.detail);
 
+  const favorites = useSelector(store => store.favorites)
+
 //   console.log(detail);
-    // const user = useSelector((store) => store.user);
+    const user = useSelector((store) => store.user);
     // console.log(user);
     // const favorites = useSelector(store => store.favorites);
     // console.log(favorites);
 
   const [slide, setSlide] = useState(false);
   const [open, setOpen] = useState(false);
-  const [favorite, setFavorite] = useState(false);
+//   const [favorite, setFavorite] = useState(false);
 
 
   const slideToggle = () => {
@@ -138,23 +142,24 @@ function BrowseDetail({ modalToggle, favorites, user }) {
   const favoritePost = (item) => {
     //   console.log('in favoritePost: ', item);
       dispatch({ type: 'ADD_FAVORITE', payload: item })
-      setFavorite(!favorite)
+      
   }
 
   const deleteFav = (item) => {
     //   console.log('in deleteFav: ', item.posts_id);
       dispatch({ type: 'DELETE_FAV', payload: item.posts_id})
-      setFavorite(!favorite)
+      
   }
 
-//   {!favorite ?
-//     <IconButton onClick={() => favoritePost(item)} edge="end">
-//         <BookmarkBorderIcon />
-//     </IconButton>
-//     :
-//     <IconButton onClick={() => deleteFav(item)} edge="end">
-//         <BookmarkIcon />
-//     </IconButton>}
+  const checkId = (item) => {
+      for( let fav of favorites ) {
+          if( fav.posts_id == item.posts_id ) {
+              return true
+          } else {
+              false
+          }
+      }
+  }
 
 
 
@@ -167,7 +172,7 @@ function BrowseDetail({ modalToggle, favorites, user }) {
               <IconButton onClick={() => modalToggle()}>
                 <CloseIcon variant="outlined" />
               </IconButton>
-              {favorite ?
+              {checkId(item) ?
                 <IconButton onClick={() => deleteFav(item)} edge="end">
                     <BookmarkIcon />
                 </IconButton>
