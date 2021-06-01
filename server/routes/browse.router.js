@@ -41,6 +41,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       })
   });
 
+
+  // POST route for favorited item to be sent to DB
   router.post(`/`, rejectUnauthenticated, (req, res) => {
     console.log(`req.body: `, req.body)
     console.log(`req.user: `, req.user)

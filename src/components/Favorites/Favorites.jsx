@@ -19,6 +19,8 @@ import {
   Box,
 } from "@material-ui/core";
 
+import Header from '../Header/Header';
+
 import CloseIcon from "@material-ui/icons/Close";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import BookmarkIcon from '@material-ui/icons/Bookmark';
@@ -40,7 +42,16 @@ const useStyles = makeStyles((theme) => ({
 
 function Favorites() {
 
+    useEffect(() => {
+        dispatch({ type: 'FETCH_FAVORITES' })
+    })
+
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    const browser = useSelector(store => store.favorites);
+
+    console.log('In favorites: ', browser)
 
     
      
