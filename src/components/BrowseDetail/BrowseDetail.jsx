@@ -109,59 +109,51 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function BrowseDetail({ modalToggle }) {
-    useEffect(() => {
-        dispatch({type: 'FETCH_FAVORITES', payload: user.id})
-    }, [])
-  
+  // populate favorites list on page load
+  useEffect(() => {
+    dispatch({ type: "FETCH_FAVORITES", payload: user.id });
+  }, []);
+
   const dispatch = useDispatch();
 
   const [modalStyle] = React.useState(getModalStyle);
   const classes = useStyles();
 
-// grabbing details from reducer
+  // --- REDUCERS --- //
+
   const detail = useSelector((store) => store.browser.detail);
+  const favorites = useSelector((store) => store.favorites);
+  const user = useSelector((store) => store.user);
 
-  const favorites = useSelector(store => store.favorites)
-
-//   console.log(detail);
-    const user = useSelector((store) => store.user);
-    // console.log(user);
-    // const favorites = useSelector(store => store.favorites);
-    // console.log(favorites);
-
+  // --- LOCAL STATE --- //
   const [slide, setSlide] = useState(false);
   const [open, setOpen] = useState(false);
-//   const [favorite, setFavorite] = useState(false);
-
 
   const slideToggle = () => {
     setSlide(!slide);
   };
 
-
+  
+  // function to dispatch to saga for post to be saved to favorites
   const favoritePost = (item) => {
     //   console.log('in favoritePost: ', item);
-      dispatch({ type: 'ADD_FAVORITE', payload: item })
-      
-  }
-
+    dispatch({ type: "ADD_FAVORITE", payload: item });
+  };
+  // function to dispatch to saga for post to be deleted from favorites
   const deleteFav = (item) => {
     //   console.log('in deleteFav: ', item.posts_id);
-      dispatch({ type: 'DELETE_FAV', payload: item.posts_id})
-      
-  }
-
+    dispatch({ type: "DELETE_FAV", payload: item.posts_id });
+  };
+  // function to check if an item has been favorited or not
   const checkId = (item) => {
-      for( let fav of favorites ) {
-          if( fav.posts_id == item.posts_id ) {
-              return true
-          } else {
-              false
-          }
+    for (let fav of favorites) {
+      if (fav.posts_id == item.posts_id) {
+        return true;
+      } else {
+        false;
       }
-  }
-
-
+    }
+  };
 
   return (
     <div style={modalStyle} className={classes.paper}>
@@ -172,14 +164,15 @@ function BrowseDetail({ modalToggle }) {
               <IconButton onClick={() => modalToggle()}>
                 <CloseIcon variant="outlined" />
               </IconButton>
-              {checkId(item) ?
+              {checkId(item) ? (
                 <IconButton onClick={() => deleteFav(item)} edge="end">
-                    <BookmarkIcon />
+                  <BookmarkIcon />
                 </IconButton>
-                :
+              ) : (
                 <IconButton onClick={() => favoritePost(item)} edge="end">
-                <BookmarkBorderIcon />
-            </IconButton>}
+                  <BookmarkBorderIcon />
+                </IconButton>
+              )}
             </Box>
             <h3 className={classes.title}>{item.username}</h3>
             <p></p>
