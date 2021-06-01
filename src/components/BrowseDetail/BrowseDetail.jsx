@@ -1,44 +1,201 @@
-import React, { useState } from 'react';
-import {Card, CardContent, CardMedia} from '@material-ui/core';
+import React, { useState } from "react";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  Modal,
+  Card,
+  makeStyles,
+  Fade,
+  Backdrop,
+  Button,
+  Slide,
+  Paper,
+  Divider,
+  ListItemAvatar,
+  Avatar,
+  IconButton,
+  Typography,
+} from "@material-ui/core";
 
-import { useHistory, useParams } from 'react-router-dom';
-import { useSelector, useDispatch} from 'react-redux';
-import { useEffect } from 'react';
+import CloseIcon from "@material-ui/icons/Close";
+import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import BookmarkIcon from "@material-ui/icons/Bookmark";
 
+import { useHistory, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 
-function BrowseDetail() {
-  // grabbing dynamic part of Url
-  let { id } = useParams();
-  console.log(id);
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
 
-  // using id to call the same id on page load.
-  useEffect(() => {
-    dispatch({ type: 'FETCH_DETAILS', payload: id });
-  }, []);
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
 
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    position: "absolute",
+    overflow: "hidden",
+    width: 225,
+    height: "75%",
+    backgroundColor: "#81ac8d",
+    border: "2px solid #000",
+    padding: "5%",
+    borderRadius: 16,
+    outline: 0,
+  },
+  image: {
+    display: "block",
+    maxWidth: "75px",
+    maxHeight: "75px",
+    marginLeft: "auto",
+    marginRight: "auto",
+    border: "2px solid #000",
+  },
+  list: {
+    width: "100%",
+    maxWidth: 360,
+  },
+  avatars: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    marginRight: theme.spacing(1),
+  },
+  title: {
+    textAlign: "center",
+  },
+  divider: {
+    marginBottom: "5px",
+  },
+  contact: {
+    backgroundColor: "whitesmoke",
+  },
+  modal: {
+    margin: "0 auto",
+    display: "flex",
+  },
+  button: {
+    margin: "0 auto",
+    display: "flex",
+  },
+  info: {
+    overflow: "auto",
+    maxHeight: 100,
+    height: 100,
+  },
+  modalPic: {
+    overflow: "visible",
+    minHeight: 75,
+    height: 75,
+    marginBottom: "2%",
+  },
+  bookmark: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+}));
+
+function BrowseDetail({ modalToggle }) {
+  
   const dispatch = useDispatch();
 
+  const [modalStyle] = React.useState(getModalStyle);
+  const classes = useStyles();
 
-  // grabbing details from reducer
-  const detail = useSelector( (store) => store.browser.detail )
-//   console.log(detail)
+// grabbing details from reducer
+  const detail = useSelector((store) => store.browser.detail);
+//   console.log(detail);
 
-  
+  const [slide, setSlide] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [favorite, setFavorite] = useState(false);
+
+
+  const slideToggle = () => {
+    setSlide(!slide);
+  };
+
+
+  const favoritePost = (item) => {
+    //   console.log('in favoritePost: ', item);
+      dispatch({ type: 'ADD_FAVORITE', payload: item })
+      setFavorite(!favorite)
+  }
+
+  const deleteFav = (item) => {
+    //   console.log('in deleteFav: ', item.posts_id);
+      dispatch({ type: 'DELETE_FAV', payload: item.posts_id})
+      setFavorite(!favorite)
+  }
+
+
 
   return (
-    <div >
-        {detail.map((item, i) => {
-            return (
-        <Card > 
-                <h3>{item.username}</h3>
-                <p></p>
-                <h3>{item.title}</h3>
-                <img src={item.image_url}/>
-                <p>{item.condition}</p>
-                <p>{item.description}</p>
-                <p>{item.wants}</p>      
-        </Card> )
-        })} 
+    <div style={modalStyle} className={classes.paper}>
+      {detail.map((item, i) => {
+        return (
+          <>
+            <Box className={classes.bookmark}>
+              <IconButton onClick={() => modalToggle()}>
+                <CloseIcon variant="outlined" />
+              </IconButton>
+              {!favorite ?
+                <IconButton onClick={() => favoritePost(item)} edge="end">
+                    <BookmarkBorderIcon />
+                </IconButton>
+                :
+                <IconButton onClick={() => deleteFav(item)} edge="end">
+                    <BookmarkIcon />
+                </IconButton>}
+            </Box>
+            <h3 className={classes.title}>{item.username}</h3>
+            <p></p>
+            <h3 className={classes.title}>{item.title}</h3>
+            <div className={classes.modalPic}>
+              <img className={classes.image} src={item.image_url} />
+            </div>
+            <Divider />
+            <p>
+              Condition: <i>{item.condition}</i>
+            </p>
+            <Divider />
+            <div className={classes.info}>
+              <h4>Info:</h4>
+              <p>{item.description}</p>
+            </div>
+            <Divider />
+            <div className={classes.info}>
+              <h4>Trade For:</h4>
+              <p>{item.wants}</p>
+            </div>
+            <Divider className={classes.divider} />
+            <Button
+              className={classes.button}
+              variant="outlined"
+              onClick={() => slideToggle()}
+            >
+              Interested?
+            </Button>
+            <Slide direction="up" in={slide} onChange={slideToggle}>
+              <Paper className={classes.contact}>
+                <p>Email: {item.email}</p>
+                <p>Phone#: {item.phone_num}</p>
+              </Paper>
+            </Slide>
+          </>
+        );
+      })}
     </div>
   );
 }
