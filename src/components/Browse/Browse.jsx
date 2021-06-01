@@ -114,7 +114,8 @@ const useStyles = makeStyles((theme) => ({
 
 function Browse() {
   useEffect(() => {
-    dispatch({ type: "FETCH_BROWSER" });
+    dispatch({ type: "FETCH_BROWSER" })
+    dispatch({type: 'FETCH_FAVORITES', payload: user.id})
   }, []);
 
   const dispatch = useDispatch();
@@ -134,6 +135,10 @@ function Browse() {
   console.log('Detail item: ', detail)
   // grabs all posts for browser
   const browser = useSelector((store) => store.browser.browser);
+  const user = useSelector((store) => store.user);
+    console.log(user);
+  const favorites = useSelector((store) => store.favorites)
+  console.log('favorites: ', favorites)
 
   // targets specific post and toggles the modal comp to open
   const toDetail = (post) => {
@@ -266,7 +271,7 @@ function Browse() {
               timeout: 500,
             }}
           >
-            <Fade in={open}>{<BrowseDetail modalToggle={modalToggle}/>}</Fade>
+            <Fade in={open}>{<BrowseDetail favorites={favorites} user={user} modalToggle={modalToggle}/>}</Fade>
           </Modal>
         </div>
       </div>

@@ -56,14 +56,14 @@ function Favorites() {
   const [slide, setSlide] = useState(false);
   const [favorite, setFavorite] = useState(false);
 
-  const browser = useSelector((store) => store.favorites);
+  const favorites = useSelector((store) => store.favorites);
   const detail = useSelector((store) => store.browser.detail);
 
-  console.log("In favorites: ", browser);
+  console.log("In favorites: ", favorites);
 
   const toDetail = (post) => {
     // console.log(post.id);
-    dispatch({ type: "FETCH_DETAILS", payload: post.id });
+    dispatch({ type: "FETCH_DETAILS", payload: post.posts_id });
     modalToggle();
   };
 
@@ -89,7 +89,7 @@ function Favorites() {
       <div className="grid">
         <div className="grid-col grid-col_8">
           <List className="list">
-            {browser.map((post, i) => {
+            {favorites.map((post, i) => {
               return (
                 <>
                   <ListItem key={i} onClick={() => toDetail(post)}>

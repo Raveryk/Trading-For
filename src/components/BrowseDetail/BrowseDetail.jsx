@@ -106,7 +106,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function BrowseDetail({ modalToggle }) {
+function BrowseDetail({ modalToggle, favorites, user }) {
+    // useEffect(() => {
+    //     dispatch({type: 'FETCH_FAVORITES', payload: })
+    // }, [])
   
   const dispatch = useDispatch();
 
@@ -115,7 +118,12 @@ function BrowseDetail({ modalToggle }) {
 
 // grabbing details from reducer
   const detail = useSelector((store) => store.browser.detail);
+
 //   console.log(detail);
+    // const user = useSelector((store) => store.user);
+    // console.log(user);
+    // const favorites = useSelector(store => store.favorites);
+    // console.log(favorites);
 
   const [slide, setSlide] = useState(false);
   const [open, setOpen] = useState(false);
@@ -139,6 +147,15 @@ function BrowseDetail({ modalToggle }) {
       setFavorite(!favorite)
   }
 
+//   {!favorite ?
+//     <IconButton onClick={() => favoritePost(item)} edge="end">
+//         <BookmarkBorderIcon />
+//     </IconButton>
+//     :
+//     <IconButton onClick={() => deleteFav(item)} edge="end">
+//         <BookmarkIcon />
+//     </IconButton>}
+
 
 
   return (
@@ -150,14 +167,14 @@ function BrowseDetail({ modalToggle }) {
               <IconButton onClick={() => modalToggle()}>
                 <CloseIcon variant="outlined" />
               </IconButton>
-              {!favorite ?
-                <IconButton onClick={() => favoritePost(item)} edge="end">
-                    <BookmarkBorderIcon />
-                </IconButton>
-                :
+              {favorite ?
                 <IconButton onClick={() => deleteFav(item)} edge="end">
                     <BookmarkIcon />
-                </IconButton>}
+                </IconButton>
+                :
+                <IconButton onClick={() => favoritePost(item)} edge="end">
+                <BookmarkBorderIcon />
+            </IconButton>}
             </Box>
             <h3 className={classes.title}>{item.username}</h3>
             <p></p>
