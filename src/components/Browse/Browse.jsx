@@ -47,13 +47,14 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    // overflow: 'auto',
+    overflow: "auto",
     width: 225,
     height: "75%",
     backgroundColor: "#81ac8d",
     border: "2px solid #000",
     padding: "5%",
     borderRadius: 16,
+    outline: 0,
   },
   image: {
     display: "block",
@@ -61,6 +62,8 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: "75px",
     marginLeft: "auto",
     marginRight: "auto",
+    border: "2px solid #000",
+
   },
   list: {
     width: "100%",
@@ -94,9 +97,10 @@ const useStyles = makeStyles((theme) => ({
     height: 100,
   },
   modalPic: {
-    overflow: "auto",
+    overflow: "visible",
     minHeight: 75,
     height: 75,
+    marginBottom: '2%'
   },
   bookmark: {
       display: 'flex',
