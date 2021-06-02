@@ -51,7 +51,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     const query = `INSERT INTO favorites ("users_id", "posts_id")
                     VALUES($1, $2);`;
     
-    pool.query(query, [req.user.id, req.body.body.posts_id])
+    pool.query(query, [req.user.id, req.body.posts_id])
       .then(result => {
         console.log('Success favoriting post')
         res.sendStatus(201)
