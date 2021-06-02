@@ -1,0 +1,34 @@
+
+
+  .image {
+    display: block;
+    max-width: 75px;
+    max-height: 75px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .list {
+    width: 100%;
+    max-width: 360,
+  }
+  
+  .title {
+    text-align: center;
+  }
+  .divider {
+    margin-bottom: 5px
+  }
+  
+  .bookmark {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      
+  }
+  .modal {
+      position: fixed;
+  }
+  .modal-div {
+      position: fixed;
+  }

@@ -14,43 +14,42 @@ import {
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
-import Header from '../Header/Header';
+import Header from "../Header/Header";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
-    direction: 'column',
-    alignItems: 'center',
+    direction: "column",
+    alignItems: "center",
   },
   card: {
-    width: '75%',
-    marginRight: 'auto',
-    marginLeft: 'auto',
+    width: "75%",
+    marginRight: "auto",
+    marginLeft: "auto",
     borderRadius: 16,
   },
   form: {
-    display: 'flex',
-    margin: '10px',
-    flexDirection: 'column',
-    
+    display: "flex",
+    margin: "10px",
+    flexDirection: "column",
   },
   inputs: {
-    marginTop: '5px',
-    marginBottom: '5px',
+    marginTop: "5px",
+    marginBottom: "5px",
   },
   btn: {
-    marginRight: 'auto',
-    marginLeft: 'auto',
-    marginTop: '5px',
-    marginBottom: '5px',
-    width: '50%'
+    marginRight: "auto",
+    marginLeft: "auto",
+    marginTop: "5px",
+    marginBottom: "5px",
+    width: "50%",
   },
   title: {
-    textAlign: 'center',
-    marginTop: '4%',
-  }
-}))
+    textAlign: "center",
+    marginTop: "4%",
+  },
+}));
 
 function Post() {
   // On page load, fetch categories from DB to populate reducer
@@ -58,7 +57,7 @@ function Post() {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
 
-  const classes = useStyles()
+  const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
   const types = useSelector((store) => store.categories);
@@ -107,87 +106,105 @@ function Post() {
   const submitPost = () => {
     console.log(newPost);
     dispatch({ type: "ADD_POST", payload: newPost });
-    setNewPost({title: "",
-    info: "",
-    type: "",
-    condition: "",
-    url: "",
-    wants: "",})
+    setNewPost({
+      title: "",
+      info: "",
+      type: "",
+      condition: "",
+      url: "",
+      wants: "",
+    });
 
-    history.push('/browse');
-    dispatch({ type: "FETCH_BROWSER" });
+    history.push("/browse");
+    // dispatch({ type: "FETCH_BROWSER" });
   };
 
   return (
     <div>
       <Header />
       <Grid container className={classes.grid}>
-      <Card elevation={4} className={classes.card} >
-        <Typography variant="h5" className={classes.title}>Post A Trade</Typography>
-        <form className={classes.form}>
-          <TextField
-            className={classes.inputs}
-            id="title"
-            label="title"
-            variant="outlined"
-            value={newPost.title}
-            onChange={handleChange}
-          />
-          <TextField
-            className={classes.inputs}
-            id="info"
-            multiline
-            rows={4}
-            label="description"
-            variant="outlined"
-            value={newPost.info}
-            onChange={handleChange}
-          />
-          <FormControl className={classes.inputs}>
-            <InputLabel>category</InputLabel>
-            <Select id="type" value={newPost.type} onChange={handleCategory}>
-              {types.map((type) => (
-                <MenuItem key={type.id} value={type.id}>
-                  {type.type}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl className={classes.inputs}>
-            <InputLabel>condition</InputLabel>
-            <Select
-              id="condition"
-              value={newPost.condition}
-              onChange={handleCondition}
+        <Card elevation={4} className={classes.card}>
+          <Typography variant="h5" className={classes.title}>
+            Post A Trade
+          </Typography>
+          <form className={classes.form}>
+            <TextField
+              required
+              className={classes.inputs}
+              id="title"
+              label="title"
+              variant="outlined"
+              value={newPost.title}
+              onChange={handleChange}
+            />
+            <TextField
+              required
+              className={classes.inputs}
+              id="info"
+              multiline
+              rows={4}
+              label="description"
+              variant="outlined"
+              value={newPost.info}
+              onChange={handleChange}
+            />
+            <FormControl className={classes.inputs}>
+              <InputLabel>category</InputLabel>
+              <Select
+                required
+                id="type"
+                value={newPost.type}
+                onChange={handleCategory}
+              >
+                {types.map((type) => (
+                  <MenuItem key={type.id} value={type.id}>
+                    {type.type}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl className={classes.inputs}>
+              <InputLabel>condition</InputLabel>
+              <Select
+                required
+                id="condition"
+                value={newPost.condition}
+                onChange={handleCondition}
+              >
+                {condition.map((type, i) => (
+                  <MenuItem key={i} value={type}>
+                    {type}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <TextField
+              required
+              className={classes.inputs}
+              id="url"
+              label="image url"
+              variant="outlined"
+              value={newPost.url}
+              onChange={handleChange}
+            />
+            <TextField
+              required
+              className={classes.inputs}
+              id="wants"
+              label="trade for..."
+              variant="outlined"
+              value={newPost.wants}
+              onChange={handleChange}
+            />
+            <Button
+              className={classes.btn}
+              variant="outlined"
+              onClick={() => submitPost()}
             >
-              {condition.map((type, i) => (
-                <MenuItem key={i} value={type}>
-                  {type}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <TextField
-            className={classes.inputs}
-            id="url"
-            label="image url"
-            variant="outlined"
-            value={newPost.url}
-            onChange={handleChange}
-          />
-          <TextField
-            className={classes.inputs}
-            id="wants"
-            label="trade for..."
-            variant="outlined"
-            value={newPost.wants}
-            onChange={handleChange}
-          />
-          <Button className={classes.btn} variant="outlined" onClick={() => submitPost()}>
-            Submit
-          </Button>
-        </form>
-      </Card>
+              Submit
+            </Button>
+          </form>
+        </Card>
       </Grid>
     </div>
   );

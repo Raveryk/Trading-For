@@ -1,9 +1,6 @@
 import axios from 'axios';
-import { put } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
-
-
-import { takeLatest } from 'redux-saga/effects';
 
 function* getBrowser() {
     try {
@@ -25,9 +22,31 @@ function* getDetails(action) {
     }
 }
 
+function* addFavorite(action) {
+    try{
+        console.log('Favorite item: ', action.payload)
+        yield axios.post('/api/browse', action.payload.body)
+        yield put({type: 'FETCH_FAVORITES', payload: action.payload.user_id })
+    } catch (error) {
+        console.log('Error adding favorite: ', error)
+    }
+}
+
+function* deleteFav(action) {
+    try{
+        console.log('deleteFav saga: ', action.payload)
+        yield axios.delete(`/api/browse/${action.payload.posts_id}`)
+        yield put({ type: 'FETCH_FAVORITES', payload: action.payload.user_id })
+    } catch (error) {
+        console.log('Error deleting favorite: ', error)
+    }
+}
+
 function* browserSaga() {
     yield takeLatest('FETCH_BROWSER', getBrowser);
     yield takeLatest('FETCH_DETAILS', getDetails);
+    yield takeLatest('ADD_FAVORITE', addFavorite);
+    yield takeLatest('DELETE_FAV', deleteFav)
 }
 
 export default browserSaga;

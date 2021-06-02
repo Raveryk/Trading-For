@@ -19,14 +19,17 @@ import {
   Box,
 } from "@material-ui/core";
 
-import CloseIcon from "@material-ui/icons/Close";
-import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+// import CloseIcon from "@material-ui/icons/Close";
+// import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+// import BookmarkIcon from '@material-ui/icons/Bookmark';
 
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 import Header from "../Header/Header";
+import BrowseDetail from '../BrowseDetail/BrowseDetail';
+
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -46,13 +49,14 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    // overflow: 'auto',
+    overflow: "auto",
     width: 225,
     height: "75%",
     backgroundColor: "#81ac8d",
     border: "2px solid #000",
     padding: "5%",
     borderRadius: 16,
+    outline: 0,
   },
   image: {
     display: "block",
@@ -60,6 +64,8 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: "75px",
     marginLeft: "auto",
     marginRight: "auto",
+    border: "2px solid #000",
+
   },
   list: {
     width: "100%",
@@ -93,9 +99,10 @@ const useStyles = makeStyles((theme) => ({
     height: 100,
   },
   modalPic: {
-    overflow: "auto",
+    overflow: "visible",
     minHeight: 75,
     height: 75,
+    marginBottom: '2%'
   },
   bookmark: {
       display: 'flex',
@@ -107,24 +114,31 @@ const useStyles = makeStyles((theme) => ({
 
 function Browse() {
   useEffect(() => {
-    dispatch({ type: "FETCH_BROWSER" });
+    dispatch({ type: "FETCH_BROWSER" })
+    dispatch({type: 'FETCH_FAVORITES', payload: user.id})
   }, []);
 
   const dispatch = useDispatch();
 
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
+//   const [modalStyle] = React.useState(getModalStyle);
 
   //state for modal open attribute
   const [open, setOpen] = useState(false);
-  const [slide, setSlide] = useState(false);
+//   const [slide, setSlide] = useState(false);
+//   const [favorite, setFavorite] = useState(false);
 
   // ---REDUCERS--- //
 
   //grabs detailed info from reducer
   const detail = useSelector((store) => store.browser.detail);
+  console.log('Detail item: ', detail)
   // grabs all posts for browser
   const browser = useSelector((store) => store.browser.browser);
+  const user = useSelector((store) => store.user);
+    console.log(user);
+  const favorites = useSelector((store) => store.favorites)
+  console.log('favorites: ', favorites)
 
   // targets specific post and toggles the modal comp to open
   const toDetail = (post) => {
@@ -135,68 +149,86 @@ function Browse() {
 
   // function to toggle modal
   const modalToggle = () => {
+    dispatch({ type: "SET_DETAILS", payload: {} });
     setOpen(!open);
     // reset reducer to be empty
-    dispatch({ type: "SET_DETAILS", payload: [] });
+  
   };
 
-  // handles contact info action
-  const slideToggle = () => {
-    setSlide(!slide);
-  };
+//   // handles contact info action
+//   const slideToggle = () => {
+//     setSlide(!slide);
+//   };
 
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      {detail.map((item, i) => {
-        return (
-          <>
-            <Box className={classes.bookmark}>
-            <IconButton onClick={() => modalToggle()}>
-              <CloseIcon variant="outlined" />
-            </IconButton>
-                <IconButton  edge="end">
-                    <BookmarkBorderIcon />
-                </IconButton>
-            </Box>
-            <h3 className={classes.title}>{item.username}</h3>
-            <p></p>
-            <h3 className={classes.title}>{item.title}</h3>
-            <div className={classes.modalPic}>
-              <img className={classes.image} src={item.image_url} />
-            </div>
-            <Divider />
-            <p>
-              Condition: <i>{item.condition}</i>
-            </p>
-            <Divider />
-            <div className={classes.info}>
-              <h4>Info:</h4>
-              <p>{item.description}</p>
-            </div>
-            <Divider />
-            <div className={classes.info}>
-              <h4>Trade For:</h4>
-              <p>{item.wants}</p>
-            </div>
-            <Divider className={classes.divider} />
-            <Button
-              className={classes.button}
-              variant="outlined"
-              onClick={() => slideToggle()}
-            >
-              Interested?
-            </Button>
-            <Slide direction="up" in={slide} onChange={slideToggle}>
-              <Paper className={classes.contact}>
-                <p>Email: {item.email}</p>
-                <p>Phone#: {item.phone_num}</p>
-              </Paper>
-            </Slide>
-          </>
-        );
-      })}
-    </div>
-  );
+//   const favoritePost = (item) => {
+//       console.log('in favoritePost: ', item);
+//       dispatch({ type: 'ADD_FAVORITE', payload: item })
+//       setFavorite(!favorite)
+//   }
+
+//   const deleteFav = (item) => {
+//       console.log('in deleteFav: ', item.posts_id);
+//       dispatch({ type: 'DELETE_FAV', payload: item.posts_id})
+//       setFavorite(!favorite)
+//   }
+
+//   const body = (
+//     <div style={modalStyle} className={classes.paper}>
+//       {detail.map((item, i) => {
+//         return (
+//           <>
+//             <Box className={classes.bookmark}>
+//             <IconButton onClick={() => modalToggle()}>
+//               <CloseIcon variant="outlined" />
+//             </IconButton>
+//             {!favorite ?
+//                 <IconButton onClick={() => favoritePost(item)} edge="end">
+//                     <BookmarkBorderIcon />
+//                 </IconButton>
+//                 :
+//                 <IconButton onClick={() => deleteFav(item)} edge="end">
+//                     <BookmarkIcon />
+//                 </IconButton>}
+//             </Box>
+//             <h3 className={classes.title}>{item.username}</h3>
+//             <p></p>
+//             <h3 className={classes.title}>{item.title}</h3>
+//             <div className={classes.modalPic}>
+//               <img className={classes.image} src={item.image_url} />
+//             </div>
+//             <Divider />
+//             <p>
+//               Condition: <i>{item.condition}</i>
+//             </p>
+//             <Divider />
+//             <div className={classes.info}>
+//               <h4>Info:</h4>
+//               <p>{item.description}</p>
+//             </div>
+//             <Divider />
+//             <div className={classes.info}>
+//               <h4>Trade For:</h4>
+//               <p>{item.wants}</p>
+//             </div>
+//             <Divider className={classes.divider} />
+//             <Button
+//               className={classes.button}
+//               variant="outlined"
+//               onClick={() => slideToggle()}
+//             >
+//               Interested?
+//             </Button>
+//             <Slide direction="up" in={slide} onChange={slideToggle}>
+//               <Paper className={classes.contact}>
+//                 <p>Email: {item.email}</p>
+//                 <p>Phone#: {item.phone_num}</p>
+//               </Paper>
+//             </Slide>
+//           </>
+//         );
+//       })}
+//     </div>
+//   );
 
   return (
     <div>
@@ -238,9 +270,9 @@ function Browse() {
             BackdropComponent={Backdrop}
             BackdropProps={{
               timeout: 500,
-            }}
+           }}
           >
-            <Fade in={open}>{body}</Fade>
+            <Fade in={open}>{<BrowseDetail favorites={favorites} user={user} modalToggle={() => {setOpen(!open)}}/>}</Fade>
           </Modal>
         </div>
       </div>

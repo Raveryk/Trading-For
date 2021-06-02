@@ -24,6 +24,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import Browse from '../Browse/Browse';
 import BrowseDetail from '../BrowseDetail/BrowseDetail'
 import EditPosts from '../EditPosts/EditPosts';
+import Favorites from '../Favorites/Favorites';
 
 // import './App.css';
 
@@ -124,6 +125,13 @@ function App() {
             <EditPosts />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            exact
+            path="/favorites/:id"
+          >
+            <Favorites />
+          </ProtectedRoute>
+
           {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
@@ -159,6 +167,7 @@ function App() {
           >
             <Home />
           </ProtectedRoute>
+          
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

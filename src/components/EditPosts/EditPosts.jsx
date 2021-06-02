@@ -108,6 +108,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "visible",
     minHeight: 75,
     height: 75,
+    marginBottom: '2%'
   },
   edit: {
     display: "flex",

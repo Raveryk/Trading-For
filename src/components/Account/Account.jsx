@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     textAlign: "center",
-    marginTop: '4%',
+    marginTop: "4%",
   },
   stats: {
     textAlign: "center",
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-import Header from '../Header/Header';
+import Header from "../Header/Header";
 
 function Account() {
   // fetching posts by specific user to calculate stats
@@ -58,31 +58,43 @@ function Account() {
     return tradeCount;
   };
 
-  // 
+  //
   const editPosts = () => {
     history.push("/edit/posts");
+  };
+
+  const toFavorites = () => {
+    history.push(`/favorites/${user.id}`);
   };
 
   return (
     <div className={classes.body}>
       <Header />
       <Card elevation={8} className={classes.card}>
-          <Typography className={classes.title} variant="h5">{user.username}'s Account</Typography>
-          <h4 className={classes.stats}>
-            <em>Posts</em>: {browser.length} <em>Trades</em>: {tradeNums()}
-          </h4>
-          <div className={classes.btns}>
-            <Button
-              className={classes.btn}
-              variant="outlined"
-              onClick={editPosts}
-            >
-              Edit Posts
-            </Button>
-            <Button className={classes.btn} variant="outlined">
-              Edit Account
-            </Button>
-          </div>
+        <Typography className={classes.title} variant="h5">
+          {user.username}'s Account
+        </Typography>
+        <h4 className={classes.stats}>
+          <em>Posts</em>: {browser.length} <em>Trades</em>: {tradeNums()}
+        </h4>
+        <div className={classes.btns}>
+          <Button 
+            className={classes.btn} 
+            variant="outlined"
+            onClick={toFavorites}>
+            Favorites
+          </Button>
+          <Button
+            className={classes.btn}
+            variant="outlined"
+            onClick={editPosts}
+          >
+            Edit Posts
+          </Button>
+          <Button className={classes.btn} variant="outlined">
+            Edit Account
+          </Button>
+        </div>
       </Card>
     </div>
   );

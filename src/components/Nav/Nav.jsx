@@ -39,9 +39,9 @@ function Nav() {
 
   
 
-  // useEffect(() => {
-  //   setDrawer(false)
-  // }, [])
+  useEffect(() => {
+    setDrawer(false)
+  }, [])
 
   
   // const theme = useTheme();
