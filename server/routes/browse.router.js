@@ -33,7 +33,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool.query(query, [postId])
       .then(result => {
         console.log(result.rows);
-        res.send(result.rows)
+        res.send(result.rows[0])
       })
       .catch( error => {
         console.log('Something went wrong GETting details:', error)

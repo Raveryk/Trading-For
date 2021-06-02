@@ -5,7 +5,8 @@ import posts from './posts.reducer';
 import categories from './categories.reducer';
 import browser from './browser.reducer';
 import account from './account.reducer';
-import favorites from './favorites.reducer'
+import favorites from './favorites.reducer';
+import drawer from './drawer.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   browser,
   account,
   favorites,
+  drawer,
 });
 // this.props.store.errors.loginMessage
 

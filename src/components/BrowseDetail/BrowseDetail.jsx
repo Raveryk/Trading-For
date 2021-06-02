@@ -46,7 +46,7 @@ function getModalStyle() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    position: "absolute",
+    position: "fixed",
     overflow: "hidden",
     width: 225,
     height: "75%",
@@ -112,7 +112,8 @@ function BrowseDetail({ modalToggle }) {
   // populate favorites list on page load
   useEffect(() => {
     dispatch({ type: "FETCH_FAVORITES", payload: user.id });
-  }, []);
+    
+  }, [favorites]);
 
   const dispatch = useDispatch();
 
@@ -121,13 +122,14 @@ function BrowseDetail({ modalToggle }) {
 
   // --- REDUCERS --- //
 
-  const detail = useSelector((store) => store.browser.detail);
+  const item = useSelector((store) => store.browser.detail);
   const favorites = useSelector((store) => store.favorites);
   const user = useSelector((store) => store.user);
 
   // --- LOCAL STATE --- //
   const [slide, setSlide] = useState(false);
   const [open, setOpen] = useState(false);
+  const [favorite, setFavorite] = useState(false)
 
   const slideToggle = () => {
     setSlide(!slide);
@@ -138,11 +140,15 @@ function BrowseDetail({ modalToggle }) {
   const favoritePost = (item) => {
     //   console.log('in favoritePost: ', item);
     dispatch({ type: "ADD_FAVORITE", payload: item });
+    modalToggle();
   };
   // function to dispatch to saga for post to be deleted from favorites
   const deleteFav = (item) => {
     //   console.log('in deleteFav: ', item.posts_id);
     dispatch({ type: "DELETE_FAV", payload: item.posts_id });
+    dispatch({ type: "FETCH_FAVORITES", payload: user.id });
+    modalToggle();
+
   };
   // function to check if an item has been favorited or not
   const checkId = (item) => {
@@ -155,11 +161,9 @@ function BrowseDetail({ modalToggle }) {
     }
   };
 
+
   return (
     <div style={modalStyle} className={classes.paper}>
-      {detail.map((item, i) => {
-        return (
-          <>
             <Box className={classes.bookmark}>
               <IconButton onClick={() => modalToggle()}>
                 <CloseIcon variant="outlined" />
@@ -208,10 +212,7 @@ function BrowseDetail({ modalToggle }) {
                 <p>Phone#: {item.phone_num}</p>
               </Paper>
             </Slide>
-          </>
-        );
-      })}
-    </div>
+            </div>
   );
 }
 

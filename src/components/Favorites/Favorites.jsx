@@ -58,6 +58,7 @@ function Favorites() {
 
   const favorites = useSelector((store) => store.favorites);
   const detail = useSelector((store) => store.browser.detail);
+  const user = useSelector((store) => store.user);
 
   console.log("In favorites: ", favorites);
 
@@ -111,8 +112,9 @@ function Favorites() {
             })}
           </List>
         </div>
-        <div>
+        <div className="modal-div">
           <Modal
+            className="modal"
             open={open}
             onClose={modalToggle}
             closeAfterTransition
@@ -122,7 +124,7 @@ function Favorites() {
             }}
           >
             <Fade in={open}>
-              {<BrowseDetail modalToggle={modalToggle} id={detail.id} />}
+              {<BrowseDetail user={user} modalToggle={() => {setOpen(!open)}}/>}
             </Fade>
           </Modal>
         </div>

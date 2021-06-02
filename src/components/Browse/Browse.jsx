@@ -149,9 +149,10 @@ function Browse() {
 
   // function to toggle modal
   const modalToggle = () => {
+    dispatch({ type: "SET_DETAILS", payload: {} });
     setOpen(!open);
     // reset reducer to be empty
-    dispatch({ type: "SET_DETAILS", payload: [] });
+  
   };
 
 //   // handles contact info action
@@ -269,9 +270,9 @@ function Browse() {
             BackdropComponent={Backdrop}
             BackdropProps={{
               timeout: 500,
-            }}
+           }}
           >
-            <Fade in={open}>{<BrowseDetail favorites={favorites} user={user} modalToggle={modalToggle}/>}</Fade>
+            <Fade in={open}>{<BrowseDetail favorites={favorites} user={user} modalToggle={() => {setOpen(!open)}}/>}</Fade>
           </Modal>
         </div>
       </div>

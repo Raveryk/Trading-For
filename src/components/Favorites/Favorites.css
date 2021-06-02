@@ -26,3 +26,9 @@
       justify-content: space-between;
       
   }
+  .modal {
+      position: fixed;
+  }
+  .modal-div {
+      position: fixed;
+  }
