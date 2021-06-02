@@ -123,8 +123,10 @@ function BrowseDetail({ modalToggle }) {
   // --- REDUCERS --- //
 
   const item = useSelector((store) => store.browser.detail);
+//   console.log(item);
   const favorites = useSelector((store) => store.favorites);
   const user = useSelector((store) => store.user);
+  console.log('User info:', user);
 
   // --- LOCAL STATE --- //
   const [slide, setSlide] = useState(false);
@@ -138,16 +140,16 @@ function BrowseDetail({ modalToggle }) {
   
   // function to dispatch to saga for post to be saved to favorites
   const favoritePost = (item) => {
-    //   console.log('in favoritePost: ', item);
-    dispatch({ type: "ADD_FAVORITE", payload: item });
-    modalToggle();
+      console.log('in favoritePost: ', item);
+    dispatch({ type: "ADD_FAVORITE", payload: { body: item, user_id: user.id } });
+    // modalToggle();
   };
   // function to dispatch to saga for post to be deleted from favorites
   const deleteFav = (item) => {
-    //   console.log('in deleteFav: ', item.posts_id);
-    dispatch({ type: "DELETE_FAV", payload: item.posts_id });
-    dispatch({ type: "FETCH_FAVORITES", payload: user.id });
-    modalToggle();
+      console.log('in deleteFav: ', item);
+    dispatch({ type: "DELETE_FAV", payload: item});
+    // dispatch({ type: "FETCH_FAVORITES", payload: user.id });
+    // modalToggle();
 
   };
   // function to check if an item has been favorited or not

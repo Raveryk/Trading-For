@@ -26,7 +26,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       console.log('req.params.id:', req.params.id);
       postId = req.params.id
     // GET route code here
-    const query = `SELECT posts.id as posts_id, title, description, condition, image_url, wants, "user".username, "user".email, "user".phone_num FROM posts 
+    const query = `SELECT posts.id as posts_id, title, description, condition, image_url, wants, "user".username, "user".email, "user".phone_num, "user".id as user_id FROM posts 
                     JOIN "user" ON "user".id=posts.users_id
                     WHERE posts.id=$1; `;
 
@@ -51,7 +51,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     const query = `INSERT INTO favorites ("users_id", "posts_id")
                     VALUES($1, $2);`;
     
-    pool.query(query, [req.user.id, req.body.posts_id])
+    pool.query(query, [req.user.id, req.body.body.posts_id])
       .then(result => {
         console.log('Success favoriting post')
         res.sendStatus(201)
@@ -62,8 +62,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
   })
 
+  // DELETE route for favorited item to be removed from table
   router.delete('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('req.params: ', req.params.id)
+    console.log('req.body: ', req.body)
+    console.log('req.params: ', req.params)
     console.log(`req.user: `, req.user)
 
     const query =  `DELETE FROM favorites WHERE users_id = $1 AND posts_id = $2;`;

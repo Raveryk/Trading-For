@@ -116,7 +116,7 @@ function Post() {
     });
 
     history.push("/browse");
-    dispatch({ type: "FETCH_BROWSER" });
+    // dispatch({ type: "FETCH_BROWSER" });
   };
 
   return (

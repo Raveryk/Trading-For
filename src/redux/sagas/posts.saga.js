@@ -19,7 +19,8 @@ function* addPost(action) {
     try {
         console.log('New post:', action.payload)
         yield axios.post('/api/posts', action.payload);
-        yield put({type: 'FETCH_POSTS'})
+        yield put({type: 'FETCH_POSTS' })
+        yield put({type: 'FETCH_BROWSER' })
     } catch (error) {
         console.log('Error sending newPost from client:', error)
     }
