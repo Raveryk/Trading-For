@@ -6,14 +6,14 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 
 import Post from '../Post/Post';
 import UserPage from '../UserPage/UserPage';
@@ -60,6 +60,8 @@ function App() {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
 
+  const user = useSelector(store => store.user)
+  console.log('user in APP: ', user)
 
 
 
@@ -68,10 +70,10 @@ function App() {
    
     <Router> 
       <ThemeProvider theme={theme}>
+    
       <div>
-    </div>
-      <div>
-        <Nav/>
+        {user.id && (<Nav/>)}
+        
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/login" />
@@ -175,7 +177,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-      </div>
+       </div>
       </ThemeProvider>
     </Router>
   );

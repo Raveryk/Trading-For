@@ -3,6 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* getFavorites(action) {
     try {
+        console.log('GET favorites for id: ', action.payload)
         const response = yield axios.get(`/api/favorites/${action.payload}`);
         console.log('Got from server for favorites:', response.data)
         yield put({ type: 'SET_FAVORITES', payload: response.data })

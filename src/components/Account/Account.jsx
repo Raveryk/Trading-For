@@ -58,11 +58,12 @@ function Account() {
     return tradeCount;
   };
 
-  //
+  //sends to edit posts view
   const editPosts = () => {
     history.push("/edit/posts");
   };
 
+  //sends to favorites view
   const toFavorites = () => {
     history.push(`/favorites/${user.id}`);
   };
@@ -78,10 +79,11 @@ function Account() {
           <em>Posts</em>: {browser.length} <em>Trades</em>: {tradeNums()}
         </h4>
         <div className={classes.btns}>
-          <Button 
-            className={classes.btn} 
+          <Button
+            className={classes.btn}
             variant="outlined"
-            onClick={toFavorites}>
+            onClick={toFavorites}
+          >
             Favorites
           </Button>
           <Button

@@ -46,7 +46,7 @@ function Favorites() {
 
   useEffect(() => {
     dispatch({ type: "FETCH_FAVORITES", payload: id });
-  }, []);
+  }, [favorites]);
 
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -80,12 +80,25 @@ function Favorites() {
     setSlide(!slide);
   };
 
+  const checkFavs = () => {
+      if(favorites.length === 0) {
+          return true;
+      }
+      return false;
+  }
+
   return (
     <div>
       <Header />
       <Typography className="title" variant="h5">
         Favorites
       </Typography>
+      {checkFavs() ? (
+          <>
+          ...Loading
+          </>
+      ): (
+          <div>
       <Divider />
       <div className="grid">
         <div className="grid-col grid-col_8">
@@ -129,6 +142,8 @@ function Favorites() {
           </Modal>
         </div>
       </div>
+      </div>
+      )}
     </div>
   );
 }

@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Home() {
+function Home({drawer, setDrawer}) {
 
   const classes = useStyles();
 

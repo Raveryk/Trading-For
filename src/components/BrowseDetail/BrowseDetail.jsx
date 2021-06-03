@@ -1,33 +1,21 @@
 import React, { useState } from "react";
 import {
   Box,
-  List,
-  ListItem,
-  ListItemText,
-  Modal,
-  Card,
   makeStyles,
-  Fade,
-  Backdrop,
-  Button,
-  Slide,
   Paper,
   Divider,
-  ListItemAvatar,
-  Avatar,
   IconButton,
-  Typography,
+  Button,
+  Slide,
+
 } from "@material-ui/core";
 
 import CloseIcon from "@material-ui/icons/Close";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 
-import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { CheckOutlined } from "@material-ui/icons";
-import userReducer from "../../redux/reducers/user.reducer";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -112,47 +100,51 @@ function BrowseDetail({ modalToggle }) {
   // populate favorites list on page load
   useEffect(() => {
     dispatch({ type: "FETCH_FAVORITES", payload: user.id });
-    
+    //watching for changes in favorites reducer
   }, [favorites]);
 
   const dispatch = useDispatch();
-
   const [modalStyle] = React.useState(getModalStyle);
   const classes = useStyles();
 
   // --- REDUCERS --- //
 
   const item = useSelector((store) => store.browser.detail);
-//   console.log(item);
   const favorites = useSelector((store) => store.favorites);
   const user = useSelector((store) => store.user);
-  console.log('User info:', user);
 
   // --- LOCAL STATE --- //
   const [slide, setSlide] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [favorite, setFavorite] = useState(false)
 
+  // toggles slide window w/ contact info
   const slideToggle = () => {
     setSlide(!slide);
   };
 
-  
-  // function to dispatch to saga for post to be saved to favorites
+
+  // function to dispatch to saga for 
+  //post to be saved to favorites
   const favoritePost = (item) => {
-      console.log('in favoritePost: ', item);
-    dispatch({ type: "ADD_FAVORITE", payload: { body: item, user_id: user.id } });
-    // modalToggle();
+    // console.log("in favoritePost: ", item);
+    dispatch({
+      type: "ADD_FAVORITE",
+      payload: { body: item, user_id: user.id },
+    });
   };
-  // function to dispatch to saga for post to be deleted from favorites
+
+
+  // function to dispatch to saga for 
+  //post to be deleted from favorites
   const deleteFav = (item) => {
-      console.log('in deleteFav: ', item);
-    dispatch({ type: "DELETE_FAV", payload: item});
+    // console.log("in deleteFav: ", item);
+    dispatch({ type: "DELETE_FAV", payload: item });
     // dispatch({ type: "FETCH_FAVORITES", payload: user.id });
     // modalToggle();
-
   };
-  // function to check if an item has been favorited or not
+
+
+  // function to check if an 
+  // item has been favorited or not
   const checkId = (item) => {
     for (let fav of favorites) {
       if (fav.posts_id == item.posts_id) {
@@ -160,61 +152,60 @@ function BrowseDetail({ modalToggle }) {
       } else {
         false;
       }
-    }
-  };
-
+    } // end of loop
+  }; // end checkId
 
   return (
     <div style={modalStyle} className={classes.paper}>
-            <Box className={classes.bookmark}>
-              <IconButton onClick={() => modalToggle()}>
-                <CloseIcon variant="outlined" />
-              </IconButton>
-              {checkId(item) ? (
-                <IconButton onClick={() => deleteFav(item)} edge="end">
-                  <BookmarkIcon />
-                </IconButton>
-              ) : (
-                <IconButton onClick={() => favoritePost(item)} edge="end">
-                  <BookmarkBorderIcon />
-                </IconButton>
-              )}
-            </Box>
-            <h3 className={classes.title}>{item.username}</h3>
-            <p></p>
-            <h3 className={classes.title}>{item.title}</h3>
-            <div className={classes.modalPic}>
-              <img className={classes.image} src={item.image_url} />
-            </div>
-            <Divider />
-            <p>
-              Condition: <i>{item.condition}</i>
-            </p>
-            <Divider />
-            <div className={classes.info}>
-              <h4>Info:</h4>
-              <p>{item.description}</p>
-            </div>
-            <Divider />
-            <div className={classes.info}>
-              <h4>Trade For:</h4>
-              <p>{item.wants}</p>
-            </div>
-            <Divider className={classes.divider} />
-            <Button
-              className={classes.button}
-              variant="outlined"
-              onClick={() => slideToggle()}
-            >
-              Interested?
-            </Button>
-            <Slide direction="up" in={slide} onChange={slideToggle}>
-              <Paper className={classes.contact}>
-                <p>Email: {item.email}</p>
-                <p>Phone#: {item.phone_num}</p>
-              </Paper>
-            </Slide>
-            </div>
+      <Box className={classes.bookmark}>
+        <IconButton onClick={() => modalToggle()}>
+          <CloseIcon variant="outlined" />
+        </IconButton>
+        {checkId(item) ? (
+          <IconButton onClick={() => deleteFav(item)} edge="end">
+            <BookmarkIcon />
+          </IconButton>
+        ) : (
+          <IconButton onClick={() => favoritePost(item)} edge="end">
+            <BookmarkBorderIcon />
+          </IconButton>
+        )}
+      </Box>
+      <h3 className={classes.title}>{item.username}</h3>
+      <p></p>
+      <h3 className={classes.title}>{item.title}</h3>
+      <div className={classes.modalPic}>
+        <img className={classes.image} src={item.image_url} />
+      </div>
+      <Divider />
+      <p>
+        Condition: <i>{item.condition}</i>
+      </p>
+      <Divider />
+      <div className={classes.info}>
+        <h4>Info:</h4>
+        <p>{item.description}</p>
+      </div>
+      <Divider />
+      <div className={classes.info}>
+        <h4>Trade For:</h4>
+        <p>{item.wants}</p>
+      </div>
+      <Divider className={classes.divider} />
+      <Button
+        className={classes.button}
+        variant="outlined"
+        onClick={() => slideToggle()}
+      >
+        Interested?
+      </Button>
+      <Slide direction="up" in={slide} onChange={slideToggle}>
+        <Paper className={classes.contact}>
+          <p>Email: {item.email}</p>
+          <p>Phone#: {item.phone_num}</p>
+        </Paper>
+      </Slide>
+    </div>
   );
 }
 

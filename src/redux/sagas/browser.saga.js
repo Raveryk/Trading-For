@@ -36,7 +36,7 @@ function* deleteFav(action) {
     try{
         console.log('deleteFav saga: ', action.payload)
         yield axios.delete(`/api/browse/${action.payload.posts_id}`)
-        yield put({ type: 'FETCH_FAVORITES', payload: action.payload.user_id })
+        yield put({type: 'FETCH_FAVORITES', payload: action.payload.user_id  })
     } catch (error) {
         console.log('Error deleting favorite: ', error)
     }
