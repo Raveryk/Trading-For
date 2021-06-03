@@ -137,8 +137,8 @@ function BrowseDetail({ modalToggle }) {
   //post to be deleted from favorites
   const deleteFav = (item) => {
     // console.log("in deleteFav: ", item);
-    dispatch({ type: "DELETE_FAV", payload: item });
-    dispatch({ type: "FETCH_FAVORITES", payload: user.id });
+    dispatch({ type: "DELETE_FAV", payload: { item: item, user_id: user.id } });
+    // dispatch({ type: "FETCH_FAVORITES", payload: user.id });
     // modalToggle();
   };
 

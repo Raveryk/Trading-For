@@ -46,7 +46,7 @@ function Favorites() {
 
   useEffect(() => {
     dispatch({ type: "FETCH_FAVORITES", payload: id });
-  }, [favorites]);
+  }, []);
 
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -95,7 +95,7 @@ function Favorites() {
       </Typography>
       {checkFavs() ? (
           <>
-          ...Loading
+          ...You have no favorites
           </>
       ): (
           <div>

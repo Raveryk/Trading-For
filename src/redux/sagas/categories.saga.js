@@ -8,7 +8,7 @@ import { takeLatest } from 'redux-saga/effects';
 function* getCategories() {
     try {
         const response = yield axios.get('/api/categories');
-        console.log('Got from server:', response.data)
+        // console.log('Got from server:', response.data)
         yield put({ type: 'SET_CATEGORIES', payload: response.data })
     } catch (error) {
         console.log('GET request for categories failed in saga:', error)
