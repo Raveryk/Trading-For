@@ -138,7 +138,7 @@ function BrowseDetail({ modalToggle }) {
   const deleteFav = (item) => {
     // console.log("in deleteFav: ", item);
     dispatch({ type: "DELETE_FAV", payload: item });
-    // dispatch({ type: "FETCH_FAVORITES", payload: user.id });
+    dispatch({ type: "FETCH_FAVORITES", payload: user.id });
     // modalToggle();
   };
 

@@ -24,7 +24,7 @@ function* getDetails(action) {
 
 function* addFavorite(action) {
     try{
-        console.log('Favorite item: ', action.payload)
+        // console.log('Favorite item: ', action.payload)
         yield axios.post('/api/browse', action.payload.body)
         yield put({type: 'FETCH_FAVORITES', payload: action.payload.user_id })
     } catch (error) {
@@ -34,9 +34,9 @@ function* addFavorite(action) {
 
 function* deleteFav(action) {
     try{
-        console.log('deleteFav saga: ', action.payload)
+        // console.log('deleteFav saga: ', action.payload)
         yield axios.delete(`/api/browse/${action.payload.posts_id}`)
-        yield put({type: 'FETCH_FAVORITES', payload: action.payload.user_id  })
+        // yield put({type: 'FETCH_FAVORITES', payload: action.payload.user_id  })
     } catch (error) {
         console.log('Error deleting favorite: ', error)
     }
