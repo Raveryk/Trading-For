@@ -4,29 +4,19 @@ import {
   ListItem,
   ListItemText,
   Modal,
-  Card,
   makeStyles,
   Fade,
   Backdrop,
-  Button,
-  Slide,
-  Paper,
   Divider,
   ListItemAvatar,
   Avatar,
-  IconButton,
   Typography,
-  Box,
 } from "@material-ui/core";
 
 import Header from "../Header/Header";
 import BrowseDetail from "../BrowseDetail/BrowseDetail";
 
-import CloseIcon from "@material-ui/icons/Close";
-import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
-
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
@@ -41,6 +31,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Favorites() {
+
+
   let { id } = useParams();
   console.log(id);
 
@@ -54,14 +46,14 @@ function Favorites() {
   //state for modal open attribute
   const [open, setOpen] = useState(false);
   const [slide, setSlide] = useState(false);
-  const [favorite, setFavorite] = useState(false);
 
+  // ---REDUCERS--- //
   const favorites = useSelector((store) => store.favorites);
-  const detail = useSelector((store) => store.browser.detail);
   const user = useSelector((store) => store.user);
 
-  console.log("In favorites: ", favorites);
+//   console.log("In favorites: ", favorites);
 
+  //Opens detail modal
   const toDetail = (post) => {
     // console.log(post.id);
     dispatch({ type: "FETCH_DETAILS", payload: post.posts_id });
@@ -80,6 +72,13 @@ function Favorites() {
     setSlide(!slide);
   };
 
+  const checkFavs = () => {
+    if (favorites.length === 0) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div>
       <Header />
@@ -87,48 +86,61 @@ function Favorites() {
         Favorites
       </Typography>
       <Divider />
-      <div className="grid">
-        <div className="grid-col grid-col_8">
-          <List className="list">
-            {favorites.map((post, i) => {
-              return (
-                <>
-                  <ListItem key={i} onClick={() => toDetail(post)}>
-                    <ListItemAvatar>
-                      <Avatar
-                        variant="square"
-                        className={classes.avatars}
-                        src={post.image_url}
-                      />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={post.title}
-                      secondary={post.condition}
+      {checkFavs() ? (
+        <Typography className="list" variant="body1">...You have no favorites</Typography>
+      ) : (
+        <div>
+          <div className="grid">
+            <div className="grid-col grid-col_8">
+              <List className="list">
+                {favorites.map((post, i) => {
+                  return (
+                    <>
+                      <ListItem key={i} onClick={() => toDetail(post)}>
+                        <ListItemAvatar>
+                          <Avatar
+                            variant="square"
+                            className={classes.avatars}
+                            src={post.image_url}
+                          />
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={post.title}
+                          secondary={post.condition}
+                        />
+                      </ListItem>
+                      <Divider />
+                    </>
+                  );
+                })}
+              </List>
+            </div>
+            <div className="modal-div">
+              <Modal
+                className="modal"
+                open={open}
+                onClose={modalToggle}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                  timeout: 500,
+                }}
+              >
+                <Fade in={open}>
+                  {
+                    <BrowseDetail
+                      user={user}
+                      modalToggle={() => {
+                        setOpen(!open);
+                      }}
                     />
-                  </ListItem>
-                  <Divider />
-                </>
-              );
-            })}
-          </List>
+                  }
+                </Fade>
+              </Modal>
+            </div>
+          </div>
         </div>
-        <div className="modal-div">
-          <Modal
-            className="modal"
-            open={open}
-            onClose={modalToggle}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-          >
-            <Fade in={open}>
-              {<BrowseDetail user={user} modalToggle={() => {setOpen(!open)}}/>}
-            </Fade>
-          </Modal>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

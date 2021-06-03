@@ -5,6 +5,7 @@ import Home from '../Home/Home';
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  // const 
   return (
     <div className="container">
       <Home />

@@ -6,14 +6,14 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core'
 
 import Post from '../Post/Post';
 import UserPage from '../UserPage/UserPage';
@@ -34,7 +34,9 @@ const theme = createMuiTheme({
         main: '#a5d6a7',
       },
       secondary: {
-        main: '#e65100',
+        main: '#e8f5e9',
+        sand: '#ffefc2',
+        orange: '#ffcd38',
       },
       typography: {
         fontFamily: [
@@ -53,13 +55,28 @@ const theme = createMuiTheme({
     },
 })
 
+const useStyles = makeStyles((theme) => ({
+  body: {
+    backgroundColor: '#e8f5e9',
+    // padding: '5%',
+    minHeight: '812px',
+    border: '2px solid',
+    borderColor: '#a5d6a7'
+  }
+
+}))
+
 function App() {
   const dispatch = useDispatch();
+
+  const classes = useStyles();
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
 
+  const user = useSelector(store => store.user)
+  console.log('user in APP: ', user)
 
 
 
@@ -68,10 +85,10 @@ function App() {
    
     <Router> 
       <ThemeProvider theme={theme}>
-      <div>
-    </div>
-      <div>
-        <Nav/>
+    
+      <div className={classes.body}>
+        {user.id && (<Nav/>)}
+        
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/login" />
@@ -175,7 +192,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-      </div>
+       </div>
       </ThemeProvider>
     </Router>
   );

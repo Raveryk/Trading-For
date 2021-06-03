@@ -4,32 +4,21 @@ import {
   ListItem,
   ListItemText,
   Modal,
-  Card,
   makeStyles,
   Fade,
   Backdrop,
-  Button,
-  Slide,
-  Paper,
   Divider,
   ListItemAvatar,
   Avatar,
-  IconButton,
   Typography,
-  Box,
 } from "@material-ui/core";
 
-// import CloseIcon from "@material-ui/icons/Close";
-// import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
-// import BookmarkIcon from '@material-ui/icons/Bookmark';
 
-// import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 import Header from "../Header/Header";
-import BrowseDetail from '../BrowseDetail/BrowseDetail';
-
+import BrowseDetail from "../BrowseDetail/BrowseDetail";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -65,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "auto",
     marginRight: "auto",
     border: "2px solid #000",
-
   },
   list: {
     width: "100%",
@@ -102,133 +90,57 @@ const useStyles = makeStyles((theme) => ({
     overflow: "visible",
     minHeight: 75,
     height: 75,
-    marginBottom: '2%'
+    marginBottom: "2%",
   },
   bookmark: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between'
-      
-  }
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 }));
 
 function Browse() {
   useEffect(() => {
-    dispatch({ type: "FETCH_BROWSER" })
-    dispatch({type: 'FETCH_FAVORITES', payload: user.id})
+    dispatch({ type: "FETCH_BROWSER" });
+    dispatch({ type: "FETCH_FAVORITES", payload: user.id });
   }, []);
 
   const dispatch = useDispatch();
 
   const classes = useStyles();
-//   const [modalStyle] = React.useState(getModalStyle);
+  //   const [modalStyle] = React.useState(getModalStyle);
 
   //state for modal open attribute
   const [open, setOpen] = useState(false);
-//   const [slide, setSlide] = useState(false);
-//   const [favorite, setFavorite] = useState(false);
+  
 
   // ---REDUCERS--- //
 
-  //grabs detailed info from reducer
-  const detail = useSelector((store) => store.browser.detail);
-  console.log('Detail item: ', detail)
   // grabs all posts for browser
   const browser = useSelector((store) => store.browser.browser);
+  // grabs user info
   const user = useSelector((store) => store.user);
-    console.log(user);
-  const favorites = useSelector((store) => store.favorites)
-  console.log('favorites: ', favorites)
+  
 
-  // targets specific post and toggles the modal comp to open
+
+  // targets specific post and 
+  // toggles the modal to open
   const toDetail = (post) => {
-    // console.log(post.id);
+      //populates details reducer
     dispatch({ type: "FETCH_DETAILS", payload: post.id });
     modalToggle();
   };
 
+
   // function to toggle modal
   const modalToggle = () => {
-    dispatch({ type: "SET_DETAILS", payload: {} });
-    setOpen(!open);
     // reset reducer to be empty
-  
+    dispatch({ type: "SET_DETAILS", payload: {} });
+    // toggle modal window
+    setOpen(!open);
   };
 
-//   // handles contact info action
-//   const slideToggle = () => {
-//     setSlide(!slide);
-//   };
-
-//   const favoritePost = (item) => {
-//       console.log('in favoritePost: ', item);
-//       dispatch({ type: 'ADD_FAVORITE', payload: item })
-//       setFavorite(!favorite)
-//   }
-
-//   const deleteFav = (item) => {
-//       console.log('in deleteFav: ', item.posts_id);
-//       dispatch({ type: 'DELETE_FAV', payload: item.posts_id})
-//       setFavorite(!favorite)
-//   }
-
-//   const body = (
-//     <div style={modalStyle} className={classes.paper}>
-//       {detail.map((item, i) => {
-//         return (
-//           <>
-//             <Box className={classes.bookmark}>
-//             <IconButton onClick={() => modalToggle()}>
-//               <CloseIcon variant="outlined" />
-//             </IconButton>
-//             {!favorite ?
-//                 <IconButton onClick={() => favoritePost(item)} edge="end">
-//                     <BookmarkBorderIcon />
-//                 </IconButton>
-//                 :
-//                 <IconButton onClick={() => deleteFav(item)} edge="end">
-//                     <BookmarkIcon />
-//                 </IconButton>}
-//             </Box>
-//             <h3 className={classes.title}>{item.username}</h3>
-//             <p></p>
-//             <h3 className={classes.title}>{item.title}</h3>
-//             <div className={classes.modalPic}>
-//               <img className={classes.image} src={item.image_url} />
-//             </div>
-//             <Divider />
-//             <p>
-//               Condition: <i>{item.condition}</i>
-//             </p>
-//             <Divider />
-//             <div className={classes.info}>
-//               <h4>Info:</h4>
-//               <p>{item.description}</p>
-//             </div>
-//             <Divider />
-//             <div className={classes.info}>
-//               <h4>Trade For:</h4>
-//               <p>{item.wants}</p>
-//             </div>
-//             <Divider className={classes.divider} />
-//             <Button
-//               className={classes.button}
-//               variant="outlined"
-//               onClick={() => slideToggle()}
-//             >
-//               Interested?
-//             </Button>
-//             <Slide direction="up" in={slide} onChange={slideToggle}>
-//               <Paper className={classes.contact}>
-//                 <p>Email: {item.email}</p>
-//                 <p>Phone#: {item.phone_num}</p>
-//               </Paper>
-//             </Slide>
-//           </>
-//         );
-//       })}
-//     </div>
-//   );
+ 
 
   return (
     <div>
@@ -270,9 +182,17 @@ function Browse() {
             BackdropComponent={Backdrop}
             BackdropProps={{
               timeout: 500,
-           }}
+            }}
           >
-            <Fade in={open}>{<BrowseDetail favorites={favorites} user={user} modalToggle={() => {setOpen(!open)}}/>}</Fade>
+            <Fade in={open}>
+              {
+                <BrowseDetail
+                  modalToggle={() => {
+                    setOpen(!open);
+                  }}
+                />
+              }
+            </Fade>
           </Modal>
         </div>
       </div>

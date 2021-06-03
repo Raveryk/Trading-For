@@ -1,5 +1,9 @@
-footer {
-  margin-top: 30px;
-  padding: 20px;
-  text-align: center;
+
+
+.text {
+  position: sticky;
+  display: flex;
+  align-items: flex-end; /** Y-axis align **/
+  justify-content: center; /** X-axis align **/
+  margin-top: 50%
 }
