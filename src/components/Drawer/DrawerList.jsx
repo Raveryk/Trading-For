@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
   welcome: {
     margin: 10,
   }
-  
 }));
 
 

@@ -138,8 +138,7 @@ function BrowseDetail({ modalToggle }) {
   const deleteFav = (item) => {
     // console.log("in deleteFav: ", item);
     dispatch({ type: "DELETE_FAV", payload: { item: item, user_id: user.id } });
-    // dispatch({ type: "FETCH_FAVORITES", payload: user.id });
-    // modalToggle();
+    modalToggle();
   };
 
 
@@ -155,6 +154,9 @@ function BrowseDetail({ modalToggle }) {
     } // end of loop
   }; // end checkId
 
+
+
+  
   return (
     <div style={modalStyle} className={classes.paper}>
       <Box className={classes.bookmark}>
