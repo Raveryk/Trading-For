@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 
-import {Card, Grid, Button, TextField, Typography, makeStyles} from '@material-ui/core';
+import {Card, Grid, Button, TextField, Typography, makeStyles, ThemeProvider} from '@material-ui/core';
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   form: {
     padding: '2%',
   },
@@ -21,12 +21,14 @@ const useStyles = makeStyles({
     marginLeft: '10%',
     direction: 'column',
     marginBottom: '10px',
+    marginTop: '10%',
 
   },
   btn: {
-    margin: '5px'
-  }
-})
+    margin: '5px',
+    backgroundColor: theme.palette.secondary.main,
+  },
+}))
 
 function LoginForm() {
   const [username, setUsername] = useState('');

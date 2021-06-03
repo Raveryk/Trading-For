@@ -1,14 +1,9 @@
-footer {
-  display: flex;
-  position: static; 
-}
+
 
 .text {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  position: sticky;
   display: flex;
   align-items: flex-end; /** Y-axis align **/
   justify-content: center; /** X-axis align **/
+  margin-top: 50%
 }

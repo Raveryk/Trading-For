@@ -13,7 +13,7 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import { createMuiTheme, ThemeProvider } from '@material-ui/core'
+import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core'
 
 import Post from '../Post/Post';
 import UserPage from '../UserPage/UserPage';
@@ -34,8 +34,9 @@ const theme = createMuiTheme({
         main: '#a5d6a7',
       },
       secondary: {
-        main: '#e65100',
-        sand: '#ffe69b',
+        main: '#e8f5e9',
+        sand: '#ffefc2',
+        orange: '#ffcd38',
       },
       typography: {
         fontFamily: [
@@ -54,8 +55,21 @@ const theme = createMuiTheme({
     },
 })
 
+const useStyles = makeStyles((theme) => ({
+  body: {
+    backgroundColor: '#e8f5e9',
+    // padding: '5%',
+    minHeight: '812px',
+    border: '2px solid',
+    borderColor: '#a5d6a7'
+  }
+
+}))
+
 function App() {
   const dispatch = useDispatch();
+
+  const classes = useStyles();
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
@@ -72,7 +86,7 @@ function App() {
     <Router> 
       <ThemeProvider theme={theme}>
     
-      <div>
+      <div className={classes.body}>
         {user.id && (<Nav/>)}
         
         <Switch>
