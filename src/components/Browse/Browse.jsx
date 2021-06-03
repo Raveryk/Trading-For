@@ -13,11 +13,7 @@ import {
   Typography,
 } from "@material-ui/core";
 
-// import CloseIcon from "@material-ui/icons/Close";
-// import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
-// import BookmarkIcon from '@material-ui/icons/Bookmark';
 
-// import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
@@ -144,80 +140,7 @@ function Browse() {
     setOpen(!open);
   };
 
-  //   // handles contact info action
-  //   const slideToggle = () => {
-  //     setSlide(!slide);
-  //   };
-
-  //   const favoritePost = (item) => {
-  //       console.log('in favoritePost: ', item);
-  //       dispatch({ type: 'ADD_FAVORITE', payload: item })
-  //       setFavorite(!favorite)
-  //   }
-
-  //   const deleteFav = (item) => {
-  //       console.log('in deleteFav: ', item.posts_id);
-  //       dispatch({ type: 'DELETE_FAV', payload: item.posts_id})
-  //       setFavorite(!favorite)
-  //   }
-
-  //   const body = (
-  //     <div style={modalStyle} className={classes.paper}>
-  //       {detail.map((item, i) => {
-  //         return (
-  //           <>
-  //             <Box className={classes.bookmark}>
-  //             <IconButton onClick={() => modalToggle()}>
-  //               <CloseIcon variant="outlined" />
-  //             </IconButton>
-  //             {!favorite ?
-  //                 <IconButton onClick={() => favoritePost(item)} edge="end">
-  //                     <BookmarkBorderIcon />
-  //                 </IconButton>
-  //                 :
-  //                 <IconButton onClick={() => deleteFav(item)} edge="end">
-  //                     <BookmarkIcon />
-  //                 </IconButton>}
-  //             </Box>
-  //             <h3 className={classes.title}>{item.username}</h3>
-  //             <p></p>
-  //             <h3 className={classes.title}>{item.title}</h3>
-  //             <div className={classes.modalPic}>
-  //               <img className={classes.image} src={item.image_url} />
-  //             </div>
-  //             <Divider />
-  //             <p>
-  //               Condition: <i>{item.condition}</i>
-  //             </p>
-  //             <Divider />
-  //             <div className={classes.info}>
-  //               <h4>Info:</h4>
-  //               <p>{item.description}</p>
-  //             </div>
-  //             <Divider />
-  //             <div className={classes.info}>
-  //               <h4>Trade For:</h4>
-  //               <p>{item.wants}</p>
-  //             </div>
-  //             <Divider className={classes.divider} />
-  //             <Button
-  //               className={classes.button}
-  //               variant="outlined"
-  //               onClick={() => slideToggle()}
-  //             >
-  //               Interested?
-  //             </Button>
-  //             <Slide direction="up" in={slide} onChange={slideToggle}>
-  //               <Paper className={classes.contact}>
-  //                 <p>Email: {item.email}</p>
-  //                 <p>Phone#: {item.phone_num}</p>
-  //               </Paper>
-  //             </Slide>
-  //           </>
-  //         );
-  //       })}
-  //     </div>
-  //   );
+ 
 
   return (
     <div>
