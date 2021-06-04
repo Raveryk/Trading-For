@@ -68,7 +68,10 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "5px",
   },
   contact: {
-    backgroundColor: "whitesmoke",
+    marginTop: '2%',
+    backgroundColor: theme.palette.secondary.main,
+    border: '1px solid black',
+
   },
   modal: {
     margin: "0 auto",
@@ -94,6 +97,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  contactInfo: {
+    marginLeft: '3%',
+  }
 }));
 
 function BrowseDetail({ modalToggle }) {
@@ -203,8 +209,10 @@ function BrowseDetail({ modalToggle }) {
       </Button>
       <Slide direction="up" in={slide} onChange={slideToggle}>
         <Paper className={classes.contact}>
-          <p>Email: {item.email}</p>
-          <p>Phone#: {item.phone_num}</p>
+          <div className={classes.contactInfo}>
+            <p>Email: {item.email}</p>
+            <p>Phone#: {item.phone_num}</p>
+          </div>
         </Paper>
       </Slide>
     </div>

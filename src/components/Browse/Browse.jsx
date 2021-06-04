@@ -63,6 +63,8 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(7),
     height: theme.spacing(7),
     marginRight: theme.spacing(1),
+    border:  "1px solid",
+    borderColor: theme.palette.primary.main,
   },
   title: {
     textAlign: "center",

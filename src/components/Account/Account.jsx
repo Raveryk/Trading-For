@@ -93,9 +93,9 @@ function Account() {
           >
             Edit Posts
           </Button>
-          <Button className={classes.btn} variant="outlined">
+          {/* <Button className={classes.btn} variant="outlined">
             Edit Account
-          </Button>
+          </Button> */}
         </div>
       </Card>
     </div>
