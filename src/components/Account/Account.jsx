@@ -76,7 +76,7 @@ function Account() {
           {user.username}'s Account
         </Typography>
         <h4 className={classes.stats}>
-          <em>Posts</em>: {browser.length} <em>Trades</em>: {tradeNums()}
+          <em>Posts </em>: {browser.length} <em>Trades </em>: {tradeNums()}
         </h4>
         <div className={classes.btns}>
           <Button
