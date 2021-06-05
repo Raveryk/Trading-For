@@ -1,15 +1,14 @@
-/* html,
+ /* html,
 body,
 #react-root {
   height: 100%;
-}
+} */
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0px;
+  font-family: 'Roboto';
 }
 
-img {
+/* img {
   display: inline-block;
   max-width: 100%;
 } */
@@ -112,10 +111,10 @@ input {
 } */
 
 
-@font-face {
+/* @font-face {
   font-family: 'BungeeShade-Regular';
   src: local('BungeeShade-Regular'),
     url('/src/fonts/BungeeShade-Regular.ttf') format('truetype');
   font-weight: normal;
-}
+} */
 

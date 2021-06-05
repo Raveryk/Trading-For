@@ -29,7 +29,7 @@ import BrowseDetail from '../BrowseDetail/BrowseDetail'
 import EditPosts from '../EditPosts/EditPosts';
 import Favorites from '../Favorites/Favorites';
 
-// import './App.css';
+import './App.css';
 
 const theme = createMuiTheme({
     palette: {
@@ -80,7 +80,7 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
-    WebFont.load({google: {families: ['Bungee Shade', 'Bungee Inline', 'Bungee Hairline']}});
+    WebFont.load({google: {families: ['Bungee Shade', 'Bungee Inline', 'Bungee Hairline', 'Roboto']}});
   }, [dispatch]);
 
   const user = useSelector(store => store.user)

@@ -200,10 +200,15 @@ function EditPosts() {
       title: 'Delete Item',
       text: 'Are you sure?',
       icon: 'warning',
+      iconColor: '#ffcd38',
       showConfirmButton: true,
       showCancelButton: true,
       confirmButtonText: 'Yes',
       cancelButtonText: 'No',
+      confirmButtonColor: '#ffcd38',
+      showClass: {
+        popup: '',                     // disable popup animation
+      },
     }).then((result) => {
       if(result.isConfirmed) {
         Swal.fire(
@@ -224,10 +229,15 @@ function EditPosts() {
     Swal.fire({
       title: 'Mark item as traded?',
       icon: 'warning',
+      iconColor: '#ffcd38',
       showConfirmButton: true,
       showCancelButton: true,
       confirmButtonText: 'Yes',
       cancelButtonText: 'No',
+      confirmButtonColor: '#ffcd38',
+      showClass: {
+        popup: '',                     // disable popup animation
+      },
     }).then((result) => {
       if(result.isConfirmed) {
         Swal.fire(
