@@ -110,3 +110,12 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 } */
+
+
+@font-face {
+  font-family: 'BungeeShade-Regular';
+  src: local('BungeeShade-Regular'),
+    url('/src/fonts/BungeeShade-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+

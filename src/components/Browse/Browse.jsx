@@ -68,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     textAlign: "center",
+    
   },
   divider: {
     marginBottom: "5px",

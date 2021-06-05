@@ -30,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
     border:  "1px solid",
     borderColor: theme.palette.primary.main,
   },
+  title: {
+    textAlign: 'center',
+    // fontFamily: theme.palette.typography.bungee
+  },
 }));
 
 function Favorites() {
@@ -39,7 +43,7 @@ function Favorites() {
   console.log(id);
 
   useEffect(() => {
-    dispatch({ type: "FETCH_FAVORITES", payload: id });
+    dispatch({ type: "FETCH_FAVORITES", payload: id })
   }, []);
 
   const dispatch = useDispatch();
@@ -84,7 +88,7 @@ function Favorites() {
   return (
     <div>
       <Header />
-      <Typography className="title" variant="h5">
+      <Typography className={classes.title} variant="h5">
         Favorites
       </Typography>
       <Divider />
@@ -107,6 +111,7 @@ function Favorites() {
                           />
                         </ListItemAvatar>
                         <ListItemText
+                          
                           primary={post.title}
                           secondary={post.condition}
                         />

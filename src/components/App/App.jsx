@@ -10,10 +10,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
+import WebFont from 'webfontloader';
+
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core'
+
 
 import Post from '../Post/Post';
 import UserPage from '../UserPage/UserPage';
@@ -31,7 +34,8 @@ import Favorites from '../Favorites/Favorites';
 const theme = createMuiTheme({
     palette: {
       primary: {
-        main: '#a5d6a7',
+        main: '#c8e6c9',
+        two: "#c8e6c9",
       },
       secondary: {
         main: '#e8f5e9',
@@ -50,7 +54,10 @@ const theme = createMuiTheme({
           '"Apple Color Emoji"',
           '"Segoe UI Emoji"',
           '"Segoe UI Symbol"',
-        ].join(',')
+        ].join(','),
+        bungee: "Bungee Shade",
+        hairline: "Bungee Hairline",
+        inline: 'Bungee Inline'
       },
     },
 })
@@ -73,6 +80,7 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
+    WebFont.load({google: {families: ['Bungee Shade', 'Bungee Inline', 'Bungee Hairline']}});
   }, [dispatch]);
 
   const user = useSelector(store => store.user)
