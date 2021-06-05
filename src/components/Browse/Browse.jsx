@@ -178,7 +178,7 @@ function Browse() {
             })}
           </List>
         </div>
-        <Box zIndex="modal" position="absolute" >
+        <Box zIndex="modal" position="fixed" >
           <Modal 
             style={{ alignItems: "center", justifyContent: "center" }}
             open={open}

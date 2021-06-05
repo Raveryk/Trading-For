@@ -18,6 +18,8 @@ import { useHistory } from "react-router-dom";
 
 import Header from "../Header/Header";
 
+import Swal from "sweetalert2";
+
 const useStyles = makeStyles((theme) => ({
   grid: {
     direction: "column",
@@ -104,6 +106,20 @@ function Post() {
 
   //handles submit button
   const submitPost = () => {
+    for (let prop in newPost) {
+      if (newPost[prop] === "") {
+        return Swal.fire({
+          title: "Fill out all inputs.",
+          icon: "warning",
+          iconColor: "#ffcd38",
+          confirmButtonColor: "#ffcd38",
+          showClass: {
+            popup: "", // disable popup animation
+          },
+        });
+      }
+    }
+
     console.log(newPost);
     dispatch({ type: "ADD_POST", payload: newPost });
     setNewPost({
