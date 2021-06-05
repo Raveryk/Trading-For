@@ -11,6 +11,7 @@ import {
   ListItemAvatar,
   Avatar,
   Typography,
+  Box,
 } from "@material-ui/core";
 
 
@@ -177,8 +178,9 @@ function Browse() {
             })}
           </List>
         </div>
-        <div>
-          <Modal
+        <Box zIndex="modal" position="absolute" >
+          <Modal 
+            style={{ alignItems: "center", justifyContent: "center" }}
             open={open}
             onClose={modalToggle}
             closeAfterTransition
@@ -197,7 +199,7 @@ function Browse() {
               }
             </Fade>
           </Modal>
-        </div>
+        </Box>
       </div>
     </div>
   );

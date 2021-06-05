@@ -71,7 +71,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '2%',
     backgroundColor: theme.palette.secondary.main,
     border: '1px solid black',
-
   },
   modal: {
     margin: "0 auto",
