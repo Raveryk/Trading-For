@@ -211,9 +211,15 @@ function EditPosts() {
       },
     }).then((result) => {
       if(result.isConfirmed) {
-        Swal.fire(
-          'Success deleting item!'
-        )
+        Swal.fire({
+          title: 'Success deleting item!',
+          iconColor: '#ffcd38',
+          showConfirmButton: true,
+          confirmButtonColor: '#ffcd38',
+          showClass: {
+            popup: '',                     // disable popup animation
+          },
+        })
     //Want to figure out confirmation stuff....
     dispatch({ type: "DELETE_POST", payload: post.id });
     // refresh users posts list
@@ -240,9 +246,15 @@ function EditPosts() {
       },
     }).then((result) => {
       if(result.isConfirmed) {
-        Swal.fire(
-          'Success trading item!'
-        )
+        Swal.fire({
+          title: 'Success trading item!',
+          iconColor: '#ffcd38',
+          showConfirmButton: true,
+          confirmButtonColor: '#ffcd38',
+          showClass: {
+            popup: '',                     // disable popup animation
+          },
+        })
     dispatch({ type: "UPDATE_TRADE", payload: post.id });
     dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
         }
