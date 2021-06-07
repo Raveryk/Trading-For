@@ -82,13 +82,16 @@ function Home({drawer, setDrawer}) {
 
   const dispatch = useDispatch();
 
+  //load posts into reducer on page load
   useEffect(() => {
     dispatch({ type:'FETCH_POSTS'})
 }, [])
 
+  // Grab posts from reducer
   const posts = useSelector( (store) => store.posts )
   console.log(posts)
 
+  //Text to go inside each list item
   const feedText = (post) => {
     return (
       <>
@@ -104,7 +107,7 @@ function Home({drawer, setDrawer}) {
   return (
     <div>
       <Header />
-      <Typography className={classes.title} variant="h5">Marketplace Feed</Typography>
+      <Typography className={classes.title} variant="h5">Recent Trades</Typography>
       <div className="grid">
         <div className="grid-col grid-col_8">
           <Divider />

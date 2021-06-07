@@ -84,7 +84,7 @@ function Account() {
             variant="outlined"
             onClick={toFavorites}
           >
-            Favorites
+            My Bookmarks
           </Button>
           <Button
             className={classes.btn}

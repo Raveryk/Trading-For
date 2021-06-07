@@ -141,7 +141,7 @@ function Post() {
       <Grid container className={classes.grid}>
         <Card elevation={4} className={classes.card}>
           <Typography variant="h5" className={classes.title}>
-            Post A Trade
+            Add a Post
           </Typography>
           <form className={classes.form}>
             <TextField

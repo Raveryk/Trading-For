@@ -46,16 +46,6 @@ function Nav() {
 
   const [drawer, setDrawer] = useState(false);
 
-  // let loginLinkData = {
-  //   path: '/login',
-  //   text: 'Login / Register',
-  // };
-
-  // if (user.id != null) {
-  //   loginLinkData.path = '/user';
-  //   loginLinkData.text = 'Home';
-  // }
-
   // function to toggle drawer being open or closed
   const toggleDrawer = () => {
     setDrawer(!drawer);

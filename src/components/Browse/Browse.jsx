@@ -150,7 +150,7 @@ function Browse() {
     <div>
       <Header />
       <Typography className={classes.title} variant="h5">
-        Browse Trade List
+        Browse
       </Typography>
       <Divider />
       <div className="grid">

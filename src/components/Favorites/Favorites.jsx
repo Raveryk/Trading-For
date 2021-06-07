@@ -38,10 +38,11 @@ const useStyles = makeStyles((theme) => ({
 
 function Favorites() {
 
-
+  // grabs id from url
   let { id } = useParams();
   console.log(id);
 
+  // grab favorites on on page load
   useEffect(() => {
     dispatch({ type: "FETCH_FAVORITES", payload: id })
   }, []);
@@ -89,7 +90,7 @@ function Favorites() {
     <div>
       <Header />
       <Typography className={classes.title} variant="h5">
-        Favorites
+        Bookmarks
       </Typography>
       <Divider />
       {checkFavs() ? (
