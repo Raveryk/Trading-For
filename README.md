@@ -26,23 +26,26 @@ Some details include:
 - Material-UI https://material-ui.com/
 - Postico
 - Passport
+- A full list of dependencies is included in the package.json file.
 
 
 ## Installation
 
 To get this application running follow the directions below:
 
-1: Create a database named "prime_feedback"
-2: Input the SQL queries from the data.sql file into Postico and execute those queries
-3: Open up your editor of choice with the project files and run npm install and npm install pg
-4: Next, run npm install @material-ui/core to access the Material-UI styling.
-5: Install npm redux react-redux
-6: Then run npm server and open a second terminal window to run npm run client and browser window with the app should appear!
+1: Open up your editor of choice with the project files and run npm install plus the necessary installations based on the prerequisites above.
+2: Create a database named "prime_app" and run the queries listed in the database.sql file.
+3: Create a .env file and put in a random set of characters over 8 characters in length and set it as SERVER_SESSION_SECRET. 
+4: Finally, run npm run server and npm run client and the app should open.
 
 ## Usage
 
 1. Register a username and password if using app for the first time.
-2. After logging in
+2. After logging in you are taken to the home page.
+3. Click on the menu icon on the upper left hand side to navigate to the different views.
+4. In the Browse section, click on an individual item to view more detailed info and bookmark an item for later viewing.
+5. In the Post section, submit your own item to be traded.
+6. In the account, view your bookmarked items as well as make any edits to your own posts.
 
 ## Built With
 - React.js
