@@ -31,16 +31,21 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function LoginForm() {
+
+  // --- LOCAL STATE --- //
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  // grabs error messages from errors reducer
   const errors = useSelector(store => store.errors);
+
   const dispatch = useDispatch();
 
   const classes = useStyles()
 
   const login = (event) => {
     event.preventDefault();
-
+    //conditional to login or send error message
     if (username && password) {
       dispatch({
         type: 'LOGIN',
