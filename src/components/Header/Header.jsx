@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-
+// contains Trading For logo and renders it on page
 function Header() {
     const classes=useStyles();
 

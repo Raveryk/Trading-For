@@ -132,7 +132,6 @@ function Post() {
     });
 
     history.push("/browse");
-    // dispatch({ type: "FETCH_BROWSER" });
   };
 
   return (

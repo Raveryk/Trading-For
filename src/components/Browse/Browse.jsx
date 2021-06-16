@@ -21,20 +21,7 @@ import { useEffect } from "react";
 import Header from "../Header/Header";
 import BrowseDetail from "../BrowseDetail/BrowseDetail";
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
 
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -104,15 +91,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Browse() {
+
+  // load browser reducer on page load
   useEffect(() => {
     dispatch({ type: "FETCH_BROWSER" });
-    dispatch({ type: "FETCH_FAVORITES", payload: user.id });
+    // dispatch({ type: "FETCH_FAVORITES", payload: user.id });
   }, []);
 
   const dispatch = useDispatch();
 
   const classes = useStyles();
-  //   const [modalStyle] = React.useState(getModalStyle);
 
   //state for modal open attribute
   const [open, setOpen] = useState(false);
@@ -122,10 +110,7 @@ function Browse() {
 
   // grabs all posts for browser
   const browser = useSelector((store) => store.browser.browser);
-  // grabs user info
-  const user = useSelector((store) => store.user);
   
-
 
   // targets specific post and 
   // toggles the modal to open

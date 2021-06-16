@@ -74,19 +74,18 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function App() {
-  const dispatch = useDispatch();
-
-  const classes = useStyles();
-
+  // Load user reducer on page load as well as web fonts
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
     WebFont.load({google: {families: ['Bungee Shade', 'Bungee Inline', 'Bungee Hairline', 'Roboto']}});
   }, [dispatch]);
 
+  const dispatch = useDispatch();
+
+  const classes = useStyles();
+
+  // --- REDUCER --- //
   const user = useSelector(store => store.user)
-  console.log('user in APP: ', user)
-
-
 
 
   return (

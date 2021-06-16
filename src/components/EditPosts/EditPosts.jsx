@@ -120,6 +120,12 @@ const useStyles = makeStyles((theme) => ({
 
 function EditPosts() {
 
+  // load browser reducer on page load
+  useEffect(() => {
+    dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
+  }, []);
+
+  // array to hold condition drop down values
   const condition = [
     "Brand New",
     "Mint",
@@ -131,12 +137,7 @@ function EditPosts() {
     "Broken",
   ];
 
-  useEffect(() => {
-    dispatch({ type: "FETCH_ACCOUNT_BROWSER" });
-  }, []);
-
   const dispatch = useDispatch();
-  // const history = useHistory();
 
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
@@ -150,11 +151,10 @@ function EditPosts() {
 
   //grabs detailed info from reducer
   const detail = useSelector((store) => store.account.accountDetail);
-  // console.log(detail)
   // grabs all posts for browser
   const browser = useSelector((store) => store.account.accountBrowser);
+  // grabs user info from reducer
   const user = useSelector((store) => store.user);
-  // console.log("User data:", user);
 
   // ----UPDATE STATES--- //
 
@@ -167,15 +167,6 @@ function EditPosts() {
     url: '',
     wants: '',
   });
-
-  // const [update, setUpdate] = useState({
-  //   id: detail[0].id,
-  //   title: detail[0].title,
-  //   info: detail[0].description,
-  //   condition: detail[0].condition,
-  //   url: detail[0].image_url,
-  //   wants: detail[0].wants,
-  // });
 
   // ----MODAL HANDLERS----- //
 
@@ -207,7 +198,7 @@ function EditPosts() {
       cancelButtonText: 'No',
       confirmButtonColor: '#ffcd38',
       showClass: {
-        popup: '',                     // disable popup animation
+        popup: '', // disable popup animation
       },
     }).then((result) => {
       if(result.isConfirmed) {
@@ -217,7 +208,7 @@ function EditPosts() {
           showConfirmButton: true,
           confirmButtonColor: '#ffcd38',
           showClass: {
-            popup: '',                     // disable popup animation
+            popup: '',  // disable popup animation
           },
         })
     //Want to figure out confirmation stuff....

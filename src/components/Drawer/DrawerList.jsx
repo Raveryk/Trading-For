@@ -36,8 +36,8 @@ function DrawerList({toggleDrawer}) {
 
   // User reducer to grab user info
   const user = useSelector((store) => store.user);
-  // console.log(user);
 
+  
   let loginLinkData = {
     path: "/login",
     text: "Login / Register",

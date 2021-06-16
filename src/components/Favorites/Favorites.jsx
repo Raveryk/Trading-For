@@ -40,7 +40,6 @@ function Favorites() {
 
   // grabs id from url
   let { id } = useParams();
-  console.log(id);
 
   // grab favorites on on page load
   useEffect(() => {
@@ -58,7 +57,6 @@ function Favorites() {
   const favorites = useSelector((store) => store.favorites);
   const user = useSelector((store) => store.user);
 
-//   console.log("In favorites: ", favorites);
 
   //Opens detail modal
   const toDetail = (post) => {
@@ -79,6 +77,7 @@ function Favorites() {
     setSlide(!slide);
   };
 
+  // Handles inline conditional rendering
   const checkFavs = () => {
     if (favorites.length === 0) {
       return true;
