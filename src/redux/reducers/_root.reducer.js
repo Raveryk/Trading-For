@@ -6,7 +6,6 @@ import categories from './categories.reducer';
 import browser from './browser.reducer';
 import account from './account.reducer';
 import favorites from './favorites.reducer';
-import drawer from './drawer.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,13 +16,11 @@ import drawer from './drawer.reducer';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  posts,
-  categories,
-  browser,
-  account,
-  favorites,
-  drawer,
+  posts, // contains all posts from users
+  categories, // contains categories from DB
+  browser, // retrieves browser info
+  account, // retrieves account info of specific user
+  favorites, // retrieves favorites of specific user
 });
-// this.props.store.errors.loginMessage
 
 export default rootReducer;

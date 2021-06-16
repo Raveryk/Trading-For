@@ -1,3 +1,4 @@
+// stores all posts that have been traded
 const posts = ( state=[], action ) => {
     switch (action.type) {
         case 'SET_POSTS':

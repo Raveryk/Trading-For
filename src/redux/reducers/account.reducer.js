@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-
+// stores users specific posts
 const accountBrowser = ( state=[], action ) => {
     switch (action.type) {
         case 'SET_ACCOUNT_BROWSER':
@@ -10,6 +10,7 @@ const accountBrowser = ( state=[], action ) => {
     }
 }
 
+// stores detail info of users posts
 const accountDetail = ( state=[], action ) => {
     switch (action.type) {
         case 'SET_ACCOUNT_DETAILS':

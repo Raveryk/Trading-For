@@ -1,3 +1,5 @@
+
+// stores categories from DB
 const categories = ( state=[], action ) => {
     switch (action.type) {
         case 'SET_CATEGORIES':
