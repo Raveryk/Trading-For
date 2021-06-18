@@ -1,3 +1,4 @@
+// stores user info
 const userReducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET_USER':

@@ -62,6 +62,8 @@ function Post() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  // grab categories for dropdown from reducer
   const types = useSelector((store) => store.categories);
 
   // array of condition types
@@ -106,6 +108,8 @@ function Post() {
 
   //handles submit button
   const submitPost = () => {
+    // checks for empty inputs ->
+    // if empty alert appears
     for (let prop in newPost) {
       if (newPost[prop] === "") {
         return Swal.fire({
@@ -119,8 +123,7 @@ function Post() {
         });
       }
     }
-
-    console.log(newPost);
+    // if inputs are full dispatch
     dispatch({ type: "ADD_POST", payload: newPost });
     setNewPost({
       title: "",
@@ -130,7 +133,7 @@ function Post() {
       url: "",
       wants: "",
     });
-
+    
     history.push("/browse");
   };
 

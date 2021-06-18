@@ -6,13 +6,6 @@ import Header from '../Header/Header';
 import {Button, makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  body: {
-    // backgroundColor: theme.palette.secondary.sand,
-    // padding: '5%',
-    // paddingBottom: '100%',
-    // border: '2px solid',
-    // borderColor: theme.palette.primary.main
-  },
   btn: {
     backgroundColor: theme.palette.primary.main,
   }
@@ -24,7 +17,7 @@ function RegisterPage() {
   const classes = useStyles();
 
   return (
-    <div className={classes.body}>
+    <div >
       <Header />
       <RegisterForm />
 

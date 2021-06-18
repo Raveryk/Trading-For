@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-
+// stores all browser items
 const browser = ( state=[], action ) => {
     switch (action.type) {
         case 'SET_BROWSER':
@@ -10,6 +10,7 @@ const browser = ( state=[], action ) => {
     }
 }
 
+// stores detailed info for browser items
 const detail = ( state={}, action ) => {
     switch (action.type) {
         case 'SET_DETAILS':

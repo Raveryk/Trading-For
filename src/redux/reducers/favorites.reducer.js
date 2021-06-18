@@ -1,5 +1,5 @@
 
-
+// stores favorites of specific user
 const favorites = ( state=[], action ) => {
     switch (action.type) {
         case 'SET_FAVORITES':

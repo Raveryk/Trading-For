@@ -35,14 +35,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Nav() {
+  // set drawer default to closed
   useEffect(() => {
     setDrawer(false);
   }, []);
 
-  // const theme = useTheme();
   const classes = useStyles();
-
-  const user = useSelector((store) => store.user);
 
   const [drawer, setDrawer] = useState(false);
 
@@ -56,8 +54,6 @@ function Nav() {
     <div className={classes.toolbar}>
       <AppBar>
         <Toolbar>
-          {/* {user.id && (
-            <> */}
           <IconButton onClick={toggleDrawer}>
             <MenuIcon className={classes.icon} />
           </IconButton>
@@ -67,12 +63,7 @@ function Nav() {
             onClose={toggleDrawer}
           >
             <DrawerList toggleDrawer={toggleDrawer} />
-          </Drawer>
-          {/* </>
-          )} */}
-          {/* <div className={classes.title}>
-            <Typography className={classes.title} variant="h5">TRADINGFOR</Typography>
-          </div> */}
+          </Drawer>  
         </Toolbar>
       </AppBar>
     </div>

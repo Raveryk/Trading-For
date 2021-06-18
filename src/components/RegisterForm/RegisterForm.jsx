@@ -32,20 +32,20 @@ const useStyles = makeStyles((theme) => ({
 
 function RegisterForm() {
   // Registration input values
-  const [username, setUsername] = useState("");
-  // console.log('username:', username)
-  const [password, setPassword] = useState("");
-  // console.log('password:', password)
-  const [email, setEmail] = useState("");
-  // console.log('email:', email)
-  const [phoneNum, setPhoneNum] = useState("");
-  // console.log('phoneNum:', phoneNum)
 
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNum, setPhoneNum] = useState("");
+
+  // grab errors from reducer
   const errors = useSelector((store) => store.errors);
+
   const dispatch = useDispatch();
 
   const classes = useStyles();
 
+  // send registration info to server
   const registerUser = (event) => {
     event.preventDefault();
 
