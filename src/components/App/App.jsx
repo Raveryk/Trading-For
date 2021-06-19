@@ -65,10 +65,13 @@ const theme = createMuiTheme({
 const useStyles = makeStyles((theme) => ({
   body: {
     backgroundColor: '#e8f5e9',
-    // padding: '5%',
-    minHeight: '812px',
+    height: '792px',
+    width: 'auto',
+    marginRight: 'auto',
+    marginLeft: 'auto',
     border: '2px solid',
-    borderColor: '#a5d6a7'
+    borderColor: '#a5d6a7',
+    
   }
 
 }))

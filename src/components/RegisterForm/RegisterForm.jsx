@@ -10,19 +10,25 @@ import { makeStyles, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   form: {
-    padding: "2%",
+    padding: "2px",
   },
   formCard: {
-    // justifyContent: 'center',
-    padding: "2%",
-    textAlign: "center",
-    backgroundColor: "#c8e6c9",
+    justifyContent: 'center',
+    padding: '2%',
+    paddingBottom: '100px',
+    textAlign: 'center',
+    backgroundColor: '#c8e6c9',
+    width: '250px',
+    height: '150px',
+    marginRight: 'auto',
+    marginLeft: 'auto'
   },
   formGrid: {
-    marginRight: "10%",
-    marginLeft: "10%",
-    direction: "column",
-    marginBottom: "10px",
+    marginRight: '10%',
+    marginLeft: '10%',
+    direction: 'column',
+    marginBottom: '10px',
+    marginTop: '10%',
   },
   btn: {
     margin: "5px",
@@ -61,8 +67,8 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    <Grid className={classes.formGrid} item xs={12}>
-      <Card elevation={6}>
+    <Grid className={classes.formGrid} item xs={12} lg={12}>
+      <Card className={classes.formCard} elevation={6}>
         <form className={classes.formCard} onSubmit={registerUser}>
           <Typography variant="h5">Register</Typography>
           {errors.registrationMessage && (

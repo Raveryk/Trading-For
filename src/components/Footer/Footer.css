@@ -3,7 +3,7 @@
 .text {
   position: sticky;
   display: flex;
-  align-items: flex-end; /** Y-axis align **/
-  justify-content: center; /** X-axis align **/
-  margin-top: 50%
+  align-items: flex-end; 
+  justify-content: center; 
+  margin-top: 10%
 }
