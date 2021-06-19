@@ -15,7 +15,7 @@ import WebFont from 'webfontloader';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core'
+import { createMuiTheme, ThemeProvider, makeStyles, Grid } from '@material-ui/core'
 
 
 import Post from '../Post/Post';
@@ -96,7 +96,7 @@ function App() {
     <Router> 
       <ThemeProvider theme={theme}>
     
-      <div className={classes.body}>
+      <Grid xs={12} lg={3} className={classes.body}>
         {user.id && (<Nav/>)}
         
         <Switch>
@@ -202,7 +202,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-       </div>
+       </Grid>
       </ThemeProvider>
     </Router>
   );
