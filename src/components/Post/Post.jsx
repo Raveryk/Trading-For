@@ -103,10 +103,10 @@ function Post() {
     const {url} = await fetch("/api/posts/s3Url").then(res => res.json())
     console.log(url)
     // post the image directly to the s3 bucket
-    fetch({
+    await fetch(url, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'multipart/form-data'
+          "Content-Type": "multipart/form-data"
         },
         body: picFile
     })
