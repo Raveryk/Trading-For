@@ -88,11 +88,35 @@ function Post() {
     wants: "",
   });
 
-  //handles change to all text inputs
-  const handleChange = (e) => {
+  const [picFile, setPicFile] = useState()
+
+  const handleChange = e => {
     e.preventDefault();
     setNewPost({ ...newPost, [e.target.id]: e.target.value });
+  }
+
+  //handles change to all text inputs
+  const handlePic = async e => {
+    e.preventDefault();
+    setPicFile(e.target.value)
+    // get secure url from our server
+    const {url} = await fetch("/api/posts/s3Url").then(res => res.json())
+    console.log(url)
+    // post the image directly to the s3 bucket
+    fetch({
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        body: picFile
+    })
+
+    const imageUrl = url.split('?')[0]
+    setNewPost({ ...newPost, url: imageUrl})
+    // post re
   };
+
+  console.log(newPost)
 
   //handles change to category selector
   const handleCategory = (e) => {
@@ -197,13 +221,12 @@ function Post() {
               </Select>
             </FormControl>
             <TextField
+              type="file"
               required
               className={classes.inputs}
-              id="url"
-              label="image url"
-              variant="outlined"
-              value={newPost.url}
-              onChange={handleChange}
+              id="pic"            
+              value={picFile}
+              onChange={handlePic}
             />
             <TextField
               required
