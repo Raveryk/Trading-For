@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import {
   FormControl,
@@ -88,7 +88,9 @@ function Post() {
     wants: "",
   });
 
-  const [picFile, setPicFile] = useState()
+  const [picFile, setPicFile] = useState('')
+  const picRef = picFile.replace(`C:\\fakepath\\`, ``)
+  console.log('picFile:', picFile, 'picRef:', picRef)
 
   const handleChange = e => {
     e.preventDefault();
@@ -102,13 +104,14 @@ function Post() {
     // get secure url from our server
     const {url} = await fetch("/api/posts/s3Url").then(res => res.json())
     console.log(url)
+
     // post the image directly to the s3 bucket
     await fetch(url, {
         method: 'PUT',
         headers: {
           "Content-Type": "multipart/form-data"
         },
-        body: picFile
+        body: picRef
     })
 
     const imageUrl = url.split('?')[0]
