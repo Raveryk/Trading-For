@@ -89,8 +89,8 @@ function Post() {
   });
 
   const [picFile, setPicFile] = useState('')
-  const picRef = picFile.replace(`C:\\fakepath\\`, ``)
-  console.log('picFile:', picFile, 'picRef:', picRef)
+  // const picRef = picFile.replace(`C:\\fakepath\\`, ``)
+  console.log('picFile:', picFile)
 
   const handleChange = e => {
     e.preventDefault();
@@ -100,18 +100,20 @@ function Post() {
   //handles change to all text inputs
   const handlePic = async e => {
     e.preventDefault();
+    let file = e.target.files[0]
+
     setPicFile(e.target.value)
     // get secure url from our server
     const {url} = await fetch("/api/posts/s3Url").then(res => res.json())
     console.log(url)
 
-    // post the image directly to the s3 bucket
+    //post the image directly to the s3 bucket
     await fetch(url, {
         method: 'PUT',
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Content-Type": file.type
         },
-        body: picRef
+        body: file.name
     })
 
     const imageUrl = url.split('?')[0]
