@@ -111,7 +111,7 @@ function Post() {
     await fetch(url, {
         method: 'PUT',
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Content-Type": "image/jpg"
         },
         body: file.name
     })
