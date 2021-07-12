@@ -97,7 +97,7 @@ function Post() {
     setNewPost({ ...newPost, [e.target.id]: e.target.value });
   }
 
-  //handles change to all text inputs
+  //handles change to image upload
   const handlePic = async e => {
     e.preventDefault();
     let file = e.target.files[0]
@@ -111,7 +111,7 @@ function Post() {
     await fetch(url, {
         method: 'PUT',
         headers: {
-          "Content-Type": file.type
+          "Content-Type": "multipart/form-data"
         },
         body: file.name
     })
