@@ -156,6 +156,7 @@ function BrowseDetail({ modalToggle }) {
     } // end of loop
   }; // end checkId
 
+  // Function to open up email in separate window
   const toEmail = () => {
     window.open(`mailto:${item.email}`);
   };
