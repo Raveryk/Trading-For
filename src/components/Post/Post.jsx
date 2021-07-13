@@ -90,7 +90,7 @@ function Post() {
 
   const [picFile, setPicFile] = useState('')
   // const picRef = picFile.replace(`C:\\fakepath\\`, ``)
-  console.log('picFile:', picFile)
+  // console.log('picFile:', picFile)
 
   const handleChange = e => {
     e.preventDefault();
@@ -111,9 +111,9 @@ function Post() {
     await fetch(url, {
         method: 'PUT',
         headers: {
-          "Content-Type": "image/jpg"
+          "Content-Type": "multipart/form-data"
         },
-        body: file.name
+        body: file
     })
 
     const imageUrl = url.split('?')[0]
@@ -136,7 +136,8 @@ function Post() {
   };
 
   //handles submit button
-  const submitPost = () => {
+  const submitPost = (e) => {
+    e.preventDefault();
     // checks for empty inputs ->
     // if empty alert appears
     for (let prop in newPost) {
@@ -174,7 +175,7 @@ function Post() {
           <Typography variant="h5" className={classes.title}>
             Add a Post
           </Typography>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={submitPost}>
             <TextField
               required
               className={classes.inputs}
@@ -229,7 +230,7 @@ function Post() {
               type="file"
               required
               className={classes.inputs}
-              id="pic"            
+              // id="url"            
               value={picFile}
               onChange={handlePic}
             />
@@ -245,7 +246,8 @@ function Post() {
             <Button
               className={classes.btn}
               variant="outlined"
-              onClick={() => submitPost()}
+              type="submit"
+              
             >
               Submit
             </Button>

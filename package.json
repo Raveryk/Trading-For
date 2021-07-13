@@ -9,7 +9,7 @@
     "@material-ui/styles": "^4.11.4",
     "@sweetalert2/theme-material-ui": "^5.0.0",
     "@sweetalert2/themes": "^5.0.0",
-    "aws-sdk": "^2.931.0",
+    "aws-sdk": "^2.944.0",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "cookie-session": "^2.0.0-rc.1",
