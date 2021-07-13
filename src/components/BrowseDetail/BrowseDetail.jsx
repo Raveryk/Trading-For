@@ -7,12 +7,13 @@ import {
   IconButton,
   Button,
   Slide,
-
 } from "@material-ui/core";
 
 import CloseIcon from "@material-ui/icons/Close";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import PhoneIcon from '@material-ui/icons/Phone';
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -68,9 +69,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "5px",
   },
   contact: {
-    marginTop: '2%',
+    marginTop: "2%",
     backgroundColor: theme.palette.secondary.main,
-    border: '1px solid black',
   },
   modal: {
     margin: "0 auto",
@@ -97,8 +97,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
   contactInfo: {
-    marginLeft: '3%',
-  }
+    justifyContent: 'center'
+  },
 }));
 
 function BrowseDetail({ modalToggle }) {
@@ -126,8 +126,7 @@ function BrowseDetail({ modalToggle }) {
     setSlide(!slide);
   };
 
-
-  // function to dispatch to saga for 
+  // function to dispatch to saga for
   //post to be saved to favorites
   const favoritePost = (item) => {
     // console.log("in favoritePost: ", item);
@@ -137,8 +136,7 @@ function BrowseDetail({ modalToggle }) {
     });
   };
 
-
-  // function to dispatch to saga for 
+  // function to dispatch to saga for
   //post to be deleted from favorites
   const deleteFav = (item) => {
     // console.log("in deleteFav: ", item);
@@ -146,8 +144,7 @@ function BrowseDetail({ modalToggle }) {
     modalToggle();
   };
 
-
-  // function to check if an 
+  // function to check if an
   // item has been favorited or not
   const checkId = (item) => {
     for (let fav of favorites) {
@@ -159,9 +156,10 @@ function BrowseDetail({ modalToggle }) {
     } // end of loop
   }; // end checkId
 
+  const toEmail = () => {
+    window.open(`mailto:${item.email}`);
+  };
 
-
-  
   return (
     <div style={modalStyle} className={classes.paper}>
       <Box className={classes.bookmark}>
@@ -208,10 +206,10 @@ function BrowseDetail({ modalToggle }) {
       </Button>
       <Slide direction="up" in={slide} onChange={slideToggle}>
         <Paper className={classes.contact}>
-          <div className={classes.contactInfo}>
-            <p>Email: {item.email}</p>
-            <p>Phone#: {item.phone_num}</p>
-          </div>
+        <div className={classes.button}>
+            <IconButton className={classes.button} onClick={toEmail}><MailOutlineIcon /></IconButton>
+            <IconButton className={classes.button}><PhoneIcon /></IconButton>
+            </div>
         </Paper>
       </Slide>
     </div>
@@ -219,3 +217,21 @@ function BrowseDetail({ modalToggle }) {
 }
 
 export default BrowseDetail;
+
+{
+  /* <Button
+        className={classes.button}
+        variant="outlined"
+        onClick={() => slideToggle()}
+      >
+        Interested?
+      </Button>
+      <Slide direction="up" in={slide} onChange={slideToggle}>
+        <Paper className={classes.contact}>
+          <div className={classes.contactInfo}>
+            <p>Email: {item.email}</p>
+            <p>Phone#: {item.phone_num}</p>
+          </div>
+        </Paper>
+      </Slide> */
+}

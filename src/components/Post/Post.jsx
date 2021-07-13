@@ -88,10 +88,10 @@ function Post() {
     wants: "",
   });
 
+  //Holds file name for input value
   const [picFile, setPicFile] = useState('')
-  // const picRef = picFile.replace(`C:\\fakepath\\`, ``)
-  // console.log('picFile:', picFile)
 
+  // Handles text input changes
   const handleChange = e => {
     e.preventDefault();
     setNewPost({ ...newPost, [e.target.id]: e.target.value });
@@ -105,7 +105,6 @@ function Post() {
     setPicFile(e.target.value)
     // get secure url from our server
     const {url} = await fetch("/api/posts/s3Url").then(res => res.json())
-    console.log(url)
 
     //post the image directly to the s3 bucket
     await fetch(url, {
@@ -118,10 +117,8 @@ function Post() {
 
     const imageUrl = url.split('?')[0]
     setNewPost({ ...newPost, url: imageUrl})
-    // post re
   };
 
-  console.log(newPost)
 
   //handles change to category selector
   const handleCategory = (e) => {
@@ -153,7 +150,7 @@ function Post() {
         });
       }
     }
-    // if inputs are full dispatch
+    // if inputs are full then dispatch
     dispatch({ type: "ADD_POST", payload: newPost });
     setNewPost({
       title: "",
