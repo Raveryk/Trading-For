@@ -88,6 +88,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  browseContainer: {
+    overflow: 'auto',
+  }
 }));
 
 function Browse() {
@@ -134,7 +137,7 @@ function Browse() {
  
 
   return (
-    <div>
+    <div className={classes.browseContainer}>
       <Header />
       <Typography className={classes.title} variant="h5">
         Browse

@@ -66,12 +66,13 @@ const theme = createTheme({
 const useStyles = makeStyles((theme) => ({
   body: {
     backgroundColor: '#e8f5e9',
-    height: '792px',
     width: 'auto',
+    height: '792px',
     marginRight: 'auto',
     marginLeft: 'auto',
     border: '2px solid',
     borderColor: '#a5d6a7',
+    overflow: 'auto'
     
   }
 
