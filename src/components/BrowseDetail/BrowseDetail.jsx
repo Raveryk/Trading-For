@@ -201,38 +201,13 @@ function BrowseDetail({ modalToggle }) {
       <Button
         className={classes.button}
         variant="outlined"
-        onClick={() => slideToggle()}
+        onClick={toEmail}
       >
-        Interested?
+        Contact User
       </Button>
-      <Slide direction="up" in={slide} onChange={slideToggle}>
-        <Paper className={classes.contact}>
-        <div className={classes.button}>
-            <IconButton className={classes.button} onClick={toEmail}><MailOutlineIcon /></IconButton>
-            <IconButton className={classes.button}><PhoneIcon /></IconButton>
-            </div>
-        </Paper>
-      </Slide>
     </div>
   );
 }
 
 export default BrowseDetail;
 
-{
-  /* <Button
-        className={classes.button}
-        variant="outlined"
-        onClick={() => slideToggle()}
-      >
-        Interested?
-      </Button>
-      <Slide direction="up" in={slide} onChange={slideToggle}>
-        <Paper className={classes.contact}>
-          <div className={classes.contactInfo}>
-            <p>Email: {item.email}</p>
-            <p>Phone#: {item.phone_num}</p>
-          </div>
-        </Paper>
-      </Slide> */
-}
