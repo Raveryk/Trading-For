@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: "40px",
     borderRadius: "50%",
   },
+  
 }));
 
 function Nav() {
@@ -52,7 +53,7 @@ function Nav() {
 
   return (
     <div className={classes.toolbar}>
-      <AppBar>
+      <AppBar >
         <Toolbar>
           <IconButton onClick={toggleDrawer}>
             <MenuIcon className={classes.icon} />

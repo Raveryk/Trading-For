@@ -15,7 +15,7 @@ import WebFont from 'webfontloader';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import { ThemeProvider, makeStyles } from '@material-ui/core'
+import { ThemeProvider, makeStyles, Grid } from '@material-ui/core'
 import {createTheme} from '@material-ui/core/styles'
 
 
@@ -66,10 +66,13 @@ const theme = createTheme({
 const useStyles = makeStyles((theme) => ({
   body: {
     backgroundColor: '#e8f5e9',
-    // padding: '5%',
-    minHeight: '812px',
+    height: '792px',
+    width: 'auto',
+    marginRight: 'auto',
+    marginLeft: 'auto',
     border: '2px solid',
-    borderColor: '#a5d6a7'
+    borderColor: '#a5d6a7',
+    
   }
 
 }))
@@ -94,7 +97,7 @@ function App() {
     <Router> 
       <ThemeProvider theme={theme}>
     
-      <div className={classes.body}>
+      <Grid xs={12} lg={3} className={classes.body}>
         {user.id && (<Nav/>)}
         
         <Switch>
@@ -200,7 +203,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-       </div>
+       </Grid>
       </ThemeProvider>
     </Router>
   );

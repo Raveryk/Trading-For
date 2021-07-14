@@ -1,15 +1,15 @@
 import React from 'react';
 import Logo from "../Header/TF_Logo_Curve.png";
-import {makeStyles} from '@material-ui/core';
+import {makeStyles, Grid} from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
     logoContainer: {
         textAlign: 'center',
-        marginTop: '20%',
+        marginTop: '80px',
     },
     logo: {
-        width: '30%',
-        height: '30%',
+        width: '120px',
+        height: '120px',
     }
 }))
 
@@ -18,9 +18,11 @@ function Header() {
     const classes=useStyles();
 
     return(
-        <div className={classes.logoContainer}>
+        <Grid item lg={12}>
+        <Grid xs={12} className={classes.logoContainer}>
         <img className={classes.logo} src={Logo} />
-        </div>
+        </Grid>
+        </Grid>
     )
 }
 

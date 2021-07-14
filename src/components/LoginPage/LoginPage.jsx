@@ -9,7 +9,8 @@ import Button from '@material-ui/core/Button'
 const useStyles = makeStyles((theme) => ({
     btn: {
       backgroundColor: theme.palette.primary.main,
-    }
+    },
+  
 
 }))
 
@@ -19,7 +20,7 @@ function LoginPage() {
   const classes = useStyles();
 
   return (
-    <div>
+    <div className={classes.page}>
       <Header />
       <LoginForm />
 
