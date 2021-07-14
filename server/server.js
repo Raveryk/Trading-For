@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
+
 
 const app = express();
 
@@ -34,7 +36,9 @@ app.use('/api/categories', categoriesRouter);
 app.use('/api/browse', browseRouter);
 app.use('/api/account', accountRouter);
 app.use('/api/edit', editRouter);
-app.use('/api/favorites', favoritesRouter)
+app.use('/api/favorites', favoritesRouter);
+
+
 
 
 // Serve static files

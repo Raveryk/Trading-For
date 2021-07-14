@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import {
   FormControl,
@@ -88,11 +88,37 @@ function Post() {
     wants: "",
   });
 
-  //handles change to all text inputs
-  const handleChange = (e) => {
+  //Holds file name for input value
+  const [picFile, setPicFile] = useState('')
+
+  // Handles text input changes
+  const handleChange = e => {
     e.preventDefault();
     setNewPost({ ...newPost, [e.target.id]: e.target.value });
+  }
+
+  //handles change to image upload
+  const handlePic = async e => {
+    e.preventDefault();
+    let file = e.target.files[0]
+
+    setPicFile(e.target.value)
+    // get secure url from our server
+    const {url} = await fetch("/api/posts/s3Url").then(res => res.json())
+
+    //post the image directly to the s3 bucket
+    await fetch(url, {
+        method: 'PUT',
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        body: file
+    })
+
+    const imageUrl = url.split('?')[0]
+    setNewPost({ ...newPost, url: imageUrl})
   };
+
 
   //handles change to category selector
   const handleCategory = (e) => {
@@ -107,7 +133,8 @@ function Post() {
   };
 
   //handles submit button
-  const submitPost = () => {
+  const submitPost = (e) => {
+    e.preventDefault();
     // checks for empty inputs ->
     // if empty alert appears
     for (let prop in newPost) {
@@ -123,7 +150,7 @@ function Post() {
         });
       }
     }
-    // if inputs are full dispatch
+    // if inputs are full then dispatch
     dispatch({ type: "ADD_POST", payload: newPost });
     setNewPost({
       title: "",
@@ -145,7 +172,7 @@ function Post() {
           <Typography variant="h5" className={classes.title}>
             Add a Post
           </Typography>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={submitPost}>
             <TextField
               required
               className={classes.inputs}
@@ -197,13 +224,12 @@ function Post() {
               </Select>
             </FormControl>
             <TextField
+              type="file"
               required
               className={classes.inputs}
-              id="url"
-              label="image url"
-              variant="outlined"
-              value={newPost.url}
-              onChange={handleChange}
+              // id="url"            
+              value={picFile}
+              onChange={handlePic}
             />
             <TextField
               required
@@ -217,7 +243,8 @@ function Post() {
             <Button
               className={classes.btn}
               variant="outlined"
-              onClick={() => submitPost()}
+              type="submit"
+              
             >
               Submit
             </Button>

@@ -12,7 +12,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     WHERE traded=false;`;
     pool.query(query)
       .then(result => {
-        console.log(result.rows);
+        // console.log(result.rows);
         res.send(result.rows)
       })
       .catch( error => {
@@ -32,7 +32,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
     pool.query(query, [postId])
       .then(result => {
-        console.log(result.rows);
+        // console.log(result.rows);
         res.send(result.rows[0])
       })
       .catch( error => {
@@ -53,7 +53,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     
     pool.query(query, [req.user.id, req.body.posts_id])
       .then(result => {
-        console.log('Success favoriting post')
+        // console.log('Success favoriting post')
         res.sendStatus(201)
       })
       .catch( error => {

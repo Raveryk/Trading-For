@@ -15,7 +15,8 @@ import WebFont from 'webfontloader';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import { createMuiTheme, ThemeProvider, makeStyles, Grid } from '@material-ui/core'
+import { ThemeProvider, makeStyles, Grid } from '@material-ui/core'
+import {createTheme} from '@material-ui/core/styles'
 
 
 import Post from '../Post/Post';
@@ -31,7 +32,7 @@ import Favorites from '../Favorites/Favorites';
 
 import './App.css';
 
-const theme = createMuiTheme({
+const theme = createTheme({
     palette: {
       primary: {
         main: '#c8e6c9',
