@@ -62,7 +62,8 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+*.env
+twilio.env
 
 # ignore package-lock as it complicates merging
 package-lock.json

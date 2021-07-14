@@ -110,6 +110,8 @@ function Browse() {
 
   // grabs all posts for browser
   const browser = useSelector((store) => store.browser.browser);
+
+  console.log(browser)
   
 
   // targets specific post and 
