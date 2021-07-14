@@ -3,7 +3,10 @@ import './Footer.css';
 
 
 function Footer() {
-  return <footer><div className="text">&copy; Prime Digital Academy</div></footer>;
+  return <footer styles={{position: 'relative'}}><div className="text"></div></footer>;
 }
 
 export default Footer;
+
+
+// return <footer styles={{position: 'relative'}}><div className="text">&copy; Prime Digital Academy</div></footer>;
