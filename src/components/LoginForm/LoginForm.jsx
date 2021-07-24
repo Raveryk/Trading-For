@@ -8,6 +8,10 @@ import {Card, Grid, Button, TextField, Typography, makeStyles, ThemeProvider} fr
 const useStyles = makeStyles((theme) => ({
   form: {
     padding: '2px',
+    margin: '5px'
+  },
+  formStyle: {
+    marginTop: '5%'
   },
   formCard: {
     justifyContent: 'center',
@@ -15,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     backgroundColor: '#c8e6c9',
     width: '250px',
-    height: '150px',
+    height: '200px',
     marginRight: 'auto',
     marginLeft: 'auto'
 
@@ -67,8 +71,8 @@ function LoginForm() {
     
     <Grid className={classes.formGrid} item xs={12} lg={12}>
     <Card className={classes.formCard} elevation={6}>
-    <form  onSubmit={login}>
-      <Typography variant="h5">Log In</Typography>
+    <form className={classes.formCard} onSubmit={login}>
+      <Typography style={{paddingBottom: '5px'}}variant="h5">Log In</Typography>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
@@ -76,6 +80,7 @@ function LoginForm() {
       )}
       <div>
           <TextField
+            
             className={classes.form}
             placeholder="username"
             type="text"

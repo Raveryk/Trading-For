@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     width: 225,
     backgroundColor: "#81ac8d",
     border: "2px solid #000",
-    padding: "5%",
+    padding: "20px",
     borderRadius: 16,
     outline: 0,
     left: '50%',
