@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     overflow: "auto",
     width: 225,
-    height: "75%",
     backgroundColor: "#81ac8d",
     border: "2px solid #000",
     padding: "5%",
@@ -88,9 +87,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  browseContainer: {
-    overflow: 'auto',
-  }
+  // browseContainer: {
+  //   overflow: 'auto',
+  // }
 }));
 
 function Browse() {
@@ -137,7 +136,7 @@ function Browse() {
  
 
   return (
-    <div className={classes.browseContainer}>
+    <div >
       <Header />
       <Typography className={classes.title} variant="h5">
         Browse
@@ -170,7 +169,7 @@ function Browse() {
         </div>
         <Box zIndex="modal" position="fixed" >
           <Modal 
-            style={{ alignItems: "center", justifyContent: "center" }}
+            style={{ position: "fixed"}}
             open={open}
             onClose={modalToggle}
             closeAfterTransition
