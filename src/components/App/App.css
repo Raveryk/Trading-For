@@ -6,9 +6,18 @@ body,
 
 
 body {
+  width: auto;
+  margin-right: 5%;
+  margin-left: 5%;
+  overflow: auto;
+  background-color: #e8f5e9;
   font-family: 'Roboto';
   font-size: 14px;
+
+
 }
+
+
 
 /* img {
   display: inline-block;

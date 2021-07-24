@@ -67,14 +67,13 @@ const useStyles = makeStyles((theme) => ({
   body: {
     backgroundColor: '#e8f5e9',
     width: 'auto',
-    height: '792px',
+    height: '812px',
     marginRight: 'auto',
     marginLeft: 'auto',
-    border: '2px solid',
-    borderColor: '#a5d6a7',
     overflow: 'auto'
     
-  }
+  },
+ 
 
 }))
 
@@ -94,11 +93,11 @@ function App() {
 
 
   return (
-   
+   <div className={classes.page}>
     <Router> 
       <ThemeProvider theme={theme}>
     
-      <Grid xs={12} lg={3} className={classes.body}>
+      <Grid xs={12} sm={12} md={6} lg={4} className={classes.body}>
         {user.id && (<Nav/>)}
         
         <Switch>
@@ -207,6 +206,7 @@ function App() {
        </Grid>
       </ThemeProvider>
     </Router>
+    </div>
   );
 }
 

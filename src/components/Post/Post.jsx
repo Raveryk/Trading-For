@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     direction: "column",
     alignItems: "center",
+    height: '100%'
   },
   card: {
     width: "75%",
