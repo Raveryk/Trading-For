@@ -73,7 +73,6 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     width: "100%",
-    maxWidth: 360,
   },
   avatars: {
     width: theme.spacing(7),
