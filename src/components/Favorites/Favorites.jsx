@@ -93,7 +93,7 @@ function Favorites() {
       </Typography>
       <Divider />
       {checkFavs() ? (
-        <Typography className="list" variant="body1">...You have no favorites</Typography>
+        <Typography style={{textAlign: 'center', marginTop: '10%'}} variant="body1">No posts have been saved</Typography>
       ) : (
         <div>
           <div className="grid">
